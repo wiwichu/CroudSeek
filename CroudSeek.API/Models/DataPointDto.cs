@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CroudSeek.API.Entities
+namespace CroudSeek.API.Models
 {
     public class DataPointDto
     {
-        [Key]
         public Guid Id { get; set; }
-        [ForeignKey("UserId")]
         public Guid Owner { get; set; }
-        [ForeignKey("QuestId")]
         public Guid Quest { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

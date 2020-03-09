@@ -12,20 +12,28 @@ namespace CroudSeek.API.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("UserId")]
-        public Guid Owner { get; set; }
-        [ForeignKey("QuestId")]
-        public Guid Quest { get; set; }
+        //public Guid OwnerId { get; set; }
+        //[ForeignKey("OwnerId")]
+        [Required]
+        public User Owner { get; set; }
+        //public int QuestId { get; set; }
+        //[ForeignKey("QuestId")]
+        //[Required]
+        public Quest Quest { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        //This view cannot be viewedby others
         public bool IsPrivate { get; set; }
+        //Users must specifically be added as a userweight to be considered.
         public bool ExcludeByDefault { get; set; }
-
-        public ICollection<User> ExcludedUsers { get; set; }
-            = new List<User>();
-        public ICollection<User> IncludedUsers { get; set; }
-            = new List<User>();
+        //public ICollection<User> ExcludedUsers { get; set; }
+        //    = new List<User>();
+        //public ICollection<User> IncludedUsers { get; set; }
+        //    = new List<User>();
+        //Collection of parameters per user indicating how their weights contribute to the result.
         public ICollection<UserWeight> UserWeights { get; set; }
             = new List<UserWeight>();
     }

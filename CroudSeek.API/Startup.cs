@@ -1,6 +1,7 @@
 using AutoMapper;
 using CourseLibrary.API.DbContexts;
 using CourseLibrary.API.Services;
+using CroudSeek.API.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -66,7 +67,12 @@ namespace CourseLibrary.API
             {
                 options.UseSqlServer(
                     @"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;");
-            }); 
+            });
+            services.AddDbContext<CroudSeekContext>(options =>
+            {
+                options.UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=CroudSeekDB;Trusted_Connection=True;");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

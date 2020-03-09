@@ -5,9 +5,9 @@ namespace CroudSeek.API.Models
 {
     public class ViewDto
     {
-        public Guid Id { get; set; }
-        public Guid Owner { get; set; }
-        public Guid Quest { get; set; }
+        public int Id { get; set; }
+        public int Owner { get; set; }
+        public int Quest { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }

@@ -10,9 +10,12 @@ namespace CroudSeek.API.Entities
     public class Zone
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+        public int OwnerId { get; set; }
         [ForeignKey("UserId")]
-        public Guid Owner { get; set; }
+        public User Owner { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
         public string Description { get; set; }
         public double? MaxLatitude { get; set; }

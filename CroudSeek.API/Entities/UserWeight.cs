@@ -10,9 +10,14 @@ namespace CroudSeek.API.Entities
     public class UserWeight
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         [ForeignKey("UserId")]
+        [Required]
         public User User { get; set; }
+        //Exclude User from view
+        public bool ExcludeUser { get; set; }
+        //How to weight this users DataPoint. Arbitrary number relative to other users. 
         public double Weight { get; set; }
     }
 }

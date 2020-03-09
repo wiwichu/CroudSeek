@@ -1,4 +1,5 @@
 using CourseLibrary.API.DbContexts;
+using CroudSeek.API.DbContexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,12 @@ namespace CourseLibrary.API
                     // we can start with a clean slate
                     context.Database.EnsureDeleted();
                     context.Database.Migrate();
+                    var csContext = scope.ServiceProvider.GetService<CroudSeekContext>();
+                    // for demo purposes, delete the database & migrate on startup so 
+                    // we can start with a clean slate
+                    csContext.Database.EnsureDeleted();
+                    csContext.Database.EnsureCreated();
+                    //csContext.Database.Migrate();
                 }
                 catch (Exception ex)
                 {

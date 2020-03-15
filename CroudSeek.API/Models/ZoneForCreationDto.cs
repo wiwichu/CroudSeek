@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CroudSeek.API.Entities
+namespace CroudSeek.API.Models
 {
-    public class Zone
+    public class ZoneForCreationDto
     {
-        [Key]
-        public int Id { get; set; }
+        [Required(ErrorMessage = "UserId is required.")]
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        [Required]
-        public User User { get; set; }
-        [Required]
-        [MaxLength(100)]
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
         public string Description { get; set; }
         public double? MaxLatitude { get; set; }

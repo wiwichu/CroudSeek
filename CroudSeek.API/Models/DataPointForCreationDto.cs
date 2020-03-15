@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CroudSeek.API.Entities
+namespace CroudSeek.API.Models
 {
-    public class DataPoint
+    public class DataPointForCreationDto
     {
-        [Key]
-        public int Id { get; set; }
-        //public int USerId { get; set; }
-        //[ForeignKey("UserId")]
-        public User User{ get; set; }
+        [Required(ErrorMessage = "User is required.")]
+        public int UserId { get; set; }
+        [Required(ErrorMessage ="Quest is required.")]
         public int QuestId { get; set; }
-        [ForeignKey("QuestId")]
-        [Required]
-        public Quest Quest { get; set; }
+        [Required(ErrorMessage ="Name is required.")]
         [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(1000)]
         public string Description { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

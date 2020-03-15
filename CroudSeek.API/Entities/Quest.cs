@@ -11,17 +11,19 @@ namespace CroudSeek.API.Entities
     {
         [Key]
         public int Id { get; set; }
-        //public Guid OwnerId { get; set; }
-        //[ForeignKey("OwnerId")]
-        [Required]
-        public User Owner { get; set; }
+        //public int UserId { get; set; }
+        //[ForeignKey("UserId")]
+        //[Required]
+        public User User { get; set; }
         public int ZoneId { get; set; }
         [ForeignKey("ZoneId")]
         //Indicates boundaries of this Quest.
+        [Required]
         public Zone Zone { get; set; }
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(1000)]
         public string Description { get; set; }
         //Whether Quest can be viewed by other Users
         public bool IsPrivate { get; set; }

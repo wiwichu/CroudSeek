@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace CroudSeek.API.Entities
+namespace CroudSeek.API.Models
 {
-    public class View
+    public class ViewForCreationDto
     {
-        [Key]
-        public int Id { get; set; }
-        //public int UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //[Required]
-        public User User { get; set; }
+        [Required(ErrorMessage ="UserId is required.")]
+        public int UserId { get; set; }
+        [Required(ErrorMessage ="QuestId is required.")]
         public int QuestId { get; set; }
-        [ForeignKey("QuestId")]
-        [Required]
-        public Quest Quest { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Name is equired.")]
         [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(1000)]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         //This view cannot be viewedby others
@@ -34,7 +27,7 @@ namespace CroudSeek.API.Entities
         //public ICollection<User> IncludedUsers { get; set; }
         //    = new List<User>();
         //Collection of parameters per user indicating how their weights contribute to the result.
-        public ICollection<UserWeight> UserWeights { get; set; }
-            = new List<UserWeight>();
+        public ICollection<UserWeightDto> UserWeights { get; set; }
+            = new List<UserWeightDto>();
     }
 }

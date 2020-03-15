@@ -11,7 +11,9 @@ namespace CroudSeek.API.Models
         [Required(ErrorMessage = "UserId is required.")]
         public int UserId { get; set; }
         [Required(ErrorMessage = "Name is required.")]
+        [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(1000)]
         public string Description { get; set; }
         public double? MaxLatitude { get; set; }
         public double? MinLatitude { get; set; }

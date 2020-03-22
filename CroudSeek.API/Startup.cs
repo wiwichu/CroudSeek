@@ -62,16 +62,19 @@ namespace CourseLibrary.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
-
+            var courseLibraryDBConnectionString = Configuration["connectionStrings:courseLibraryDBConnectionString"];
+            var croudSeekDBConnectionString = Configuration["connectionStrings:croudSeekDBConnectionString"];
             services.AddDbContext<CourseLibraryContext>(options =>
             {
-                options.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;");
+                options.UseSqlServer(courseLibraryDBConnectionString
+                    //@"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;"
+            );
             });
             services.AddDbContext<CroudSeekContext>(options =>
             {
-                options.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=CroudSeekDB;Trusted_Connection=True;");
+                options.UseSqlServer(croudSeekDBConnectionString
+                    //@"Server=(localdb)\mssqllocaldb;Database=CroudSeekDB;Trusted_Connection=True;"
+            );
             });
         }
 

@@ -12,9 +12,9 @@ namespace CroudSeek.API.Entities
     {
         [Key]
         public int Id { get; set; }
-        //public int UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //[Required]
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        [Required]
         public User User { get; set; }
         public int QuestId { get; set; }
         [ForeignKey("QuestId")]

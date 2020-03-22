@@ -16,9 +16,12 @@
     "IIS Express": {
       "commandName": "Project",
       "environmentVariables": {
+        "Key": "Value",
+        //"connectionStrings:croudSeekDBConnectionString": "Server=myproductionserver;Database=CroudSeekDB;Trusted_Connection=True;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:51044"
+      "applicationUrl": "http://localhost:51044",
+      "connectionStrings:courseLibraryDBConnectionString": "Server=(localdb)\\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;"
     },
     "CourseLibrary.API": {
       "commandName": "Project",

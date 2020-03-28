@@ -9,7 +9,7 @@ namespace CroudSeek.API.Models
     public class DataPointForCreationDto
     {
         [Required(ErrorMessage = "User is required.")]
-        public int UserId { get; set; }
+        public int OwnerId { get; set; }
         [Required(ErrorMessage ="Quest is required.")]
         public int QuestId { get; set; }
         [Required(ErrorMessage ="Name is required.")]

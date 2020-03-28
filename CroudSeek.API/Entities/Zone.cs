@@ -11,10 +11,10 @@ namespace CroudSeek.API.Entities
     {
         [Key]
         public int Id { get; set; }
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
+        public int OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
         [Required]
-        public User User { get; set; }
+        public User Owner { get; set; }
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
@@ -29,5 +29,6 @@ namespace CroudSeek.API.Entities
         public double? SpotLatitude { get; set; }
         public double? SpotLongitude { get; set; }
         public double? SpotRadiusMeters { get; set; }
+        public bool IsPrivate { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace CroudSeek.API.Models
     public class ViewForCreationDto
     {
         [Required(ErrorMessage ="UserId is required.")]
-        public int UserId { get; set; }
+        public int OwnerId { get; set; }
         [Required(ErrorMessage ="QuestId is required.")]
         public int QuestId { get; set; }
         [Required(ErrorMessage ="Name is equired.")]

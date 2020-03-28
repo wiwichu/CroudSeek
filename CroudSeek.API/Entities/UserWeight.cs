@@ -15,6 +15,10 @@ namespace CroudSeek.API.Entities
         [ForeignKey("UserId")]
         [Required]
         public User User { get; set; }
+        public int OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
+        [Required]
+        public User Owner { get; set; }
         //Exclude User from view
         public bool ExcludeUser { get; set; }
         //How to weight this users DataPoint. Arbitrary number relative to other users. 

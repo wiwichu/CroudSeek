@@ -11,6 +11,7 @@ namespace CroudSeek.API.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         //Exclude User from view
+        public int OwnerId { get; set; }
         public bool ExcludeUser { get; set; }
         //How to weight this users DataPoint. Arbitrary number relative to other users. 
         public double Weight { get; set; }

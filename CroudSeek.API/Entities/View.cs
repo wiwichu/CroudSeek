@@ -35,7 +35,7 @@ namespace CroudSeek.API.Entities
         //public ICollection<User> IncludedUsers { get; set; }
         //    = new List<User>();
         //Collection of parameters per user indicating how their weights contribute to the result.
-        public ICollection<UserWeight> UserWeights { get; set; }
-            = new List<UserWeight>();
+        public ICollection<ViewUserWeight> ViewUserWeights { get; set; }
+    = new List<ViewUserWeight>();
     }
 }

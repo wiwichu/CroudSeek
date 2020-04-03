@@ -27,6 +27,29 @@ namespace CroudSeek.API.DbContexts
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            modelBuilder.Entity<ViewUserWeight>().HasKey(v => new { v.ViewId, v.UserWeightId });
+            modelBuilder.Entity<ViewUserWeight>().HasData(
+                new ViewUserWeight()
+                {
+                    UserWeightId = 1,
+                    ViewId = 1
+                },
+                new ViewUserWeight()
+                {
+                    UserWeightId = 1,
+                    ViewId = 2
+                },
+                new ViewUserWeight()
+                {
+                    UserWeightId = 2,
+                    ViewId = 1
+                },
+                new ViewUserWeight()
+                {
+                    UserWeightId = 2,
+                    ViewId = 2
+                }
+                );
             modelBuilder.Entity<User>()
                 .HasData(
                     new User()
@@ -69,15 +92,15 @@ namespace CroudSeek.API.DbContexts
                     Description = "This is Zone1",
                     IsPrivate = false,
                     MaxAltitude = 999999.9999,
-                    MaxLatitude = 999999.9999,
-                    MaxLongitude = 999999.999,
-                    MinAltitude = 11111.111,
-                    MinLatitude = 11111.11,
-                    MinLongitude = 111111.11,
+                    MaxLatitude = 20,
+                    MaxLongitude = -60,
+                    MinAltitude = -200,
+                    MinLatitude = 20,
+                    MinLongitude = 160,
                     Name = "Zone1",
-                    SpotLatitude = 5555.555,
-                    SpotLongitude = 55555.55,
-                    SpotRadiusMeters = 1000.7,
+                    SpotLatitude = 40,
+                    SpotLongitude = -100,
+                    SpotRadiusMeters = 10000.7,
                 },
                new Zone()
                {
@@ -86,15 +109,15 @@ namespace CroudSeek.API.DbContexts
                    Description = "This is Zone2",
                    IsPrivate = false,
                    MaxAltitude = 999999.9999,
-                   MaxLatitude = 999999.9999,
-                   MaxLongitude = 999999.999,
-                   MinAltitude = 11111.111,
-                   MinLatitude = 11111.11,
-                   MinLongitude = 111111.11,
+                   MaxLatitude = 20,
+                   MaxLongitude = -60,
+                   MinAltitude = -200,
+                   MinLatitude = 20,
+                   MinLongitude = 160,
                    Name = "Zone2",
-                   SpotLatitude = 5555.555,
-                   SpotLongitude = 55555.55,
-                   SpotRadiusMeters = 1000.7,
+                   SpotLatitude = 40,
+                   SpotLongitude = -100,
+                   SpotRadiusMeters = 10000.7,
                },
                new Zone()
                {
@@ -103,15 +126,15 @@ namespace CroudSeek.API.DbContexts
                    Description = "This is Zone3",
                    IsPrivate = false,
                    MaxAltitude = 999999.9999,
-                   MaxLatitude = 999999.9999,
-                   MaxLongitude = 999999.999,
-                   MinAltitude = 11111.111,
-                   MinLatitude = 11111.11,
-                   MinLongitude = 111111.11,
+                   MaxLatitude = 20,
+                   MaxLongitude = -60,
+                   MinAltitude = -200,
+                   MinLatitude = 20,
+                   MinLongitude = 160,
                    Name = "Zone3",
-                   SpotLatitude = 5555.555,
-                   SpotLongitude = 55555.55,
-                   SpotRadiusMeters = 1000.7,
+                   SpotLatitude = 40,
+                   SpotLongitude = -100,
+                   SpotRadiusMeters = 10000.7,
                },
                new Zone()
                {
@@ -120,15 +143,15 @@ namespace CroudSeek.API.DbContexts
                    Description = "This is Zone4",
                    IsPrivate = false,
                    MaxAltitude = 999999.9999,
-                   MaxLatitude = 999999.9999,
-                   MaxLongitude = 999999.999,
-                   MinAltitude = 11111.111,
-                   MinLatitude = 11111.11,
-                   MinLongitude = 111111.11,
+                   MaxLatitude = 20,
+                   MaxLongitude = -60,
+                   MinAltitude = -200,
+                   MinLatitude = 20,
+                   MinLongitude = 160,
                    Name = "Zone4",
-                   SpotLatitude = 5555.555,
-                   SpotLongitude = 55555.55,
-                   SpotRadiusMeters = 1000.7,
+                   SpotLatitude = 40,
+                   SpotLongitude = -100,
+                   SpotRadiusMeters = 10000.7,
                },
                new Zone()
                {
@@ -137,15 +160,15 @@ namespace CroudSeek.API.DbContexts
                    Description = "This is Zone5",
                    IsPrivate = false,
                    MaxAltitude = 999999.9999,
-                   MaxLatitude = 999999.9999,
-                   MaxLongitude = 999999.999,
-                   MinAltitude = 11111.111,
-                   MinLatitude = 11111.11,
-                   MinLongitude = 111111.11,
+                   MaxLatitude = 20,
+                   MaxLongitude = -60,
+                   MinAltitude = -200,
+                   MinLatitude = 20,
+                   MinLongitude = 160,
                    Name = "Zone5",
-                   SpotLatitude = 5555.555,
-                   SpotLongitude = 55555.55,
-                   SpotRadiusMeters = 1000.7,
+                   SpotLatitude = 40,
+                   SpotLongitude = -100,
+                   SpotRadiusMeters = 10000.7,
                }
                 );
             modelBuilder.Entity<Quest>()
@@ -195,9 +218,222 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 5,
                     ZoneId = 5
                 }
-        ); 
+        );
+        modelBuilder.Entity<DataPoint>()
+                .HasData(
+                new DataPoint()
+                {
+                    Id = 1,
+                    Altitude = 0,
+                    Certainty = 20,
+                    Description = "Could be here",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 25,
+                    Longitude = -120,
+                    Name = "Quest1 Possible Sighting",
+                    OwnerId = 1,
+                    QuestId = 1,
+                    RadiusMeters = 0
+                },
+                new DataPoint()
+                {
+                    Id = 2,
+                    Altitude = 10,
+                    Certainty = 28,
+                    Description = "Another possibility",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 50,
+                    Longitude = -65,
+                    Name = "Quest1 Maybe here",
+                    OwnerId = 1,
+                    QuestId = 1,
+                    RadiusMeters = 100
+                },
+                new DataPoint()
+                {
+                    Id = 3,
+                    Altitude = -10,
+                    Certainty = 50,
+                    Description = "Buried Treasure",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 40,
+                    Longitude = -80,
+                    Name = "Quest1 Digging",
+                    OwnerId = 3,
+                    QuestId = 1,
+                    RadiusMeters = 10
+                }, new DataPoint()
+                {
+                    Id = 4,
+                    Altitude = 0,
+                    Certainty = 80,
+                    Description = "Checked already",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 30,
+                    Longitude = -90,
+                    Name = "Quest1 Don't Bother",
+                    OwnerId = 2,
+                    QuestId = 1,
+                    RadiusMeters = 1000
+                },
+                new DataPoint()
+                {
+                    Id = 5,
+                    Altitude = 0,
+                    Certainty = 20,
+                    Description = "Could be here",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 25,
+                    Longitude = -120,
+                    Name = "Quest2 Possible Sighting",
+                    OwnerId = 2,
+                    QuestId = 2,
+                    RadiusMeters = 0
+                },
+                new DataPoint()
+                {
+                    Id = 6,
+                    Altitude = 10,
+                    Certainty = 28,
+                    Description = "Another possibility",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 50,
+                    Longitude = -65,
+                    Name = "Quest2 Maybe here",
+                    OwnerId = 2,
+                    QuestId = 2,
+                    RadiusMeters = 100
+                },
+                new DataPoint()
+                {
+                    Id = 7,
+                    Altitude = -10,
+                    Certainty = 50,
+                    Description = "Buried Treasure",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 40,
+                    Longitude = -80,
+                    Name = "Quest2 Digging",
+                    OwnerId = 3,
+                    QuestId = 2,
+                    RadiusMeters = 10
+                }, new DataPoint()
+                {
+                    Id = 8,
+                    Altitude = 0,
+                    Certainty = 80,
+                    Description = "Checked already",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 30,
+                    Longitude = -90,
+                    Name = "Quest2 Don't Bother",
+                    OwnerId = 3,
+                    QuestId = 2,
+                    RadiusMeters = 1000
+                }
 
-            base.OnModelCreating(modelBuilder);
+
+        );
+            modelBuilder.Entity<UserWeight>()
+                .HasData(
+            new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 1,
+                OwnerId = 1,
+                UserId = 3,
+                Weight = 90
+            },
+            new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 2,
+                OwnerId = 1,
+                UserId = 3,
+                Weight = 10
+            }, new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 3,
+                OwnerId = 1,
+                UserId = 2,
+                Weight = 30
+            },
+            new UserWeight()
+            {
+                ExcludeUser = true,
+                Id = 4,
+                OwnerId = 1,
+                UserId = 4,
+                Weight = 1000
+            },
+            new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 5,
+                OwnerId = 2,
+                UserId = 3,
+                Weight = 10000
+            },
+            new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 6,
+                OwnerId = 2,
+                UserId = 3,
+                Weight = 0
+            }, new UserWeight()
+            {
+                ExcludeUser = false,
+                Id = 7,
+                OwnerId = 2,
+                UserId = 2,
+                Weight = 3000
+            },
+            new UserWeight()
+            {
+                ExcludeUser = true,
+                Id = 8,
+                OwnerId = 2,
+                UserId = 4,
+                Weight = 1000
+            }
+        );
+            modelBuilder.Entity<View>()
+                    .HasData(
+                    new View()
+                    {
+                        Description = "What a View",
+                        Id = 1,
+                        ExcludeByDefault = false,
+                        ImageUrl = null,
+                        IsPrivate = false,
+                        Name = "WhatAView",
+                        OwnerId = 1,
+                        QuestId = 1
+                    },
+                    new View()
+                    {
+                        Description = "You View",
+                        Id = 2,
+                        ExcludeByDefault = false,
+                        ImageUrl = null,
+                        IsPrivate = false,
+                        Name = "YouView",
+                        OwnerId = 1,
+                        QuestId = 1
+                    }
+            ); 
+
+    base.OnModelCreating(modelBuilder);
         }
     }
 }

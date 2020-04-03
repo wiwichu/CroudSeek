@@ -23,5 +23,8 @@ namespace CroudSeek.API.Entities
         public bool ExcludeUser { get; set; }
         //How to weight this users DataPoint. Arbitrary number relative to other users. 
         public double Weight { get; set; }
+        public ICollection<ViewUserWeight> ViewUserWeights { get; set; }
+    = new List<ViewUserWeight>();
+
     }
 }

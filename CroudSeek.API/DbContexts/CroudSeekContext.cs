@@ -20,6 +20,7 @@ namespace CroudSeek.API.DbContexts
         public DbSet<UserWeight> UserWeights { get; set; }
         public DbSet<View> Views { get; set; }
         public DbSet<Zone> Zones { get; set; }
+        public DbSet<ViewUserWeight> ViewUserWeights { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

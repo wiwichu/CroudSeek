@@ -2,6 +2,7 @@ using AutoMapper;
 using CourseLibrary.API.DbContexts;
 using CourseLibrary.API.Services;
 using CroudSeek.API.DbContexts;
+using CroudSeek.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -62,6 +63,7 @@ namespace CourseLibrary.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
+            services.AddScoped<ICroudSeekRepository, CroudSeekRepository>();
             var courseLibraryDBConnectionString = Configuration["connectionStrings:courseLibraryDBConnectionString"];
             var croudSeekDBConnectionString = Configuration["connectionStrings:croudSeekDBConnectionString"];
             services.AddDbContext<CourseLibraryContext>(options =>

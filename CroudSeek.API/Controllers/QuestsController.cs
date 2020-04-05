@@ -1,4 +1,5 @@
-﻿using CroudSeek.API.Entities;
+﻿using AutoMapper;
+using CroudSeek.API.Entities;
 using CroudSeek.API.Models;
 using CroudSeek.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -15,30 +16,18 @@ namespace CroudSeek.API.Controllers
     public class QuestsController :ControllerBase
     {
         private readonly ICroudSeekRepository _croudSeekRepository;
+        private IMapper _mapper;
 
-        public QuestsController(ICroudSeekRepository croudSeekRepository)
+        public QuestsController(ICroudSeekRepository croudSeekRepository, IMapper mapper)
         {
             _croudSeekRepository = croudSeekRepository;
+            _mapper = mapper;
         }
         [HttpGet()]
         public ActionResult<IEnumerable<QuestDto>> GetQuests()
         {
-            var result = new List<QuestDto>();
             var questsFromRepo = _croudSeekRepository.GetQuests();
-            foreach (var quest in questsFromRepo)
-            {
-                var q = new QuestDto()
-                {
-                    Id = quest.Id,
-                    Description = quest.Description,
-                    IsPrivate = quest.IsPrivate,
-                    Name = quest.Name,
-                    OwnerId = quest.OwnerId,
-                    ZoneId = quest.ZoneId
-                };
-                result.Add(q);
-            }
-            return Ok(result);
+            return Ok(_mapper.Map <IEnumerable<QuestDto>>(questsFromRepo));
         }
 
     }

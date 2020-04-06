@@ -52,6 +52,12 @@ namespace CroudSeek.API.DbContexts
                 }
                 );
             modelBuilder.Entity<User>()
+                        .HasIndex(u => u.Name)
+                        .IsUnique();
+            modelBuilder.Entity<User>()
+                        .HasIndex(u => u.Email)
+                        .IsUnique();
+            modelBuilder.Entity<User>()
                 .HasData(
                     new User()
                     {
@@ -59,6 +65,12 @@ namespace CroudSeek.API.DbContexts
                         Email = "Joe.Schmo@CroudSeek.com",
                         Name = "JoeSchmo"
                     },
+                   new User()
+                   {
+                       Id = 11,
+                       Email = "1Joe.Schmo@CroudSeek.com",
+                       Name = "1JoeSchmo"
+                   },
                     new User()
                     {
                         Id = 2,

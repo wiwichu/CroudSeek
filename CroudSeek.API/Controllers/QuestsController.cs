@@ -30,5 +30,18 @@ namespace CroudSeek.API.Controllers
             return Ok(_mapper.Map <IEnumerable<QuestDto>>(questsFromRepo));
         }
 
+        [HttpGet("{questId}", Name = "GetQuest")]
+        public IActionResult GetQuest(int questId)
+        {
+            var questFromRepo = _croudSeekRepository.GetQuest(questId);
+
+            if (questFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<QuestDto>(questFromRepo));
+        }
+
     }
 }

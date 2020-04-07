@@ -30,7 +30,7 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpGet("{dataPointId}", Name = "GetDataPoint")]
-        public IActionResult GetQuest(int dataPointId)
+        public IActionResult GetDataPoint(int dataPointId)
         {
             var dataPointFromRepo = _croudSeekRepository.GetDataPoint(dataPointId);
 

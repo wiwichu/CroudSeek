@@ -37,5 +37,7 @@ namespace CroudSeek.API.Entities
         //Collection of parameters per user indicating how their weights contribute to the result.
         public ICollection<ViewUserWeight> ViewUserWeights { get; set; }
     = new List<ViewUserWeight>();
+        public ICollection<UserWeight> UserWeights { get; set; }
+    = new List<UserWeight>();
     }
 }

@@ -9,5 +9,7 @@ namespace CroudSeek.API.Entities
     {
         public int ViewId { get; set; } 
         public int UserWeightId { get; set; }
+        public View View { get; set; }
+        public UserWeight UserWeight { get; set; }
     }
 }

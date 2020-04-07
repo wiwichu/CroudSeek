@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CroudSeek.API.Models
 {
-    public class ViewDto
+    public class ViewWithoutUserWeightsDto
     {
         public int Id { get; set; }
         public int OwnerId { get; set; }
@@ -13,6 +13,5 @@ namespace CroudSeek.API.Models
         public string ImageUrl { get; set; }
         public bool IsPrivate { get; set; }
         public bool ExcludeByDefault { get; set; }
-        public List<UserWeightDto> UserWeights { get; set; } = new List<UserWeightDto>();
     }
 }

@@ -27,7 +27,7 @@ namespace CroudSeek.API.Services
         Quest GetQuest(int id);
         User GetUser(int id);
         UserWeight GetUserWeight(int id);
-        View GetView(int id);
+        View GetView(int id, bool includeUserWeights);
         Zone GetZone(int id);
     }
 }

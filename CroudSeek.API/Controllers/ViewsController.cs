@@ -26,21 +26,24 @@ namespace CroudSeek.API.Controllers
         public ActionResult<IEnumerable<ViewDto>> GetViews()
         {
             var viewsFromRepo = _croudSeekRepository.GetViews();
-            return Ok(_mapper.Map<IEnumerable<ViewDto>>(viewsFromRepo));
+            return Ok(_mapper.Map<IEnumerable<ViewWithoutUserWeightsDto>>(viewsFromRepo));
         }
 
         [HttpGet("{viewId}", Name = "GetView")]
-        public IActionResult GetView(int viewId)
+        public IActionResult GetView(int viewId,bool includeUserWeights=false)
         {
-            var viewFromRepo = _croudSeekRepository.GetView(viewId);
+            var viewFromRepo = _croudSeekRepository.GetView(viewId,includeUserWeights);
 
             if (viewFromRepo == null)
             {
                 return NotFound();
             }
-
-            return Ok(_mapper.Map<ViewDto>(viewFromRepo));
+            if (includeUserWeights)
+            {
+                var result = _mapper.Map<ViewDto>(viewFromRepo);
+                return Ok(result);
+            }
+            return Ok(_mapper.Map<ViewWithoutUserWeightsDto>(viewFromRepo));
         }
-
     }
 }

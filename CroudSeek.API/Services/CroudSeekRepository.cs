@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CroudSeek.API.Services
 {
@@ -88,8 +89,22 @@ namespace CroudSeek.API.Services
                 .AsEnumerable().ToList();
         }
 
-        public View GetView(int id)
+        public View GetView(int id,bool includeUserWeights)
         {
+            if (includeUserWeights)
+            {
+                var newView = _context.Views.Where((d) => d.Id == id)
+                    .Select((v) =>
+                    new
+                    {
+                        View = v,
+                        UserWeights = v.ViewUserWeights.Select(vu=>vu.UserWeight).ToList()
+                    })
+                    .FirstOrDefault();
+                var endView = newView.View;
+                endView.UserWeights = newView.UserWeights;
+                return endView;
+            }
             return _context.Views.Where((d) => d.Id == id).FirstOrDefault();
         }
 

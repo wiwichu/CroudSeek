@@ -11,6 +11,7 @@ namespace CroudSeek.API.Profiles
         public ViewsProfile()
         {
             CreateMap<Entities.View, Models.ViewDto>();
+            CreateMap<Entities.View, Models.ViewWithoutUserWeightsDto>();
         }
     }
 }

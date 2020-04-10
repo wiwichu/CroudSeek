@@ -31,6 +31,7 @@ namespace CroudSeek.API.Services
         Zone GetZone(int id);
         void AddQuest(Quest quest);
         void UpdateQuest(Quest quest);
+        void DeleteQuest(Quest quest);
         bool Save();
     }
 }

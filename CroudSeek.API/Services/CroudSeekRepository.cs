@@ -158,7 +158,10 @@ namespace CroudSeek.API.Services
         {
             //no code in thi implementation
         }
-
+        public void DeleteQuest(Quest quest)
+        {
+            _context.Quests.Remove(quest);
+        }
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);

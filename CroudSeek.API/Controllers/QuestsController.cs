@@ -129,5 +129,20 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
+        [HttpDelete("{questId}")]
+        public ActionResult DeleteQuest(int questId)
+        {
+            var questFromRepo = _croudSeekRepository.GetQuest(questId);
+
+            if (questFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _croudSeekRepository.DeleteQuest(questFromRepo);
+            _croudSeekRepository.Save();
+
+            return NoContent();
+        }
     }
 }

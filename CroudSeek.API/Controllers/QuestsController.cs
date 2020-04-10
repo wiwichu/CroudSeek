@@ -2,6 +2,7 @@
 using CroudSeek.API.Entities;
 using CroudSeek.API.Models;
 using CroudSeek.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -81,16 +82,46 @@ namespace CroudSeek.API.Controllers
 
             if (questFromRepo == null)
             {
-                var questEntity = _mapper.Map<Entities.Quest>(quest);
-                _croudSeekRepository.AddQuest(questEntity);
-                _croudSeekRepository.Save();
+                return NotFound();
+                //var questEntity = _mapper.Map<Entities.Quest>(quest);
+                //_croudSeekRepository.AddQuest(questEntity);
+                //_croudSeekRepository.Save();
 
-                var questToReturn = _mapper.Map<QuestDto>(questEntity);
-                return CreatedAtRoute("GetQuest",
-                    new { questId = questToReturn.Id },
-                    questToReturn);
+                //var questToReturn = _mapper.Map<QuestDto>(questEntity);
+                //return CreatedAtRoute("GetQuest",
+                //    new { questId = questToReturn.Id },
+                //    questToReturn);
             }
             _mapper.Map(quest, questFromRepo);
+
+            _croudSeekRepository.UpdateQuest(questFromRepo);
+
+            _croudSeekRepository.Save();
+
+            return NoContent();
+        }
+        [HttpPatch("{questId}")]
+        public ActionResult PartiallyUpdateQuest(int questId,
+            JsonPatchDocument<QuestForUpdateDto> patchDocument)
+        {
+
+            var questFromRepo = _croudSeekRepository.GetQuest(questId);
+
+            if (questFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var questToPatch = _mapper.Map<QuestForUpdateDto>(questFromRepo);
+            // add validation
+            patchDocument.ApplyTo(questToPatch, ModelState);
+
+            if (!TryValidateModel(questToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(questToPatch, questFromRepo);
 
             _croudSeekRepository.UpdateQuest(questFromRepo);
 

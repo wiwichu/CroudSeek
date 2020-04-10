@@ -13,7 +13,7 @@ namespace CroudSeek.API.Models
         [Required(ErrorMessage ="ZoneId is required.")]
         public int ZoneId { get; set; }
         [Required(ErrorMessage ="Name is required.")]
-        [MaxLength(100)]
+        [MaxLength(100, ErrorMessage ="Name cannot be longer than 100 characters.")]
         public string Name { get; set; }
         [MaxLength(1000)]
         public string Description { get; set; }

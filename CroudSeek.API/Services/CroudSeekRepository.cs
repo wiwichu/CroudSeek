@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CroudSeek.API.Services
 {
-    public class CroudSeekRepository : ICroudSeekRepository
+    public class CroudSeekRepository : ICroudSeekRepository, IDisposable
     {
         private readonly CroudSeekContext _context;
         public CroudSeekRepository(CroudSeekContext context)
@@ -136,6 +136,42 @@ namespace CroudSeek.API.Services
         public IEnumerable<Zone> GetZonesByOwner(int ownerId)
         {
             return _context.Zones.Where((d) => d.OwnerId == ownerId).OrderBy((d) => d.Name).ToList();
+        }
+        public void AddQuest(Quest quest)
+        {
+            if (quest == null)
+            {
+                throw new ArgumentNullException(nameof(quest));
+            }
+
+            // the repository fills the id (instead of using identity columns)
+            //author.Id = Guid.NewGuid();
+
+            //foreach (var course in author.Courses)
+            //{
+            //    course.Id = Guid.NewGuid();
+            //}
+
+            _context.Quests.Add(quest);
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose resources when needed
+            }
         }
     }
 }

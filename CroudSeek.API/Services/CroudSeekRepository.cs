@@ -154,6 +154,10 @@ namespace CroudSeek.API.Services
 
             _context.Quests.Add(quest);
         }
+        public void UpdateQuest(Quest quest)
+        {
+            //no code in thi implementation
+        }
 
         public bool Save()
         {

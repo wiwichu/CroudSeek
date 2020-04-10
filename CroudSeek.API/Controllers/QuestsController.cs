@@ -64,5 +64,39 @@ namespace CroudSeek.API.Controllers
                 new { questId = questToReturn.Id },
                 questToReturn);
         }
+        [HttpPut("{questId}")]
+        public ActionResult<QuestDto> UpdateQuestint(int questId,QuestForUpdateDto quest)
+        {
+            if (quest.Name == quest.Description)
+            {
+                ModelState.AddModelError("Description",
+                    "Description must be different from Name.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var questFromRepo = _croudSeekRepository.GetQuest(questId);
+
+            if (questFromRepo == null)
+            {
+                var questEntity = _mapper.Map<Entities.Quest>(quest);
+                _croudSeekRepository.AddQuest(questEntity);
+                _croudSeekRepository.Save();
+
+                var questToReturn = _mapper.Map<QuestDto>(questEntity);
+                return CreatedAtRoute("GetQuest",
+                    new { questId = questToReturn.Id },
+                    questToReturn);
+            }
+            _mapper.Map(quest, questFromRepo);
+
+            _croudSeekRepository.UpdateQuest(questFromRepo);
+
+            _croudSeekRepository.Save();
+
+            return NoContent();
+        }
     }
 }

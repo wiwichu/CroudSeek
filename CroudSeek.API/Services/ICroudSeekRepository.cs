@@ -30,6 +30,7 @@ namespace CroudSeek.API.Services
         View GetView(int id, bool includeUserWeights);
         Zone GetZone(int id);
         void AddQuest(Quest quest);
+        void UpdateQuest(Quest quest);
         bool Save();
     }
 }

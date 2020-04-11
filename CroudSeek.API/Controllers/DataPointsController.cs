@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CroudSeek.API.Models;
 using CroudSeek.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,59 @@ namespace CroudSeek.API.Controllers
                 new { questId = questId, dataPointId = dataPointToReturn.Id },
                 dataPointToReturn);
         }
+        [HttpPatch("{dataPointId}")]
+        public ActionResult PartiallyUpdateCourseForAuthor(int questId,
+            int dataPointId,
+            JsonPatchDocument<DataPointForUpdateDto> patchDocument)
+        {
+            if (!_croudSeekRepository.QuestExists(questId))
+            {
+                return NotFound();
+            }
+
+            var dataPointForQuestFromRepo = _croudSeekRepository.GetDataPoint(questId, dataPointId);
+
+            if (dataPointForQuestFromRepo == null)
+            {
+                var dataPointDto = new DataPointForUpdateDto();
+                patchDocument.ApplyTo(dataPointDto, ModelState);
+
+                if (!TryValidateModel(dataPointDto))
+                {
+                    return ValidationProblem(ModelState);
+                }
+
+                var dataPointToAdd = _mapper.Map<Entities.DataPoint>(dataPointDto);
+                dataPointToAdd.Id = dataPointId;
+
+                _croudSeekRepository.AddDataPoint(questId, dataPointToAdd);
+                _croudSeekRepository.Save();
+
+                var dataPointToReturn = _mapper.Map<DataPointDto>(dataPointToAdd);
+
+                return CreatedAtRoute("GetCourseForAuthor",
+                    new { questId, dataPointId = dataPointToReturn.Id },
+                    dataPointToReturn);
+            }
+
+            var dataPointToPatch = _mapper.Map<DataPointForUpdateDto>(dataPointForQuestFromRepo);
+            // add validation
+            patchDocument.ApplyTo(dataPointToPatch, ModelState);
+
+            if (!TryValidateModel(dataPointToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(dataPointToPatch, dataPointForQuestFromRepo);
+
+            _croudSeekRepository.UpdateDataPoint(dataPointForQuestFromRepo);
+
+            _croudSeekRepository.Save();
+
+            return NoContent();
+        }
+
         [HttpPut("{dataPointId}")]
         public IActionResult UpdateDataPointForQuest(int questId,
             int dataPointId,

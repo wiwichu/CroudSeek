@@ -168,6 +168,11 @@ namespace CroudSeek.API.Services
                         .Where(c => c.QuestId == questId)
                         .OrderBy(c => c.Name).ToList();
         }
+        public DataPoint GetDataPoint(int questId, int dataPointId)
+        {
+            return _context.DataPoints
+              .Where(c => c.QuestId == questId && c.Id == dataPointId).FirstOrDefault();
+        }
 
         public bool QuestExists(int questId)
         {

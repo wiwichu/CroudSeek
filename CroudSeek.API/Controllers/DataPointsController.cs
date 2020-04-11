@@ -41,17 +41,35 @@ namespace CroudSeek.API.Controllers
         //    return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsFromRepo));
         //}
 
-        [HttpGet("{dataPointId}", Name = "GetDataPoint")]
-        public IActionResult GetDataPoint(int dataPointId)
-        {
-            var dataPointFromRepo = _croudSeekRepository.GetDataPoint(dataPointId);
+        //[HttpGet("{dataPointId}", Name = "GetDataPoint")]
+        //public IActionResult GetDataPoint(int dataPointId)
+        //{
+        //    var dataPointFromRepo = _croudSeekRepository.GetDataPoint(dataPointId);
 
-            if (dataPointFromRepo == null)
+        //    if (dataPointFromRepo == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(_mapper.Map<DataPointDto>(dataPointFromRepo));
+        //}
+
+        [HttpGet("{dataPointId}", Name = "GetDataPointForQuest")]
+        public ActionResult<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)
+        {
+            if (!_croudSeekRepository.QuestExists(questId))
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<DataPointDto>(dataPointFromRepo));
+            var dataPointForQuestFromRepo = _croudSeekRepository.GetDataPoint(questId,dataPointId);
+
+            if (dataPointForQuestFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<DataPointDto>(dataPointForQuestFromRepo));
         }
 
     }

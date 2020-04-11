@@ -124,6 +124,26 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
+        [HttpDelete("{dataPointId}")]
+        public ActionResult DeleteDataPointForQuest(int questId, int dataPointId)
+        {
+            if (!_croudSeekRepository.QuestExists(questId))
+            {
+                return NotFound();
+            }
+
+            var dataPointForQuestFromRepo = _croudSeekRepository.GetDataPoint(questId, dataPointId);
+
+            if (dataPointForQuestFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _croudSeekRepository.DeleteDataPoint(dataPointForQuestFromRepo);
+            _croudSeekRepository.Save();
+
+            return NoContent();
+        }
 
         [HttpPut("{dataPointId}")]
         public IActionResult UpdateDataPointForQuest(int questId,

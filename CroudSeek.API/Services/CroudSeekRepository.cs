@@ -187,6 +187,10 @@ namespace CroudSeek.API.Services
         {
             // no code in this implementation
         }
+        public void DeleteDataPoint(DataPoint dataPoint)
+        {
+            _context.DataPoints.Remove(dataPoint);
+        }
 
         public bool QuestExists(int questId)
         {

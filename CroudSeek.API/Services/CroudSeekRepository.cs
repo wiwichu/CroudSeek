@@ -183,6 +183,10 @@ namespace CroudSeek.API.Services
             dataPoint.QuestId = questId;
             _context.DataPoints.Add(dataPoint);
         }
+        public void UpdateDataPoint(DataPoint dataPoint)
+        {
+            // no code in this implementation
+        }
 
         public bool QuestExists(int questId)
         {

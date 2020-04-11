@@ -71,6 +71,44 @@ namespace CroudSeek.API.Controllers
                 new { questId = questId, dataPointId = dataPointToReturn.Id },
                 dataPointToReturn);
         }
+        [HttpPut("{dataPointId}")]
+        public IActionResult UpdateDataPointForQuest(int questId,
+            int dataPointId,
+            DataPointForUpdateDto dataPoint)
+        {
+            if (!_croudSeekRepository.QuestExists(questId))
+            {
+                return NotFound();
+            }
+
+            var dataPointForQuestFromRepo = _croudSeekRepository.GetDataPoint(questId, dataPointId);
+
+            if (dataPointForQuestFromRepo == null)
+            {
+                var dataPointToAdd = _mapper.Map<Entities.DataPoint>(dataPoint);
+                dataPointToAdd.Id = dataPointId;
+
+                _croudSeekRepository.AddDataPoint(questId, dataPointToAdd);
+
+                _croudSeekRepository.Save();
+
+                var dataPointToReturn = _mapper.Map<DataPointDto>(dataPointToAdd);
+
+                return CreatedAtRoute("GetdataPointForQuest",
+                    new { questId, dataPointId = dataPointToReturn.Id },
+                    dataPointToReturn);
+            }
+
+            // map the entity to a CourseForUpdateDto
+            // apply the updated field values to that dto
+            // map the CourseForUpdateDto back to an entity
+            _mapper.Map(dataPoint, dataPointForQuestFromRepo);
+
+            _croudSeekRepository.UpdateDataPoint(dataPointForQuestFromRepo);
+
+            _croudSeekRepository.Save();
+            return NoContent();
+        }
 
         [HttpGet("{dataPointId}", Name = "GetDataPointForQuest")]
         public ActionResult<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)

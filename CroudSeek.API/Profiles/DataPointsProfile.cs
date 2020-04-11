@@ -12,6 +12,8 @@ namespace CroudSeek.API.Profiles
         {
             CreateMap<Entities.DataPoint, Models.DataPointDto>();
             CreateMap<Entities.DataPoint, Models.DataPointForCreationDto>().ReverseMap();
+            CreateMap<Entities.DataPoint, Models.DataPointForManipulationDto>().ReverseMap();
+            CreateMap<Entities.DataPoint, Models.DataPointForUpdateDto>().ReverseMap();            
         }
     }
 }

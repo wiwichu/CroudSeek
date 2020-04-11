@@ -25,6 +25,7 @@ namespace CroudSeek.API.Services
         IEnumerable<Zone> GetZonesByOwner(int ownerId);
         DataPoint GetDataPoint(int id);
         DataPoint GetDataPoint(int questId, int dataPointId);
+        void UpdateDataPoint(DataPoint dataPoint);
         Quest GetQuest(int id);
         void AddDataPoint(int questId, DataPoint dataPoint);
         User GetUser(int id);

@@ -53,6 +53,24 @@ namespace CroudSeek.API.Controllers
 
         //    return Ok(_mapper.Map<DataPointDto>(dataPointFromRepo));
         //}
+        [HttpPost]
+        public ActionResult<DataPointDto> CreateDataPointForQuest(
+            int questId, DataPointForCreationDto dataPoint)
+        {
+            if (!_croudSeekRepository.QuestExists(questId))
+            {
+                return NotFound();
+            }
+
+            var dataPointEntity = _mapper.Map<Entities.DataPoint>(dataPoint);
+            _croudSeekRepository.AddDataPoint(questId, dataPointEntity);
+            _croudSeekRepository.Save();
+
+            var dataPointToReturn = _mapper.Map<DataPointDto>(dataPointEntity);
+            return CreatedAtRoute("GetDataPointForQuest",
+                new { questId = questId, dataPointId = dataPointToReturn.Id },
+                dataPointToReturn);
+        }
 
         [HttpGet("{dataPointId}", Name = "GetDataPointForQuest")]
         public ActionResult<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)

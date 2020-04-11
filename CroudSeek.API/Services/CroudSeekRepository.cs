@@ -173,6 +173,16 @@ namespace CroudSeek.API.Services
             return _context.DataPoints
               .Where(c => c.QuestId == questId && c.Id == dataPointId).FirstOrDefault();
         }
+        public void AddDataPoint(int questId, DataPoint dataPoint)
+        {
+            if (dataPoint == null)
+            {
+                throw new ArgumentNullException(nameof(dataPoint));
+            }
+            // always set the AuthorId to the passed-in authorId
+            dataPoint.QuestId = questId;
+            _context.DataPoints.Add(dataPoint);
+        }
 
         public bool QuestExists(int questId)
         {

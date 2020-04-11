@@ -26,6 +26,7 @@ namespace CroudSeek.API.Services
         DataPoint GetDataPoint(int id);
         DataPoint GetDataPoint(int questId, int dataPointId);
         Quest GetQuest(int id);
+        void AddDataPoint(int questId, DataPoint dataPoint);
         User GetUser(int id);
         UserWeight GetUserWeight(int id);
         View GetView(int id, bool includeUserWeights);

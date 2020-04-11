@@ -27,5 +27,8 @@ namespace CroudSeek.API.Entities
         public string Description { get; set; }
         //Whether Quest can be viewed by other Users
         public bool IsPrivate { get; set; }
+        public ICollection<DataPoint> DataPoints { get; set; }
+    = new List<DataPoint>();
+
     }
 }

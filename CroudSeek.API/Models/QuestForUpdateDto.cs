@@ -19,5 +19,7 @@ namespace CroudSeek.API.Models
         public string Description { get; set; }
         //Whether Quest can be viewed by other Users
         public bool IsPrivate { get; set; }
+        public ICollection<DataPointForCreationDto> DataPoints { get; set; }
+= new List<DataPointForCreationDto>();
     }
 }

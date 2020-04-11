@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CroudSeek.API.Controllers
 {
     [ApiController]
-    [Route("api/datapoints")]
+    [Route("api/quests/{questId}/datapoints")]
 
     public class DataPointsController : ControllerBase
     {
@@ -22,12 +22,24 @@ namespace CroudSeek.API.Controllers
             _croudSeekRepository = croudSeekRepository;
             _mapper = mapper;
         }
-        [HttpGet()]
-        public ActionResult<IEnumerable<DataPointDto>> GetDataPoints()
+        [HttpGet]
+        public ActionResult<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
         {
-            var dataPointsFromRepo = _croudSeekRepository.GetDataPoints();
-            return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsFromRepo));
+            if (!_croudSeekRepository.QuestExists(questId))
+            {
+                return NotFound();
+            }
+
+            var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPoints(questId);
+            return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo));
         }
+
+        //[HttpGet()]
+        //public ActionResult<IEnumerable<DataPointDto>> GetDataPoints()
+        //{
+        //    var dataPointsFromRepo = _croudSeekRepository.GetDataPoints();
+        //    return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsFromRepo));
+        //}
 
         [HttpGet("{dataPointId}", Name = "GetDataPoint")]
         public IActionResult GetDataPoint(int dataPointId)

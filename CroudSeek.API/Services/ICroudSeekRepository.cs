@@ -32,6 +32,8 @@ namespace CroudSeek.API.Services
         void AddQuest(Quest quest);
         void UpdateQuest(Quest quest);
         void DeleteQuest(Quest quest);
+        bool QuestExists(int questId);
+        IEnumerable<DataPoint> GetDataPoints(int questId);
         bool Save();
     }
 }

@@ -162,6 +162,18 @@ namespace CroudSeek.API.Services
         {
             _context.Quests.Remove(quest);
         }
+        public IEnumerable<DataPoint> GetDataPoints(int questId)
+        {
+             return _context.DataPoints
+                        .Where(c => c.QuestId == questId)
+                        .OrderBy(c => c.Name).ToList();
+        }
+
+        public bool QuestExists(int questId)
+        {
+
+            return _context.Quests.Any(a => a.Id == questId);
+        }
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);

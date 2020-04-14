@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.API.Entities
 {
-    public class UserWeight
+    public class UserWeight : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         [Required]

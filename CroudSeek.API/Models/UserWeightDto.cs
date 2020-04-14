@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.API.Models
 {
-    public class UserWeightDto
+    public class UserWeightDto : BaseDto
     {
-        public int Id { get; set; }
+//        public int Id { get; set; }
         public int UserId { get; set; }
         //Exclude User from view
         public int OwnerId { get; set; }

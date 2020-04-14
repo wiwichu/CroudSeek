@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CroudSeek.API.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]

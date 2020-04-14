@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.API.Entities
 {
-    public class Zone
+    public class Zone : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         public int OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         [Required]

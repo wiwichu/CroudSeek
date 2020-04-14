@@ -2,9 +2,9 @@
 
 namespace CroudSeek.API.Models
 {
-    public class DataPointDto
+    public class DataPointDto : BaseDto
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int OwnerId { get; set; }
         public int QuestId { get; set; }
         public string Name { get; set; }

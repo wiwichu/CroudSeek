@@ -8,10 +8,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace CroudSeek.API.Entities
 {
-    public class View
+    public class View : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         public int OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         [Required]

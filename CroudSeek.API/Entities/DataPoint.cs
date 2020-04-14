@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CroudSeek.API.Entities
 {
-    public class DataPoint
+    public class DataPoint : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        //[Key]
+        //public int Id { get; set; }
         public int OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         [Required]

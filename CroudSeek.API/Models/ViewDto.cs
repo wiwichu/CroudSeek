@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CroudSeek.API.Models
 {
-    public class ViewDto
+    public class ViewDto : BaseDto
     {
-        public int Id { get; set; }
+       // public int Id { get; set; }
         public int OwnerId { get; set; }
         public int Quest { get; set; }
         public string Name { get; set; }

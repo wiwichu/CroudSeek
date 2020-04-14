@@ -2,9 +2,9 @@
 
 namespace CroudSeek.API.Models
 {
-    public class ZoneDto
+    public class ZoneDto : BaseDto
     {
-        public int Id { get; set; }
+//        public int Id { get; set; }
         public int OwnerId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

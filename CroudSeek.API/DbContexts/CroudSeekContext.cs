@@ -448,5 +448,36 @@ namespace CroudSeek.API.DbContexts
 
     base.OnModelCreating(modelBuilder);
         }
+        public override int SaveChanges()
+        {
+            var newEntities = this.ChangeTracker.Entries()
+                .Where(
+                    x => x.State == EntityState.Added &&
+                    x.Entity != null &&
+                    x.Entity as BaseEntity != null
+                    )
+                .Select(x => x.Entity as BaseEntity);
+
+            var modifiedEntities = this.ChangeTracker.Entries()
+                .Where(
+                    x => x.State == EntityState.Modified &&
+                    x.Entity != null &&
+                    x.Entity as BaseEntity != null
+                    )
+                .Select(x => x.Entity as BaseEntity);
+
+            foreach (var newEntity in newEntities)
+            {
+                newEntity.CreateTime = DateTime.UtcNow;
+                newEntity.UpdateTime = DateTime.UtcNow;
+            }
+
+            foreach (var modifiedEntity in modifiedEntities)
+            {
+                modifiedEntity.UpdateTime = DateTime.UtcNow;
+            }
+
+            return base.SaveChanges();
+        }
     }
 }

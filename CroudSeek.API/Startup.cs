@@ -1,6 +1,4 @@
 using AutoMapper;
-using CourseLibrary.API.DbContexts;
-using CourseLibrary.API.Services;
 using CroudSeek.API.DbContexts;
 using CroudSeek.API.Services;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace CourseLibrary.API
 {
@@ -62,21 +62,29 @@ namespace CourseLibrary.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
             services.AddScoped<ICroudSeekRepository, CroudSeekRepository>();
             var courseLibraryDBConnectionString = Configuration["connectionStrings:courseLibraryDBConnectionString"];
             var croudSeekDBConnectionString = Configuration["connectionStrings:croudSeekDBConnectionString"];
-            services.AddDbContext<CourseLibraryContext>(options =>
-            {
-                options.UseSqlServer(courseLibraryDBConnectionString
-                    //@"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;"
-            );
-            });
             services.AddDbContext<CroudSeekContext>(options =>
             {
                 options.UseSqlServer(croudSeekDBConnectionString
                     //@"Server=(localdb)\mssqllocaldb;Database=CroudSeekDB;Trusted_Connection=True;"
             );
+            });
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc(
+                    "CroudSeekOpenAPISpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "CroudSeek API",
+                       Version = "1"
+                    });
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+                setupAction.IncludeXmlComments(xmlCommentsFullPath);
             });
         }
 
@@ -99,6 +107,16 @@ namespace CourseLibrary.API
                 });
 
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint(
+                    "/swagger/CroudSeekOpenAPISpecification/swagger.json",
+                    "CroudSeek API");
+                setupAction.RoutePrefix = "";
+            });
 
             app.UseRouting();
 

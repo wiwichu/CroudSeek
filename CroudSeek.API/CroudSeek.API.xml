@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CroudSeek.API</name>
+    </assembly>
+    <members>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.GetDataPointsForQuest(System.Int32)">
+            <summary>
+            Get the datapoints for a particular quest
+            </summary>
+            <param name="questId">The Id of the quest the datapoints belong to</param>
+            <returns>A list of Datapoints belonging to the quest.</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.PartiallyUpdateDataPointForQuest(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.DataPointForUpdateDto})">
+            <summary>
+            Partially update a DataPoint for a Quest
+            </summary>
+            <param name="questId">Id of Quest the DataPoint belongs to</param>
+            <param name="dataPointId">Id of DAtaPoint</param>
+            <param name="patchDocument">The set of operations to apply to the DataPoint</param>
+            <returns>An ActionResult </returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH quests/questId/datapoints/dataPointId \
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }, \
+                { \
+                    "op": "replace", \
+                    "path": "/description", \
+                    "value": "NEWDESCRIPTION" \
+                } \
+            ]
+            </remarks>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.OwnerId">
+            <summary>
+            Id of DataPoint Owner
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.QuestId">
+            <summary>
+            Id of Quest this DatraPoint belongs to
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Name">
+            <summary>
+            Name of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Description">
+            <summary>
+            Description of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Latitude">
+            <summary>
+            Latitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Longitude">
+            <summary>
+            Longitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Altitude">
+            <summary>
+            Altitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.RadiusMeters">
+            <summary>
+            Radius of DataPoint in Meters
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.Certainty">
+            <summary>
+            Certainty of Observation
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.IsNegative">
+            <summary>
+            Whether this DataPoint indicates where the Quest is not found
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointDto.IsPrivate">
+            <summary>
+            Whether DataPoint can be shared with other users
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.OwnerId">
+            <summary>
+            Id of DataPoint Owner
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.QuestId">
+            <summary>
+            Id of Quest this DatraPoint belongs to
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Name">
+            <summary>
+            Name of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Description">
+            <summary>
+            Description of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Latitude">
+            <summary>
+            Latitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Longitude">
+            <summary>
+            Longitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Altitude">
+            <summary>
+            Altitude of DataPoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.RadiusMeters">
+            <summary>
+            How big the circle around this point is.
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Certainty">
+            <summary>
+            Arbitrary number indicating the level of certainty on this datapoint
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.IsNegative">
+            <summary>
+            Whether this DataPoint indicates the Quest is not found here.
+            </summary>
+        </member>
+        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.IsPrivate">
+            <summary>
+            Whether other users can view this datapoint.
+            </summary>
+        </member>
+    </members>
+</doc>

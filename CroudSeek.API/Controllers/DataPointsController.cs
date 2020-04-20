@@ -23,6 +23,11 @@ namespace CroudSeek.API.Controllers
             _croudSeekRepository = croudSeekRepository;
             _mapper = mapper;
         }
+        /// <summary>
+        /// Get the datapoints for a particular quest
+        /// </summary>
+        /// <param name="questId">The Id of the quest the datapoints belong to</param>
+        /// <returns>A list of Datapoints belonging to the quest.</returns>
         [HttpGet]
         public ActionResult<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
         {
@@ -72,8 +77,31 @@ namespace CroudSeek.API.Controllers
                 new { questId = questId, dataPointId = dataPointToReturn.Id },
                 dataPointToReturn);
         }
+        /// <summary>
+        /// Partially update a DataPoint for a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest the DataPoint belongs to</param>
+        /// <param name="dataPointId">Id of DAtaPoint</param>
+        /// <param name="patchDocument">The set of operations to apply to the DataPoint</param>
+        /// <returns>An ActionResult </returns>
+        /// <remarks>
+        /// Sample request (this request updates the name and description) \
+        /// PATCH quests/questId/datapoints/dataPointId \
+        /// [ \
+	    ///     { \
+		///         "op": "replace", \
+		///         "path": "/name", \
+		///         "value": "NEWNAME" \
+	    ///     }, \
+	    ///     { \
+		///         "op": "replace", \
+		///         "path": "/description", \
+		///         "value": "NEWDESCRIPTION" \
+	    ///     } \
+        /// ]
+        /// </remarks>
         [HttpPatch("{dataPointId}")]
-        public ActionResult PartiallyUpdateCourseForAuthor(int questId,
+        public ActionResult PartiallyUpdateDataPointForQuest(int questId,
             int dataPointId,
             JsonPatchDocument<DataPointForUpdateDto> patchDocument)
         {

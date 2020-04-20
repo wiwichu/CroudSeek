@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CroudSeek.API.Models;
 using CroudSeek.API.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +29,10 @@ namespace CroudSeek.API.Controllers
         /// </summary>
         /// <param name="questId">The Id of the quest the datapoints belong to</param>
         /// <returns>A list of Datapoints belonging to the quest.</returns>
+        /// <response code="200">Returns the DataPoints for the Quest Id</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public ActionResult<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
         {

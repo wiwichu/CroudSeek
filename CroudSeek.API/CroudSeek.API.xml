@@ -10,6 +10,7 @@
             </summary>
             <param name="questId">The Id of the quest the datapoints belong to</param>
             <returns>A list of Datapoints belonging to the quest.</returns>
+            <response code="200">Returns the DataPoints for the Quest Id</response>
         </member>
         <member name="M:CroudSeek.API.Controllers.DataPointsController.PartiallyUpdateDataPointForQuest(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.DataPointForUpdateDto})">
             <summary>

@@ -13,7 +13,7 @@ namespace CroudSeek.API.Controllers
 {
     [ApiController]
     [Route("api/quests/{questId}/datapoints")]
-    [Produces("application/json", "application/xml")]
+    //[Produces("application/json", "application/xml")]
     public class DataPointsController : ControllerBase
     {
         private readonly ICroudSeekRepository _croudSeekRepository;

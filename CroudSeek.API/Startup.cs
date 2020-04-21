@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace CourseLibrary.API
@@ -31,23 +32,34 @@ namespace CourseLibrary.API
         {
             services.AddControllers(setupAction =>
             {
+
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-                //setupAction.Filters.Add(new ProducesAttribute(
-                //    "application/json"
-                //    , "application/xml"
-                //    ));
+                setupAction.Filters.Add(new ProducesAttribute(
+                    "application/json"
+                    , "application/xml"
+                    ));
                 setupAction.ReturnHttpNotAcceptable = true;
-                //var outputFormatters = setupAction.OutputFormatters;
-                //setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
-            }).AddNewtonsoftJson(setupAction =>
+                setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+                var jsonOutputFormatter = setupAction.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>().FirstOrDefault();
+
+                if (jsonOutputFormatter != null)
+                {
+                    if(jsonOutputFormatter.SupportedMediaTypes.Contains("text.json"))
+                    {
+                        jsonOutputFormatter.SupportedMediaTypes.Remove("text.json");
+                    }
+                }
+            })
+                .AddNewtonsoftJson(setupAction =>
              {
                  setupAction.SerializerSettings.ContractResolver =
                     new CamelCasePropertyNamesContractResolver();
              })
-             .AddXmlDataContractSerializerFormatters()
+            .AddXmlDataContractSerializerFormatters()
             .ConfigureApiBehaviorOptions(setupAction =>
             {
                 setupAction.InvalidModelStateResponseFactory = context =>
@@ -68,7 +80,8 @@ namespace CourseLibrary.API
                         ContentTypes = { "application/problem+json" }
                     };
                 };
-            });
+            })
+            ;
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

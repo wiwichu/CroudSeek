@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CroudSeek.API.Controllers
 {
@@ -30,6 +31,9 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpGet("{viewId}", Name = "GetView")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult GetView(int viewId,bool includeUserWeights=false)
         {
             var viewFromRepo = _croudSeekRepository.GetView(viewId,includeUserWeights);

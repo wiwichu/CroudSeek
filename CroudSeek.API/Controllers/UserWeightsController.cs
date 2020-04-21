@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CroudSeek.API.Controllers
 {
@@ -30,6 +31,9 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpGet("{userWeightId}", Name = "GetUserWeight")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult GetUserWeight(int userWeightId)
         {
             var userWeightFromRepo = _croudSeekRepository.GetUserWeight(userWeightId);

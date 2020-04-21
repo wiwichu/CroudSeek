@@ -12,6 +12,14 @@
             <returns>A list of Datapoints belonging to the quest.</returns>
             <response code="200">Returns the DataPoints for the Quest Id</response>
         </member>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.CreateDataPointForQuest(System.Int32,CroudSeek.API.Models.DataPointForCreationDto)">
+            <summary>
+            Create a DataPoint for Quest
+            </summary>
+            <param name="questId">Id of quest for which datapoint will be created</param>
+            <param name="dataPoint">DataPoint details</param>
+            <returns></returns>
+        </member>
         <member name="M:CroudSeek.API.Controllers.DataPointsController.PartiallyUpdateDataPointForQuest(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.DataPointForUpdateDto})">
             <summary>
             Partially update a DataPoint for a Quest
@@ -36,6 +44,7 @@
                 } \
             ]
             </remarks>
+            
         </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.OwnerId">
             <summary>

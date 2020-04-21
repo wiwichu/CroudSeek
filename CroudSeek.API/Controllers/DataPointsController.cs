@@ -13,7 +13,7 @@ namespace CroudSeek.API.Controllers
 {
     [ApiController]
     [Route("api/quests/{questId}/datapoints")]
-
+    [Produces("application/json", "application/xml")]
     public class DataPointsController : ControllerBase
     {
         private readonly ICroudSeekRepository _croudSeekRepository;
@@ -31,7 +31,6 @@ namespace CroudSeek.API.Controllers
         /// <returns>A list of Datapoints belonging to the quest.</returns>
         /// <response code="200">Returns the DataPoints for the Quest Id</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public ActionResult<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
@@ -64,7 +63,16 @@ namespace CroudSeek.API.Controllers
 
         //    return Ok(_mapper.Map<DataPointDto>(dataPointFromRepo));
         //}
+        /// <summary>
+        /// Create a DataPoint for Quest
+        /// </summary>
+        /// <param name="questId">Id of quest for which datapoint will be created</param>
+        /// <param name="dataPoint">DataPoint details</param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesDefaultResponseType]
         public ActionResult<DataPointDto> CreateDataPointForQuest(
             int questId, DataPointForCreationDto dataPoint)
         {
@@ -93,18 +101,22 @@ namespace CroudSeek.API.Controllers
         /// Sample request (this request updates the name and description) \
         /// PATCH quests/questId/datapoints/dataPointId \
         /// [ \
-	    ///     { \
-		///         "op": "replace", \
-		///         "path": "/name", \
-		///         "value": "NEWNAME" \
-	    ///     }, \
-	    ///     { \
-		///         "op": "replace", \
-		///         "path": "/description", \
-		///         "value": "NEWDESCRIPTION" \
-	    ///     } \
+        ///     { \
+        ///         "op": "replace", \
+        ///         "path": "/name", \
+        ///         "value": "NEWNAME" \
+        ///     }, \
+        ///     { \
+        ///         "op": "replace", \
+        ///         "path": "/description", \
+        ///         "value": "NEWDESCRIPTION" \
+        ///     } \
         /// ]
         /// </remarks>
+        /// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPatch("{dataPointId}")]
         public ActionResult PartiallyUpdateDataPointForQuest(int questId,
             int dataPointId,
@@ -158,6 +170,9 @@ namespace CroudSeek.API.Controllers
             return NoContent();
         }
         [HttpDelete("{dataPointId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public ActionResult DeleteDataPointForQuest(int questId, int dataPointId)
         {
             if (!_croudSeekRepository.QuestExists(questId))
@@ -179,6 +194,10 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpPut("{dataPointId}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public IActionResult UpdateDataPointForQuest(int questId,
             int dataPointId,
             DataPointForUpdateDto dataPoint)
@@ -218,6 +237,9 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpGet("{dataPointId}", Name = "GetDataPointForQuest")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public ActionResult<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)
         {
             if (!_croudSeekRepository.QuestExists(questId))

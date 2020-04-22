@@ -8,8 +8,6 @@ namespace CroudSeek.API.Models
 {
     public class QuestForUpdateDto
     {
-        [Required(ErrorMessage = "UserId is required.")]
-        public int OwnerId { get; set; }
         [Required(ErrorMessage = "ZoneId is required.")]
         public int ZoneId { get; set; }
         [Required(ErrorMessage = "Name is required.")]

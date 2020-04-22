@@ -8,8 +8,6 @@ namespace CroudSeek.API.Models
 {
     public class ZoneForCreationDto
     {
-        [Required(ErrorMessage = "UserId is required.")]
-        public int OwnerId { get; set; }
         [Required(ErrorMessage = "Name is required.")]
         [MaxLength(100)]
         public string Name { get; set; }

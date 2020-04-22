@@ -4,13 +4,8 @@ namespace CroudSeek.API.Models
 {
     public class DataPointDto : BaseDto
     {
-        //public int Id { get; set; }
         /// <summary>
-        /// Id of DataPoint Owner
-        /// </summary>
-        public int OwnerId { get; set; }
-        /// <summary>
-        /// Id of Quest this DatraPoint belongs to
+        /// Id of Quest this DataPoint belongs to
         /// </summary>
         public int QuestId { get; set; }
         /// <summary>

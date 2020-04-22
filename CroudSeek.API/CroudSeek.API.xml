@@ -184,14 +184,9 @@
             <param name="userId">Id of User to be deleted</param>
             <returns>ActionResult</returns>
         </member>
-        <member name="P:CroudSeek.API.Models.DataPointDto.OwnerId">
-            <summary>
-            Id of DataPoint Owner
-            </summary>
-        </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.QuestId">
             <summary>
-            Id of Quest this DatraPoint belongs to
+            Id of Quest this DataPoint belongs to
             </summary>
         </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.Name">
@@ -237,16 +232,6 @@
         <member name="P:CroudSeek.API.Models.DataPointDto.IsPrivate">
             <summary>
             Whether DataPoint can be shared with other users
-            </summary>
-        </member>
-        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.OwnerId">
-            <summary>
-            Id of DataPoint Owner
-            </summary>
-        </member>
-        <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.QuestId">
-            <summary>
-            Id of Quest this DatraPoint belongs to
             </summary>
         </member>
         <member name="P:CroudSeek.API.Models.DataPointForManipulationDto.Name">

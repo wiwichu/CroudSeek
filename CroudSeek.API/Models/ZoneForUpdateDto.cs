@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CroudSeek.API.Models
 {
-    public class ZoneDto : BaseDto
+    public class ZoneForUpdateDto
     {
+        [Required(ErrorMessage = "Name is required.")]
+        [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(1000)]
         public string Description { get; set; }
         public double? MaxLatitude { get; set; }
         public double? MinLatitude { get; set; }

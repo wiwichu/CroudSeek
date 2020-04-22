@@ -10,5 +10,6 @@ namespace CroudSeek.API.Models
         public int Id { get; set; }
         public DateTimeOffset CreateTime { get; set; }
         public DateTimeOffset UpdateTime { get; set; }
+        public int OwnerId { get; set; }
     }
 }

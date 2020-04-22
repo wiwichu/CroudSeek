@@ -12,15 +12,10 @@ namespace CroudSeek.API.Models
     public abstract class DataPointForManipulationDto
     {
         /// <summary>
-        /// Id of DataPoint Owner
-        /// </summary>
-        [Required(ErrorMessage = "User is required.")]
-        public int OwnerId { get; set; }
-        /// <summary>
         /// Id of Quest this DatraPoint belongs to
         /// </summary>
-        [Required(ErrorMessage = "Quest is required.")]
-        public int QuestId { get; set; }
+        //[Required(ErrorMessage = "Quest is required.")]
+        //public int QuestId { get; set; }
         /// <summary>
         /// Name of DataPoint
         /// </summary>

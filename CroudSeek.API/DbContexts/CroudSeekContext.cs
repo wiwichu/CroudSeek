@@ -33,7 +33,7 @@ namespace CroudSeek.API.DbContexts
                 new ViewUserWeight()
                 {
                     UserWeightId = 1,
-                    ViewId = 1
+                    ViewId = 1,
                 },
                 new ViewUserWeight()
                 {
@@ -62,38 +62,62 @@ namespace CroudSeek.API.DbContexts
                     new User()
                     {
                         Id = 1,
+                        OwnerId = 1,
                         Email = "Joe.Schmo@CroudSeek.com",
                         Name = "JoeSchmo"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     },
                    new User()
                    {
                        Id = 11,
+                       OwnerId=11,
                        Email = "1Joe.Schmo@CroudSeek.com",
                        Name = "1JoeSchmo"
+                        ,
+                       CreateTime = DateTimeOffset.Now,
+                       UpdateTime = DateTimeOffset.Now
                    },
                     new User()
                     {
                         Id = 2,
+                        OwnerId = 2,
                         Email = "Shiny.Hiney@CroudSeek.com",
                         Name = "ShinyHiney"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     },
                     new User()
                     {
                         Id = 3,
+                        OwnerId = 3,
                         Email = "Silly.Billy@CroudSeek.com",
                         Name = "SillyBilly"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     },
                     new User()
                     {
                         Id = 4,
+                        OwnerId = 4,
                         Email = "Holy.Moley@CroudSeek.com",
                         Name = "HolyMoley"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     },
                     new User()
                     {
                         Id = 5,
+                        OwnerId = 5,
                         Email = "Funny.Bunny@CroudSeek.com",
                         Name = "FunnyBunny"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     }
                 );
             modelBuilder.Entity<Zone>()
@@ -113,7 +137,10 @@ namespace CroudSeek.API.DbContexts
                     Name = "Zone1",
                     SpotLatitude = 40,
                     SpotLongitude = -100,
-                    SpotRadiusMeters = 10000.7,
+                    SpotRadiusMeters = 10000.7
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                new Zone()
                {
@@ -130,7 +157,10 @@ namespace CroudSeek.API.DbContexts
                    Name = "Zone2",
                    SpotLatitude = 40,
                    SpotLongitude = -100,
-                   SpotRadiusMeters = 10000.7,
+                   SpotRadiusMeters = 10000.7
+                        ,
+                   CreateTime = DateTimeOffset.Now,
+                   UpdateTime = DateTimeOffset.Now
                },
                new Zone()
                {
@@ -147,7 +177,10 @@ namespace CroudSeek.API.DbContexts
                    Name = "Zone3",
                    SpotLatitude = 40,
                    SpotLongitude = -100,
-                   SpotRadiusMeters = 10000.7,
+                   SpotRadiusMeters = 10000.7
+                        ,
+                   CreateTime = DateTimeOffset.Now,
+                   UpdateTime = DateTimeOffset.Now
                },
                new Zone()
                {
@@ -164,7 +197,10 @@ namespace CroudSeek.API.DbContexts
                    Name = "Zone4",
                    SpotLatitude = 40,
                    SpotLongitude = -100,
-                   SpotRadiusMeters = 10000.7,
+                   SpotRadiusMeters = 10000.7
+                        ,
+                   CreateTime = DateTimeOffset.Now,
+                   UpdateTime = DateTimeOffset.Now
                },
                new Zone()
                {
@@ -181,7 +217,10 @@ namespace CroudSeek.API.DbContexts
                    Name = "Zone5",
                    SpotLatitude = 40,
                    SpotLongitude = -100,
-                   SpotRadiusMeters = 10000.7,
+                   SpotRadiusMeters = 10000.7
+                        ,
+                   CreateTime = DateTimeOffset.Now,
+                   UpdateTime = DateTimeOffset.Now
                }
                 );
             modelBuilder.Entity<Quest>()
@@ -194,6 +233,9 @@ namespace CroudSeek.API.DbContexts
                     IsPrivate = false,
                     OwnerId = 1,
                     ZoneId = 1
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new Quest()
                 {
@@ -203,6 +245,9 @@ namespace CroudSeek.API.DbContexts
                     IsPrivate = false,
                     OwnerId = 2,
                     ZoneId = 2
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new Quest()
                 {
@@ -212,6 +257,9 @@ namespace CroudSeek.API.DbContexts
                     IsPrivate = false,
                     OwnerId = 3,
                     ZoneId = 3
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new Quest()
                 {
@@ -221,6 +269,9 @@ namespace CroudSeek.API.DbContexts
                     IsPrivate = false,
                     OwnerId = 4,
                     ZoneId = 4
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new Quest()
                 {
@@ -230,6 +281,9 @@ namespace CroudSeek.API.DbContexts
                     IsPrivate = false,
                     OwnerId = 5,
                     ZoneId = 5
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 }
         );
         modelBuilder.Entity<DataPoint>()
@@ -248,6 +302,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 1,
                     QuestId = 1,
                     RadiusMeters = 0
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new DataPoint()
                 {
@@ -263,6 +320,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 1,
                     QuestId = 1,
                     RadiusMeters = 100
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new DataPoint()
                 {
@@ -278,6 +338,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 3,
                     QuestId = 1,
                     RadiusMeters = 10
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 }, new DataPoint()
                 {
                     Id = 4,
@@ -292,6 +355,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 2,
                     QuestId = 1,
                     RadiusMeters = 1000
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new DataPoint()
                 {
@@ -307,6 +373,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 2,
                     QuestId = 2,
                     RadiusMeters = 0
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new DataPoint()
                 {
@@ -322,6 +391,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 2,
                     QuestId = 2,
                     RadiusMeters = 100
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 },
                 new DataPoint()
                 {
@@ -337,6 +409,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 3,
                     QuestId = 2,
                     RadiusMeters = 10
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 }, new DataPoint()
                 {
                     Id = 8,
@@ -351,6 +426,9 @@ namespace CroudSeek.API.DbContexts
                     OwnerId = 3,
                     QuestId = 2,
                     RadiusMeters = 1000
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 }
 
 
@@ -364,6 +442,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 1,
                 UserId = 3,
                 Weight = 90
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             },
             new UserWeight()
             {
@@ -372,6 +453,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 1,
                 UserId = 3,
                 Weight = 10
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             }, new UserWeight()
             {
                 ExcludeUser = false,
@@ -379,6 +463,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 1,
                 UserId = 2,
                 Weight = 30
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             },
             new UserWeight()
             {
@@ -387,6 +474,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 1,
                 UserId = 4,
                 Weight = 1000
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             },
             new UserWeight()
             {
@@ -395,6 +485,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 2,
                 UserId = 3,
                 Weight = 10000
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             },
             new UserWeight()
             {
@@ -403,6 +496,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 2,
                 UserId = 3,
                 Weight = 0
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             }, new UserWeight()
             {
                 ExcludeUser = false,
@@ -410,6 +506,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 2,
                 UserId = 2,
                 Weight = 3000
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             },
             new UserWeight()
             {
@@ -418,6 +517,9 @@ namespace CroudSeek.API.DbContexts
                 OwnerId = 2,
                 UserId = 4,
                 Weight = 1000
+                        ,
+                CreateTime = DateTimeOffset.Now,
+                UpdateTime = DateTimeOffset.Now
             }
         );
             modelBuilder.Entity<View>()
@@ -432,6 +534,9 @@ namespace CroudSeek.API.DbContexts
                         Name = "WhatAView",
                         OwnerId = 1,
                         QuestId = 1
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     },
                     new View()
                     {
@@ -443,6 +548,9 @@ namespace CroudSeek.API.DbContexts
                         Name = "YouView",
                         OwnerId = 1,
                         QuestId = 1
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
                     }
             ); 
 

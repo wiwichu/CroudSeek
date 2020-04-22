@@ -9,12 +9,6 @@ namespace CroudSeek.API.Entities
 {
     public class Zone : BaseEntity
     {
-        //[Key]
-        //public int Id { get; set; }
-        public int OwnerId { get; set; }
-        [ForeignKey("OwnerId")]
-        [Required]
-        public User Owner { get; set; }
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }

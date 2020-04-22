@@ -83,6 +83,7 @@ namespace CroudSeek.API.Controllers
             }
 
             var dataPointEntity = _mapper.Map<Entities.DataPoint>(dataPoint);
+            dataPointEntity.QuestId = questId;
             _croudSeekRepository.AddDataPoint(questId, dataPointEntity);
             _croudSeekRepository.Save();
 
@@ -228,6 +229,7 @@ namespace CroudSeek.API.Controllers
             {
                 var dataPointToAdd = _mapper.Map<Entities.DataPoint>(dataPoint);
                 dataPointToAdd.Id = dataPointId;
+                dataPointToAdd.QuestId = questId;
 
                 _croudSeekRepository.AddDataPoint(questId, dataPointToAdd);
 
@@ -244,6 +246,7 @@ namespace CroudSeek.API.Controllers
             // apply the updated field values to that dto
             // map the CourseForUpdateDto back to an entity
             _mapper.Map(dataPoint, dataPointForQuestFromRepo);
+            dataPointForQuestFromRepo.QuestId = questId;
 
             _croudSeekRepository.UpdateDataPoint(dataPointForQuestFromRepo);
 

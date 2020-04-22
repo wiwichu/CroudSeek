@@ -143,25 +143,34 @@ namespace CroudSeek.API.Services
             {
                 throw new ArgumentNullException(nameof(quest));
             }
-
-            // the repository fills the id (instead of using identity columns)
-            //author.Id = Guid.NewGuid();
-
-            //foreach (var course in author.Courses)
-            //{
-            //    course.Id = Guid.NewGuid();
-            //}
-
             _context.Quests.Add(quest);
         }
         public void UpdateQuest(Quest quest)
         {
-            //no code in thi implementation
+            //no code in this implementation
         }
         public void DeleteQuest(Quest quest)
         {
             _context.Quests.Remove(quest);
         }
+        //
+        public void AddUser(User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            _context.Users.Add(user);
+        }
+        public void UpdateUser(User user)
+        {
+            //no code in this implementation
+        }
+        public void DeleteUser(User user)
+        {
+            _context.Users.Remove(user);
+        }
+
         public IEnumerable<DataPoint> GetDataPoints(int questId)
         {
              return _context.DataPoints

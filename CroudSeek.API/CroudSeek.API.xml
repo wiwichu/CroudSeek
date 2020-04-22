@@ -25,7 +25,7 @@
             Partially update a DataPoint for a Quest
             </summary>
             <param name="questId">Id of Quest the DataPoint belongs to</param>
-            <param name="dataPointId">Id of DAtaPoint</param>
+            <param name="dataPointId">Id of DataPoint</param>
             <param name="patchDocument">The set of operations to apply to the DataPoint</param>
             <returns>An ActionResult </returns>
             <remarks>
@@ -45,6 +45,144 @@
             ]
             </remarks>
             
+        </member>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.DeleteDataPointForQuest(System.Int32,System.Int32)">
+            <summary>
+            Deletes a DataPoint for a Quest
+            </summary>
+            <param name="questId">Id of Quest owning DataPoint</param>
+            <param name="dataPointId">Id of DataPoint</param>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.UpdateDataPointForQuest(System.Int32,System.Int32,CroudSeek.API.Models.DataPointForUpdateDto)">
+            <summary>
+            Updates an existing DataPoint
+            </summary>
+            <param name="questId">Id of Quest owning the DataPoint</param>
+            <param name="dataPointId">Id of Quest to be updated</param>
+            <param name="dataPoint">New DataPoint details</param>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.GetDataPointForQuest(System.Int32,System.Int32)">
+            <summary>
+            Get a DataPoint for a Quest
+            </summary>
+            <param name="questId">Id of Quest owning DataPoint</param>
+            <param name="dataPointId">Id of DataPoint</param>
+            <returns>Updated DataPoint</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.GetQuests">
+            <summary>
+            Get All Quests
+            </summary>
+            <returns>Collection of Quests</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.GetQuest(System.Int32)">
+            <summary>
+            Get a Quest by Id
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <returns>Quest</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.CreateQuest(CroudSeek.API.Models.QuestForCreationDto)">
+            <summary>
+            Create a Quest
+            </summary>
+            <param name="quest">Quest details</param>
+            <returns>New Quest</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.UpdateQuest(System.Int32,CroudSeek.API.Models.QuestForUpdateDto)">
+            <summary>
+            Update a Quest
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="quest">Deatils of Quest Updates</param>
+            <returns>Updated Quest</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.QuestForUpdateDto})">
+            <summary>
+            Partially Update a Quest
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="patchDocument">The set of operations to apply to the Quest</param>
+            <returns>Updated Quest</returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH quests/questId\
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }, \
+                { \
+                    "op": "replace", \
+                    "path": "/description", \
+                    "value": "NEWDESCRIPTION" \
+                } \
+            ]
+            </remarks>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.QuestsController.DeleteQuest(System.Int32)">
+            <summary>
+            Delete a Quest
+            </summary>
+            <param name="questId">Id of Quest to be deleted</param>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.GetUsers">
+            <summary>
+            Get all Users
+            </summary>
+            <returns>Collection of Users</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.GetUser(System.Int32)">
+            <summary>
+            Get a User by Id
+            </summary>
+            <param name="userId">Id of User to get</param>
+            <returns>User</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.CreateUser(CroudSeek.API.Models.UserForCreationDto)">
+            <summary>
+            Create a User
+            </summary>
+            <param name="user">User details</param>
+            <returns>New User</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.UpdateUser(System.Int32,CroudSeek.API.Models.UserForUpdateDto)">
+            <summary>
+            Update a User
+            </summary>
+            <param name="userId">Id of User</param>
+            <param name="user">Deatils of User Updates</param>
+            <returns>Updated User</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.PartiallyUpdateUser(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.UserForUpdateDto})">
+            <summary>
+            Partially Update a User
+            </summary>
+            <param name="userId">Id of User</param>
+            <param name="patchDocument">The set of operations to apply to the User</param>
+            <returns>Updated User</returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH quests/questId\
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }
+            ]
+            </remarks>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UsersController.DeleteUser(System.Int32)">
+            <summary>
+            Delete a User
+            </summary>
+            <param name="userId">Id of User to be deleted</param>
+            <returns>ActionResult</returns>
         </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.OwnerId">
             <summary>

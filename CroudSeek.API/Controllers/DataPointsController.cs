@@ -94,7 +94,7 @@ namespace CroudSeek.API.Controllers
         /// Partially update a DataPoint for a Quest
         /// </summary>
         /// <param name="questId">Id of Quest the DataPoint belongs to</param>
-        /// <param name="dataPointId">Id of DAtaPoint</param>
+        /// <param name="dataPointId">Id of DataPoint</param>
         /// <param name="patchDocument">The set of operations to apply to the DataPoint</param>
         /// <returns>An ActionResult </returns>
         /// <remarks>
@@ -169,11 +169,17 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
+        /// <summary>
+        /// Deletes a DataPoint for a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest owning DataPoint</param>
+        /// <param name="dataPointId">Id of DataPoint</param>
+        /// <returns>ActionResult</returns>
         [HttpDelete("{dataPointId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public ActionResult DeleteDataPointForQuest(int questId, int dataPointId)
+        public IActionResult DeleteDataPointForQuest(int questId, int dataPointId)
         {
             if (!_croudSeekRepository.QuestExists(questId))
             {
@@ -192,7 +198,13 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
-
+        /// <summary>
+        /// Updates an existing DataPoint
+        /// </summary>
+        /// <param name="questId">Id of Quest owning the DataPoint</param>
+        /// <param name="dataPointId">Id of Quest to be updated</param>
+        /// <param name="dataPoint">New DataPoint details</param>
+        /// <returns>ActionResult</returns>
         [HttpPut("{dataPointId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -235,7 +247,12 @@ namespace CroudSeek.API.Controllers
             _croudSeekRepository.Save();
             return NoContent();
         }
-
+        /// <summary>
+        /// Get a DataPoint for a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest owning DataPoint</param>
+        /// <param name="dataPointId">Id of DataPoint</param>
+        /// <returns>Updated DataPoint</returns>
         [HttpGet("{dataPointId}", Name = "GetDataPointForQuest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

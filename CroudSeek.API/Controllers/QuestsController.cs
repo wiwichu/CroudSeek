@@ -24,13 +24,22 @@ namespace CroudSeek.API.Controllers
             _croudSeekRepository = croudSeekRepository;
             _mapper = mapper;
         }
-        [HttpGet()]
+        /// <summary>
+        /// Get All Quests
+        /// </summary>
+        /// <returns>Collection of Quests</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
         public ActionResult<IEnumerable<QuestDto>> GetQuests()
         {
             var questsFromRepo = _croudSeekRepository.GetQuests();
             return Ok(_mapper.Map <IEnumerable<QuestDto>>(questsFromRepo));
         }
-
+        /// <summary>
+        /// Get a Quest by Id
+        /// </summary>
+        /// <param name="questId">Id of Quest</param>
+        /// <returns>Quest</returns>
         [HttpGet("{questId}", Name = "GetQuest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,6 +55,11 @@ namespace CroudSeek.API.Controllers
 
             return Ok(_mapper.Map<QuestDto>(questFromRepo));
         }
+        /// <summary>
+        /// Create a Quest
+        /// </summary>
+        /// <param name="quest">Quest details</param>
+        /// <returns>New Quest</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
@@ -70,11 +84,17 @@ namespace CroudSeek.API.Controllers
                 new { questId = questToReturn.Id },
                 questToReturn);
         }
+        /// <summary>
+        /// Update a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest</param>
+        /// <param name="quest">Deatils of Quest Updates</param>
+        /// <returns>Updated Quest</returns>
         [HttpPut("{questId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public ActionResult<QuestDto> UpdateQuestint(int questId,QuestForUpdateDto quest)
+        public ActionResult<QuestDto> UpdateQuest(int questId,QuestForUpdateDto quest)
         {
             if (quest.Name == quest.Description)
             {
@@ -108,6 +128,28 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
+        /// <summary>
+        /// Partially Update a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest</param>
+        /// <param name="patchDocument">The set of operations to apply to the Quest</param>
+        /// <returns>Updated Quest</returns>
+        /// <remarks>
+        /// Sample request (this request updates the name and description) \
+        /// PATCH quests/questId\
+        /// [ \
+        ///     { \
+        ///         "op": "replace", \
+        ///         "path": "/name", \
+        ///         "value": "NEWNAME" \
+        ///     }, \
+        ///     { \
+        ///         "op": "replace", \
+        ///         "path": "/description", \
+        ///         "value": "NEWDESCRIPTION" \
+        ///     } \
+        /// ]
+        /// </remarks>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPatch("{questId}")]
@@ -139,6 +181,11 @@ namespace CroudSeek.API.Controllers
 
             return NoContent();
         }
+        /// <summary>
+        /// Delete a Quest
+        /// </summary>
+        /// <param name="questId">Id of Quest to be deleted</param>
+        /// <returns>ActionResult</returns>
         [HttpDelete("{questId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

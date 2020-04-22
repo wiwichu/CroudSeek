@@ -36,13 +36,9 @@ namespace CourseLibrary.API
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
-                setupAction.Filters.Add(new ProducesAttribute(
-                    "application/json"
-                    , "application/xml"
-                    ));
+                setupAction.Filters.Add(new ProducesAttribute("application/json", "application/xml"));
+                setupAction.Filters.Add(new ConsumesAttribute("application/json"));
                 setupAction.ReturnHttpNotAcceptable = true;
-
-                setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
                 var jsonOutputFormatter = setupAction.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>().FirstOrDefault();
 

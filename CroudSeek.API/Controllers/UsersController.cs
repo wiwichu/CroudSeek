@@ -62,6 +62,7 @@ namespace CroudSeek.API.Controllers
         /// <returns>New User</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public ActionResult<UserDto> CreateUser(UserForCreationDto user)
         {
@@ -88,6 +89,7 @@ namespace CroudSeek.API.Controllers
         [HttpPut("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public ActionResult<UserDto> UpdateUser(int userId, UserForUpdateDto user)
         {
@@ -129,6 +131,7 @@ namespace CroudSeek.API.Controllers
         /// </remarks>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json-patch+json")]
         [HttpPatch("{userId}")]
         public ActionResult PartiallyUpdateUser(int userId,
             JsonPatchDocument<UserForUpdateDto> patchDocument)

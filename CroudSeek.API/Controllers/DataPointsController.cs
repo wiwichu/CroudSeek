@@ -72,6 +72,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public ActionResult<DataPointDto> CreateDataPointForQuest(
             int questId, DataPointForCreationDto dataPoint)
@@ -117,6 +118,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json-patch+json")]
         [HttpPatch("{dataPointId}")]
         public ActionResult PartiallyUpdateDataPointForQuest(int questId,
             int dataPointId,
@@ -209,6 +211,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public IActionResult UpdateDataPointForQuest(int questId,
             int dataPointId,

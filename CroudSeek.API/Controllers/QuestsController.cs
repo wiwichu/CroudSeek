@@ -62,6 +62,7 @@ namespace CroudSeek.API.Controllers
         /// <returns>New Quest</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public ActionResult<QuestDto> CreateQuest(QuestForCreationDto quest)
         {
@@ -93,6 +94,7 @@ namespace CroudSeek.API.Controllers
         [HttpPut("{questId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json")]
         [ProducesDefaultResponseType]
         public ActionResult<QuestDto> UpdateQuest(int questId,QuestForUpdateDto quest)
         {
@@ -152,6 +154,7 @@ namespace CroudSeek.API.Controllers
         /// </remarks>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Consumes("application/json-patch+json")]
         [HttpPatch("{questId}")]
         public ActionResult PartiallyUpdateQuest(int questId,
             JsonPatchDocument<QuestForUpdateDto> patchDocument)

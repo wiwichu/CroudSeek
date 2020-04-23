@@ -162,6 +162,23 @@ namespace CroudSeek.API.Services
             }
             _context.Users.Add(user);
         }
+        public void AddUserWeight(UserWeight userWeight)
+        {
+            if (userWeight == null)
+            {
+                throw new ArgumentNullException(nameof(userWeight));
+            }
+            _context.UserWeights.Add(userWeight);
+        }
+        public void UpdateUserWeight(UserWeight userWeight)
+        {
+            //no code in this implementation
+        }
+        public void DeleteUserWeight(UserWeight userWeight)
+        {
+            _context.UserWeights.Remove(userWeight);
+        }
+
         public void UpdateUser(User user)
         {
             //no code in this implementation

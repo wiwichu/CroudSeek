@@ -42,5 +42,8 @@ namespace CroudSeek.API.Services
         bool QuestExists(int questId);
         IEnumerable<DataPoint> GetDataPoints(int questId);
         bool Save();
+        void AddUserWeight(UserWeight userWeight);
+        void UpdateUserWeight(UserWeight userWeight);
+        void DeleteUserWeight(UserWeight userWeight);
     }
 }

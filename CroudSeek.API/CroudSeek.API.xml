@@ -167,7 +167,7 @@
             <returns>Updated User</returns>
             <remarks>
             Sample request (this request updates the name and description) \
-            PATCH quests/questId\
+            PATCH users/userId\
             [ \
                 { \
                     "op": "replace", \
@@ -182,6 +182,47 @@
             Delete a User
             </summary>
             <param name="userId">Id of User to be deleted</param>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.CreateUserWeight(CroudSeek.API.Models.UserWeightForCreationDto)">
+            <summary>
+            Create a UserWeight
+            </summary>
+            <param name="userWeight">UserWeight details</param>
+            <returns>New UserWeight</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.UpdateUserWeight(System.Int32,CroudSeek.API.Models.UserWeightForUpdateDto)">
+            <summary>
+            Update a UserWeight
+            </summary>
+            <param name="userWeightId">Id of UserWeight</param>
+            <param name="userWeight">Details of UserWeight Updates</param>
+            <returns>Updated UserWeight</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.PartiallyUpdateUserWeight(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.UserWeightForUpdateDto})">
+            <summary>
+            Partially Update a UserWeight
+            </summary>
+            <param name="userWeightId">Id of UserWeight</param>
+            <param name="patchDocument">The set of operations to apply to the UserWeight</param>
+            <returns>Updated UserWeight</returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH userWeights\Id\
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }
+            ]
+            </remarks>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.DeleteUserWeight(System.Int32)">
+            <summary>
+            Delete a UserWeight
+            </summary>
+            <param name="userWeightId">Id of UserWeight to be deleted</param>
             <returns>ActionResult</returns>
         </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.QuestId">

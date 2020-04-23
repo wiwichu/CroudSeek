@@ -75,7 +75,7 @@ namespace CroudSeek.API.Controllers
             _croudSeekRepository.AddUser(userEntity);
             _croudSeekRepository.Save();
 
-            var userToReturn = _mapper.Map<QuestDto>(userEntity);
+            var userToReturn = _mapper.Map<UserDto>(userEntity);
             return CreatedAtRoute("GetUser",
                 new { userId = userToReturn.Id },
                 userToReturn);
@@ -120,7 +120,7 @@ namespace CroudSeek.API.Controllers
         /// <returns>Updated User</returns>
         /// <remarks>
         /// Sample request (this request updates the name and description) \
-        /// PATCH quests/questId\
+        /// PATCH users/userId\
         /// [ \
         ///     { \
         ///         "op": "replace", \

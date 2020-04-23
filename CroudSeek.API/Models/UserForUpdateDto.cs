@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CroudSeek.API.Models
 {
-    public class UserForUpdateDto : BaseDto
+    public class UserForUpdateDto
     {
         public string Name { get; set; }
         public string Email { get; set; }

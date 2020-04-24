@@ -15,24 +15,134 @@ namespace CroudSeek.API.Services
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public DataPoint GetDataPoint(int id)
-        {
-            return _context.DataPoints.Where((d) => d.Id == id).FirstOrDefault();
-        }
-
-        public IEnumerable<DataPoint> GetDataPoints()
-        {
-            return _context.DataPoints.OrderBy((d) => d.Name).ToList();
-        }
-
-        public IEnumerable<DataPoint> GetDataPointsByOwner(int ownerId)
-        {
-            return _context.DataPoints.Where((d) => d.OwnerId == ownerId).OrderBy((d) => d.Name).ToList();
-        }
 
         public IEnumerable<DataPoint> GetDataPointsByQuest(int questId)
         {
             return _context.DataPoints.Where((d) => d.QuestId == questId).OrderBy((d) => d.Name).ToList();
+        }
+
+        public DataPoint GetDataPoint(int questId, int dataPointId)
+        {
+            return _context.DataPoints
+              .Where(c => c.QuestId == questId && c.Id == dataPointId).FirstOrDefault();
+        }
+        public void AddDataPoint(int questId, DataPoint dataPoint)
+        {
+            if (dataPoint == null)
+            {
+                throw new ArgumentNullException(nameof(dataPoint));
+            }
+            // always set the AuthorId to the passed-in authorId
+            dataPoint.QuestId = questId;
+            _context.DataPoints.Add(dataPoint);
+        }
+        public void UpdateDataPoint(DataPoint dataPoint)
+        {
+            // no code in this implementation
+        }
+        public void DeleteDataPoint(DataPoint dataPoint)
+        {
+            _context.DataPoints.Remove(dataPoint);
+        }
+        public View GetView(int id, bool includeUserWeights)
+        {
+            if (includeUserWeights)
+            {
+                var newView = _context.Views.Where((d) => d.Id == id)
+                    .Select((v) =>
+                    new
+                    {
+                        View = v,
+                        UserWeights = v.ViewUserWeights.Select(vu => vu.UserWeight).ToList()
+                    })
+                    .FirstOrDefault();
+                var endView = newView.View;
+                endView.UserWeights = newView.UserWeights;
+                return endView;
+            }
+            return _context.Views.Where((d) => d.Id == id).FirstOrDefault();
+        }
+        public View GetViewByQuest(int questId,int viewId, bool includeUserWeights)
+        {
+            if (includeUserWeights)
+            {
+                var newView = _context.Views.Where((v) => v.QuestId == questId && v.Id == viewId)
+                    .Select((v) =>
+                    new
+                    {
+                        View = v,
+                        UserWeights = v.ViewUserWeights.Select(vu => vu.UserWeight).ToList()
+                    })
+                    .FirstOrDefault();
+                if (newView == null)
+                {
+                    return null;
+                }
+                var endView = newView.View;
+                endView.UserWeights = newView.UserWeights;
+                return endView;
+            }
+            return _context.Views.Where((v) => v.QuestId == questId && v.Id == viewId).FirstOrDefault();
+        }
+
+        public IEnumerable<View> GetViews()
+        {
+            return _context.Views.OrderBy((d) => d.Name).ToList();
+        }
+
+        public IEnumerable<View> GetViewsByOwner(int ownerId)
+        {
+            return _context.Views.Where((d) => d.OwnerId == ownerId).OrderBy((d) => d.Name).ToList();
+        }
+
+        public IEnumerable<View> GetViewsByQuest(int questId)
+        {
+            return _context.Views.Where((d) => d.QuestId == questId).OrderBy((d) => d.Name).ToList();
+        }
+        public View AddView(View view)
+        {
+            if (view == null)
+            {
+                throw new ArgumentNullException(nameof(view));
+            }
+            var newView = _context.Views.Add(view);
+            UpdateViewUserWeights(view);
+            return newView?.Entity;
+        }
+        private void UpdateViewUserWeights(View view)
+        {
+            _context.ViewUserWeights.RemoveRange(_context.ViewUserWeights.Where((vuw) => vuw.ViewId == view.Id));
+            foreach (var userWeight in view.UserWeights)
+            {
+                var newEntity = AddUserWeight(userWeight);
+                _context.ViewUserWeights.Add(
+                   new ViewUserWeight
+                   {
+                       ViewId = view.Id,
+                       UserWeightId = newEntity.Id,
+                       View = view,
+                       UserWeight = newEntity
+                   });
+            }
+        }
+        public void UpdateView(View view)
+        {
+            UpdateViewUserWeights(view);
+        }
+        public void DeleteView(View view)
+        {
+            _context.ViewUserWeights.RemoveRange(_context.ViewUserWeights.Where((vuw) => vuw.ViewId == view.Id));
+            _context.Views.Remove(view);
+        }
+        public View AddViewByQuest(int questId, View view)
+        {
+            if (view == null)
+            {
+                throw new ArgumentNullException(nameof(view));
+            }
+            // always set the AuthorId to the passed-in authorId
+            view.QuestId = questId;
+            return AddView(view);
         }
 
         public Quest GetQuest(int id)
@@ -88,41 +198,6 @@ namespace CroudSeek.API.Services
                 .Where((w) => w.Id == i.UserWeightId))
                 .AsEnumerable().ToList();
         }
-
-        public View GetView(int id,bool includeUserWeights)
-        {
-            if (includeUserWeights)
-            {
-                var newView = _context.Views.Where((d) => d.Id == id)
-                    .Select((v) =>
-                    new
-                    {
-                        View = v,
-                        UserWeights = v.ViewUserWeights.Select(vu=>vu.UserWeight).ToList()
-                    })
-                    .FirstOrDefault();
-                var endView = newView.View;
-                endView.UserWeights = newView.UserWeights;
-                return endView;
-            }
-            return _context.Views.Where((d) => d.Id == id).FirstOrDefault();
-        }
-
-        public IEnumerable<View> GetViews()
-        {
-            return _context.Views.OrderBy((d) => d.Name).ToList();
-        }
-
-        public IEnumerable<View> GetViewsByOwner(int ownerId)
-        {
-            return _context.Views.Where((d) => d.OwnerId == ownerId).OrderBy((d) => d.Name).ToList();
-        }
-
-        public IEnumerable<View> GetViewsByQuest(int questId)
-        {
-            return _context.Views.Where((d) => d.QuestId == questId).OrderBy((d) => d.Name).ToList();
-        }
-
         public Zone GetZone(int id)
         {
             return _context.Zones.Where((d) => d.Id == id).FirstOrDefault();
@@ -162,13 +237,13 @@ namespace CroudSeek.API.Services
             }
             _context.Users.Add(user);
         }
-        public void AddUserWeight(UserWeight userWeight)
+        public UserWeight AddUserWeight(UserWeight userWeight)
         {
             if (userWeight == null)
             {
                 throw new ArgumentNullException(nameof(userWeight));
             }
-            _context.UserWeights.Add(userWeight);
+            return _context.UserWeights.Add(userWeight)?.Entity;
         }
         public void UpdateUserWeight(UserWeight userWeight)
         {
@@ -188,35 +263,6 @@ namespace CroudSeek.API.Services
             _context.Users.Remove(user);
         }
 
-        public IEnumerable<DataPoint> GetDataPoints(int questId)
-        {
-             return _context.DataPoints
-                        .Where(c => c.QuestId == questId)
-                        .OrderBy(c => c.Name).ToList();
-        }
-        public DataPoint GetDataPoint(int questId, int dataPointId)
-        {
-            return _context.DataPoints
-              .Where(c => c.QuestId == questId && c.Id == dataPointId).FirstOrDefault();
-        }
-        public void AddDataPoint(int questId, DataPoint dataPoint)
-        {
-            if (dataPoint == null)
-            {
-                throw new ArgumentNullException(nameof(dataPoint));
-            }
-            // always set the AuthorId to the passed-in authorId
-            dataPoint.QuestId = questId;
-            _context.DataPoints.Add(dataPoint);
-        }
-        public void UpdateDataPoint(DataPoint dataPoint)
-        {
-            // no code in this implementation
-        }
-        public void DeleteDataPoint(DataPoint dataPoint)
-        {
-            _context.DataPoints.Remove(dataPoint);
-        }
 
         public bool QuestExists(int questId)
         {
@@ -241,5 +287,19 @@ namespace CroudSeek.API.Services
                 // dispose resources when needed
             }
         }
+
+        //public IEnumerable<DataPoint> GetDataPoints()
+        //{
+        //    return _context.DataPoints.OrderBy((d) => d.Name).ToList();
+        //}
+
+        //public IEnumerable<DataPoint> GetDataPointsByOwner(int ownerId)
+        //{
+        //    return _context.DataPoints.Where((d) => d.OwnerId == ownerId).OrderBy((d) => d.Name).ToList();
+        //}
+        //public DataPoint GetDataPoint(int id)
+        //{
+        //    return _context.DataPoints.Where((d) => d.Id == id).FirstOrDefault();
+        //}
     }
 }

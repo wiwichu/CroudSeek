@@ -40,7 +40,7 @@ namespace CroudSeek.API.Controllers
                 return NotFound();
             }
 
-            var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPoints(questId);
+            var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPointsByQuest(questId);
             return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo));
         }
 

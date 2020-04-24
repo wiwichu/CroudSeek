@@ -10,8 +10,10 @@ namespace CroudSeek.API.Profiles
     {
         public ViewsProfile()
         {
-            CreateMap<Entities.View, Models.ViewDto>();
-            CreateMap<Entities.View, Models.ViewWithoutUserWeightsDto>();
+            CreateMap<Entities.View, Models.ViewDto>().ReverseMap();
+            CreateMap<Entities.View, Models.ViewForCreationDto>().ReverseMap();
+            CreateMap<Entities.View, Models.ViewForUpdateDto>().ReverseMap();
+            CreateMap<Entities.View, Models.ViewWithoutUserWeightsDto>().ReverseMap();
         }
     }
 }

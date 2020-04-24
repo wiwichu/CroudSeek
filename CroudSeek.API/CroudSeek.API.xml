@@ -225,6 +225,65 @@
             <param name="userWeightId">Id of UserWeight to be deleted</param>
             <returns>ActionResult</returns>
         </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.GetViews(System.Int32)">
+            <summary>
+            Get Views
+            </summary>
+            <returns>Collection of Views</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.GetView(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Get View with/without UserWeights
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="viewId">Id of View to get</param>
+            <param name="includeUserWeights">True to include UserWeights</param>
+            <returns></returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.CreateViewForQuest(System.Int32,CroudSeek.API.Models.ViewForCreationDto)">
+            <summary>
+            Create a View
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="view">View details</param>
+            <returns>New View</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.UpdateViewForQuest(System.Int32,System.Int32,CroudSeek.API.Models.ViewForUpdateDto)">
+            <summary>
+            Update a View
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="viewId">Id of View</param>
+            <param name="view">Deatils of View Updates</param>
+            <returns>Updated View</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.PartiallyUpdateView(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.ViewForUpdateDto})">
+            <summary>
+            Partially Update a View
+            </summary>
+            <param name="viewId">Id of View</param>
+            <param name="patchDocument">The set of operations to apply to the View</param>
+            <returns>Updated View</returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH views/viewId\
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }
+            ]
+            </remarks>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ViewsController.DeleteViewForQuest(System.Int32,System.Int32)">
+            <summary>
+            Delete a View
+            </summary>
+            <param name="questId">Id of Quest</param>
+            <param name="viewId">Id of View to be deleted</param>
+            <returns>ActionResult</returns>
+        </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.QuestId">
             <summary>
             Id of Quest this DataPoint belongs to

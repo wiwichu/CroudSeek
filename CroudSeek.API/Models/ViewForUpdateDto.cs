@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.API.Models
 {
-    public class ViewForCreationDto
+    public class ViewForUpdateDto
     {
         [Required(ErrorMessage ="QuestId is required.")]
         public int QuestId { get; set; }
@@ -25,7 +25,7 @@ namespace CroudSeek.API.Models
         //public ICollection<User> IncludedUsers { get; set; }
         //    = new List<User>();
         //Collection of parameters per user indicating how their weights contribute to the result.
-        public ICollection<UserWeightForCreationDto> UserWeights { get; set; }
-            = new List<UserWeightForCreationDto>();
+        public ICollection<UserWeightForUpdateDto> UserWeights { get; set; }
+            = new List<UserWeightForUpdateDto>();
     }
 }

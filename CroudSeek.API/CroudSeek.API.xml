@@ -284,6 +284,52 @@
             <param name="viewId">Id of View to be deleted</param>
             <returns>ActionResult</returns>
         </member>
+        <member name="M:CroudSeek.API.Controllers.ZonesController.CreateZone(CroudSeek.API.Models.ZoneForCreationDto)">
+            <summary>
+            Create a Zone
+            </summary>
+            <param name="zone">Zone details</param>
+            <returns>New Zone</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ZonesController.UpdateZone(System.Int32,CroudSeek.API.Models.ZoneForUpdateDto)">
+            <summary>
+            Update a Zone
+            </summary>
+            <param name="zoneId">Id of Zone</param>
+            <param name="zone">Deatils of Zone Updates</param>
+            <returns>Updated Zone</returns>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ZonesController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.ZoneForUpdateDto})">
+            <summary>
+            Partially Update a Zone
+            </summary>
+            <param name="zoneId">Id of Zone</param>
+            <param name="patchDocument">The set of operations to apply to the Zone</param>
+            <returns>Updated Zone</returns>
+            <remarks>
+            Sample request (this request updates the name and description) \
+            PATCH zones/zoneId\
+            [ \
+                { \
+                    "op": "replace", \
+                    "path": "/name", \
+                    "value": "NEWNAME" \
+                }, \
+                { \
+                    "op": "replace", \
+                    "path": "/description", \
+                    "value": "NEWDESCRIPTION" \
+                } \
+            ]
+            </remarks>
+        </member>
+        <member name="M:CroudSeek.API.Controllers.ZonesController.DeleteZone(System.Int32)">
+            <summary>
+            Delete a Zone
+            </summary>
+            <param name="zoneId">Id of Zone to be deleted</param>
+            <returns>ActionResult</returns>
+        </member>
         <member name="P:CroudSeek.API.Models.DataPointDto.QuestId">
             <summary>
             Id of Quest this DataPoint belongs to

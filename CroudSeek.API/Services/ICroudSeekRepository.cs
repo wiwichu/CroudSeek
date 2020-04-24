@@ -35,9 +35,12 @@ namespace CroudSeek.API.Services
         User GetUser(int id);
         UserWeight GetUserWeight(int id);
         Zone GetZone(int id);
+        void AddZone(Zone zone);
         void AddQuest(Quest quest);
         void UpdateQuest(Quest quest);
+        void UpdateZone(Zone zone);
         void DeleteQuest(Quest quest);
+        void DeleteZone(Zone zone);
         void AddUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);

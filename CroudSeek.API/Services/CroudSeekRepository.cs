@@ -228,6 +228,14 @@ namespace CroudSeek.API.Services
         {
             _context.Quests.Remove(quest);
         }
+        public void UpdateZone(Zone zone)
+        {
+            //no code in this implementation
+        }
+        public void DeleteZone(Zone zone)
+        {
+            _context.Zones.Remove(zone);
+        }
         //
         public void AddUser(User user)
         {
@@ -236,6 +244,14 @@ namespace CroudSeek.API.Services
                 throw new ArgumentNullException(nameof(user));
             }
             _context.Users.Add(user);
+        }
+        public void AddZone(Zone zone)
+        {
+            if (zone == null)
+            {
+                throw new ArgumentNullException(nameof(zone));
+            }
+            _context.Zones.Add(zone);
         }
         public UserWeight AddUserWeight(UserWeight userWeight)
         {

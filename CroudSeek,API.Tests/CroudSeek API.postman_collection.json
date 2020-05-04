@@ -4753,14 +4753,27 @@
 											"    function (error,response){",
 											"        if (error) {",
 											"            console.log(error)",
-											"",
 											"        }",
-											"        pm.test(\"Result properties have been updated\",",
+											"        pm.test(\"Quest deleted\",",
 											"        function(){",
 											"             pm.expect(response).to.have.property('code', 204);",
+											"               pm.sendRequest(",
+											"                    delRequest,",
+											"                    function (error,response){",
+											"                        if (error) {",
+											"                            console.log(error)",
+											"                     }",
+											"                        pm.test(\"Quest not found\",",
+											"                        function(){",
+											"                            pm.expect(response).to.have.property('code', 404);",
+											"                        }",
+											"                        )",
+											"                });        ",
 											"        }",
 											"        )",
-											"    });"
+											"    });",
+											"    ",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -8865,7 +8878,7 @@
 	],
 	"variable": [
 		{
-			"id": "090167ab-8b8e-42f5-8301-9a36754174f8",
+			"id": "ffa50225-3fa9-4245-8386-5a9afc9c0058",
 			"key": "baseUrl",
 			"value": "/",
 			"type": "string"

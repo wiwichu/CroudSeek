@@ -145,8 +145,12 @@ namespace CroudSeek.API.Services
             return AddView(view);
         }
 
-        public Quest GetQuest(int id)
+        public Quest GetQuest(int id, bool includeDataPoints=false)
         {
+            if (includeDataPoints)
+            {
+                return _context.Quests.Where((d) => d.Id == id).Include(q=>q.DataPoints).FirstOrDefault();
+            }
             return _context.Quests.Where((d) => d.Id == id).FirstOrDefault();
         }
 

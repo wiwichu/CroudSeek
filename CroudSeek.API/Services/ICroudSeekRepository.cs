@@ -31,7 +31,7 @@ namespace CroudSeek.API.Services
         IEnumerable<UserWeight> GetUserWeightsByOwner(int ownerId);
         IEnumerable<Zone> GetZones();
         IEnumerable<Zone> GetZonesByOwner(int ownerId);
-        Quest GetQuest(int id);
+        Quest GetQuest(int id, bool includeDataPoints=false);
         User GetUser(int id);
         UserWeight GetUserWeight(int id);
         Zone GetZone(int id);

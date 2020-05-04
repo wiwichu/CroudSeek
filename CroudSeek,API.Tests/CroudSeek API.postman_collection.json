@@ -4737,7 +4737,30 @@
 											"            pm.expect(result.name).to.equal(\"NEWQuest\");",
 											"            pm.expect(result.description).to.equal(\"NEWQuest Descr\");",
 											"        })",
-											"    })"
+											"    })",
+											"    ",
+											"    ",
+											"const delRequest = {",
+											"    url: url,",
+											"    method: 'DELETE',",
+											"    header: {",
+											"        \"accept\" : \"application/json\"",
+											"    }",
+											"};",
+											"",
+											"pm.sendRequest(",
+											"    delRequest,",
+											"    function (error,response){",
+											"        if (error) {",
+											"            console.log(error)",
+											"",
+											"        }",
+											"        pm.test(\"Result properties have been updated\",",
+											"        function(){",
+											"             pm.expect(response).to.have.property('code', 204);",
+											"        }",
+											"        )",
+											"    });"
 										],
 										"type": "text/javascript"
 									}
@@ -8842,7 +8865,7 @@
 	],
 	"variable": [
 		{
-			"id": "ea469b6d-08f8-4eb4-a200-c2740e15efd1",
+			"id": "090167ab-8b8e-42f5-8301-9a36754174f8",
 			"key": "baseUrl",
 			"value": "/",
 			"type": "string"

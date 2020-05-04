@@ -195,13 +195,16 @@ namespace CroudSeek.API.Controllers
         [ProducesDefaultResponseType]
         public ActionResult DeleteQuest(int questId)
         {
-            var questFromRepo = _croudSeekRepository.GetQuest(questId);
+            var questFromRepo = _croudSeekRepository.GetQuest(questId,true);
 
             if (questFromRepo == null)
             {
                 return NotFound();
             }
-
+            foreach (var datapoint in questFromRepo.DataPoints)
+            {
+                _croudSeekRepository.DeleteDataPoint(datapoint);
+            }
             _croudSeekRepository.DeleteQuest(questFromRepo);
             _croudSeekRepository.Save();
 

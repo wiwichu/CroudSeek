@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseLibrary.API", "Course
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CroudSeek,API.Tests", "CroudSeek,API.Tests\CroudSeek,API.Tests.csproj", "{DCB5B06D-6E8D-44A3-9AF2-08F1200EF568}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CroudSeek.Core", "CroudSeek.Core\CroudSeek.Core.csproj", "{99EF8350-87D9-4E11-9338-44D4A4C14F18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CroudSeek.Shared", "CroudSeek.Shared\CroudSeek.Shared.csproj", "{3E6814CB-3288-40D6-94C1-BA672B06BC02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{DCB5B06D-6E8D-44A3-9AF2-08F1200EF568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCB5B06D-6E8D-44A3-9AF2-08F1200EF568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCB5B06D-6E8D-44A3-9AF2-08F1200EF568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99EF8350-87D9-4E11-9338-44D4A4C14F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99EF8350-87D9-4E11-9338-44D4A4C14F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99EF8350-87D9-4E11-9338-44D4A4C14F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99EF8350-87D9-4E11-9338-44D4A4C14F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E6814CB-3288-40D6-94C1-BA672B06BC02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6814CB-3288-40D6-94C1-BA672B06BC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6814CB-3288-40D6-94C1-BA672B06BC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6814CB-3288-40D6-94C1-BA672B06BC02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

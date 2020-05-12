@@ -1,0 +1,78 @@
+﻿@page "/questdetail/{QuestId}"
+@inherits QuestDetailBase
+
+<h1 class="page-title">Details for @Quest.Description</h1>
+@{
+    var leadingFormat = "00000";
+}
+
+<div class="col-12 row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Quest ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Quest.Id.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Quest.Name</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Quest.Description</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Owner ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Quest.OwnerId.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Zone ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Quest.ZoneId.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Create Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Quest.CreateTime</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Update Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Quest.UpdateTime</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Is Private</label>
+            <div class="col-sm-8">
+
+                @if (Quest.IsPrivate)
+                {
+                    <label type="text" readonly class="form-control-plaintext">Yes</label>
+                }
+                else
+                {
+                    <label type="text" readonly class="form-control-plaintext">No</label>
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>

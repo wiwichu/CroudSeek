@@ -40,5 +40,9 @@
     <Folder Include="ValidationAttributes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CroudSeek.Shared\CroudSeek.Shared.csproj" />
+  </ItemGroup>
+
 
 </Project>

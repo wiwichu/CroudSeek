@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CroudSeek.API.Entities;
-using CroudSeek.API.Models;
+using CroudSeek.Shared;
 using CroudSeek.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

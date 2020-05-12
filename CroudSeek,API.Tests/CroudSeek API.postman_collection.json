@@ -3498,13 +3498,6 @@
 													"",
 													"var url = pm.response.headers.get(\"Location\");",
 													"",
-													"const getRequest = {",
-													"    url: url,",
-													"    method: 'GET',",
-													"    header: {",
-													"        \"accept\" : \"application/json\"",
-													"    }",
-													"};",
 													""
 												],
 												"type": "text/javascript"
@@ -3997,7 +3990,7 @@
 													"",
 													"// eval(pm.globals.get(\"contentTypeJsonTest\"))();",
 													"",
-													"eval(pm.globals.get(\"responseBodyNotEmpty\"))();",
+													"// eval(pm.globals.get(\"responseBodyNotEmpty\"))();",
 													"",
 													"var url = pm.response.headers.get(\"Location\");",
 													"",
@@ -8879,7 +8872,7 @@
 	],
 	"variable": [
 		{
-			"id": "fa0d3c10-7185-44b6-9365-b8c7bf340d14",
+			"id": "d3937269-2ede-431f-9e7d-070f67c5c7e1",
 			"key": "baseUrl",
 			"value": "/",
 			"type": "string"

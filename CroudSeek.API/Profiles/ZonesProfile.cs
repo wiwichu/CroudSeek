@@ -10,9 +10,9 @@ namespace CroudSeek.API.Profiles
     {
         public ZonesProfile()
         {
-            CreateMap<Entities.Zone, Models.ZoneDto>().ReverseMap();
-            CreateMap<Entities.Zone, Models.ZoneForUpdateDto>().ReverseMap();
-            CreateMap<Entities.Zone, Models.ZoneForCreationDto>().ReverseMap();
+            CreateMap<Entities.Zone, CroudSeek.Shared.ZoneDto>().ReverseMap();
+            CreateMap<Entities.Zone, CroudSeek.Shared.ZoneForUpdateDto>().ReverseMap();
+            CreateMap<Entities.Zone, CroudSeek.Shared.ZoneForCreationDto>().ReverseMap();
         }
     }
 }

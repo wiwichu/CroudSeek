@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CroudSeek.API.Models;
+using CroudSeek.Shared;
 using CroudSeek.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;

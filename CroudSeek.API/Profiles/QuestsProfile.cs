@@ -10,9 +10,9 @@ namespace CroudSeek.API.Profiles
     {
         public QuestsProfile()
         {
-            CreateMap<Entities.Quest, Models.QuestDto>();
-            CreateMap<Entities.Quest, Models.QuestForCreationDto>().ReverseMap();
-            CreateMap<Entities.Quest, Models.QuestForUpdateDto>().ReverseMap();
+            CreateMap<Entities.Quest, CroudSeek.Shared.QuestDto>();
+            CreateMap<Entities.Quest, CroudSeek.Shared.QuestForCreationDto>().ReverseMap();
+            CreateMap<Entities.Quest, CroudSeek.Shared.QuestForUpdateDto>().ReverseMap();
         }
     }
 }

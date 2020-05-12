@@ -12,7 +12,7 @@
             <returns>A list of Datapoints belonging to the quest.</returns>
             <response code="200">Returns the DataPoints for the Quest Id</response>
         </member>
-        <member name="M:CroudSeek.API.Controllers.DataPointsController.CreateDataPointForQuest(System.Int32,CroudSeek.API.Models.DataPointForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.CreateDataPointForQuest(System.Int32,CroudSeek.Shared.DataPointForCreationDto)">
             <summary>
             Create a DataPoint for Quest
             </summary>
@@ -20,7 +20,7 @@
             <param name="dataPoint">DataPoint details</param>
             <returns></returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.DataPointsController.PartiallyUpdateDataPointForQuest(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.DataPointForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.PartiallyUpdateDataPointForQuest(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.DataPointForUpdateDto})">
             <summary>
             Partially update a DataPoint for a Quest
             </summary>
@@ -54,7 +54,7 @@
             <param name="dataPointId">Id of DataPoint</param>
             <returns>ActionResult</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.DataPointsController.UpdateDataPointForQuest(System.Int32,System.Int32,CroudSeek.API.Models.DataPointForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.DataPointsController.UpdateDataPointForQuest(System.Int32,System.Int32,CroudSeek.Shared.DataPointForUpdateDto)">
             <summary>
             Updates an existing DataPoint
             </summary>
@@ -84,14 +84,14 @@
             <param name="questId">Id of Quest</param>
             <returns>Quest</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.QuestsController.CreateQuest(CroudSeek.API.Models.QuestForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.QuestsController.CreateQuest(CroudSeek.Shared.QuestForCreationDto)">
             <summary>
             Create a Quest
             </summary>
             <param name="quest">Quest details</param>
             <returns>New Quest</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.QuestsController.UpdateQuest(System.Int32,CroudSeek.API.Models.QuestForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.QuestsController.UpdateQuest(System.Int32,CroudSeek.Shared.QuestForUpdateDto)">
             <summary>
             Update a Quest
             </summary>
@@ -99,7 +99,7 @@
             <param name="quest">Deatils of Quest Updates</param>
             <returns>Updated Quest</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.QuestsController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.QuestForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.QuestsController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.QuestForUpdateDto})">
             <summary>
             Partially Update a Quest
             </summary>
@@ -143,14 +143,14 @@
             <param name="userId">Id of User to get</param>
             <returns>User</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UsersController.CreateUser(CroudSeek.API.Models.UserForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.UsersController.CreateUser(CroudSeek.Shared.UserForCreationDto)">
             <summary>
             Create a User
             </summary>
             <param name="user">User details</param>
             <returns>New User</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UsersController.UpdateUser(System.Int32,CroudSeek.API.Models.UserForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.UsersController.UpdateUser(System.Int32,CroudSeek.Shared.UserForUpdateDto)">
             <summary>
             Update a User
             </summary>
@@ -158,7 +158,7 @@
             <param name="user">Deatils of User Updates</param>
             <returns>Updated User</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UsersController.PartiallyUpdateUser(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.UserForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.UsersController.PartiallyUpdateUser(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.UserForUpdateDto})">
             <summary>
             Partially Update a User
             </summary>
@@ -184,14 +184,14 @@
             <param name="userId">Id of User to be deleted</param>
             <returns>ActionResult</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UserWeightsController.CreateUserWeight(CroudSeek.API.Models.UserWeightForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.CreateUserWeight(CroudSeek.Shared.UserWeightForCreationDto)">
             <summary>
             Create a UserWeight
             </summary>
             <param name="userWeight">UserWeight details</param>
             <returns>New UserWeight</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UserWeightsController.UpdateUserWeight(System.Int32,CroudSeek.API.Models.UserWeightForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.UpdateUserWeight(System.Int32,CroudSeek.Shared.UserWeightForUpdateDto)">
             <summary>
             Update a UserWeight
             </summary>
@@ -199,7 +199,7 @@
             <param name="userWeight">Details of UserWeight Updates</param>
             <returns>Updated UserWeight</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.UserWeightsController.PartiallyUpdateUserWeight(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.UserWeightForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.UserWeightsController.PartiallyUpdateUserWeight(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.UserWeightForUpdateDto})">
             <summary>
             Partially Update a UserWeight
             </summary>
@@ -240,7 +240,7 @@
             <param name="includeUserWeights">True to include UserWeights</param>
             <returns></returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ViewsController.CreateViewForQuest(System.Int32,CroudSeek.API.Models.ViewForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.ViewsController.CreateViewForQuest(System.Int32,CroudSeek.Shared.ViewForCreationDto)">
             <summary>
             Create a View
             </summary>
@@ -248,7 +248,7 @@
             <param name="view">View details</param>
             <returns>New View</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ViewsController.UpdateViewForQuest(System.Int32,System.Int32,CroudSeek.API.Models.ViewForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.ViewsController.UpdateViewForQuest(System.Int32,System.Int32,CroudSeek.Shared.ViewForUpdateDto)">
             <summary>
             Update a View
             </summary>
@@ -257,7 +257,7 @@
             <param name="view">Deatils of View Updates</param>
             <returns>Updated View</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ViewsController.PartiallyUpdateView(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.ViewForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.ViewsController.PartiallyUpdateView(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.ViewForUpdateDto})">
             <summary>
             Partially Update a View
             </summary>
@@ -284,14 +284,14 @@
             <param name="viewId">Id of View to be deleted</param>
             <returns>ActionResult</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ZonesController.CreateZone(CroudSeek.API.Models.ZoneForCreationDto)">
+        <member name="M:CroudSeek.API.Controllers.ZonesController.CreateZone(CroudSeek.Shared.ZoneForCreationDto)">
             <summary>
             Create a Zone
             </summary>
             <param name="zone">Zone details</param>
             <returns>New Zone</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ZonesController.UpdateZone(System.Int32,CroudSeek.API.Models.ZoneForUpdateDto)">
+        <member name="M:CroudSeek.API.Controllers.ZonesController.UpdateZone(System.Int32,CroudSeek.Shared.ZoneForUpdateDto)">
             <summary>
             Update a Zone
             </summary>
@@ -299,7 +299,7 @@
             <param name="zone">Deatils of Zone Updates</param>
             <returns>Updated Zone</returns>
         </member>
-        <member name="M:CroudSeek.API.Controllers.ZonesController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.API.Models.ZoneForUpdateDto})">
+        <member name="M:CroudSeek.API.Controllers.ZonesController.PartiallyUpdateQuest(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{CroudSeek.Shared.ZoneForUpdateDto})">
             <summary>
             Partially Update a Zone
             </summary>

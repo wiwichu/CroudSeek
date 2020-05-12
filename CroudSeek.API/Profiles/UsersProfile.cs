@@ -10,9 +10,9 @@ namespace CroudSeek.API.Profiles
     {
         public UsersProfile()
         {
-            CreateMap<Entities.User, Models.UserDto>().ReverseMap();
-            CreateMap<Entities.User, Models.UserForCreationDto>().ReverseMap();
-            CreateMap<Entities.User, Models.UserForUpdateDto>().ReverseMap();
+            CreateMap<Entities.User, CroudSeek.Shared.UserDto>().ReverseMap();
+            CreateMap<Entities.User, CroudSeek.Shared.UserForCreationDto>().ReverseMap();
+            CreateMap<Entities.User, CroudSeek.Shared.UserForUpdateDto>().ReverseMap();
         }
     }
 }

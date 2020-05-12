@@ -10,9 +10,9 @@ namespace CroudSeek.API.Profiles
     {
         public UserWeightsProfile()
         {
-            CreateMap<Entities.UserWeight, Models.UserWeightDto>().ReverseMap();
-            CreateMap<Entities.UserWeight, Models.UserWeightForCreationDto>().ReverseMap();
-            CreateMap<Entities.UserWeight, Models.UserWeightForUpdateDto>().ReverseMap();
+            CreateMap<Entities.UserWeight, CroudSeek.Shared.UserWeightDto>().ReverseMap();
+            CreateMap<Entities.UserWeight, CroudSeek.Shared.UserWeightForCreationDto>().ReverseMap();
+            CreateMap<Entities.UserWeight, CroudSeek.Shared.UserWeightForUpdateDto>().ReverseMap();
         }
     }
 }

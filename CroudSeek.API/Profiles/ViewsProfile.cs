@@ -10,10 +10,10 @@ namespace CroudSeek.API.Profiles
     {
         public ViewsProfile()
         {
-            CreateMap<Entities.View, Models.ViewDto>().ReverseMap();
-            CreateMap<Entities.View, Models.ViewForCreationDto>().ReverseMap();
-            CreateMap<Entities.View, Models.ViewForUpdateDto>().ReverseMap();
-            CreateMap<Entities.View, Models.ViewWithoutUserWeightsDto>().ReverseMap();
+            CreateMap<Entities.View, CroudSeek.Shared.ViewDto>().ReverseMap();
+            CreateMap<Entities.View, CroudSeek.Shared.ViewForCreationDto>().ReverseMap();
+            CreateMap<Entities.View, CroudSeek.Shared.ViewForUpdateDto>().ReverseMap();
+            CreateMap<Entities.View, CroudSeek.Shared.ViewWithoutUserWeightsDto>().ReverseMap();
         }
     }
 }

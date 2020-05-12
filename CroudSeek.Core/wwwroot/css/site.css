@@ -11,8 +11,8 @@ body {
 }
 
 nav {
-    background-color: #a593c2;
-    border-color: #a593c2;
+    background-color: #0077FF;
+    border-color: #0077FF;
 }
 
 #logo {
@@ -29,8 +29,8 @@ nav {
 
 .sidebar-logo {
     height: 80px;
-    background-color: #a593c2;
-    border-color: #a593c2;
+    background-color: #0077FF;
+    border-color: #0077FF;
     width: 240px;
 }
 
@@ -98,8 +98,8 @@ nav {
 
 .list-group-item.active, .list-group-item.active:active, .list-group-item.active:focus, .list-group-item.active:visited {
     color: white;
-    background-color: #a593c2 !important;
-    border-color: #a593c2;
+    background-color: #0077FF !important;
+    border-color: #0077FF;
     font-weight: bold;
 }
 
@@ -152,8 +152,8 @@ nav {
 
     .table-btn:hover, .table-btn:active {
         color: #fff;
-        background-color: #a593c2 !important;
-        border-color: #a593c2 !important;
+        background-color: #0077FF !important;
+        border-color: #0077FF !important;
     }
 
 .quick-add-btn {
@@ -191,8 +191,8 @@ nav {
 
     .edit-btn:hover, .edit-btn:active {
         color: #fff;
-        background-color: #a593c2;
-        border-color: #a593c2;
+        background-color: #0077FF;
+        border-color: #0077FF;
     }
 
 .edit-outline-btn {
@@ -201,6 +201,6 @@ nav {
 
     .edit-outline-btn:hover, .edit-outline-btn:active {
         color: #fff;
-        background-color: #a593c2 !important;
-        border-color: #a593c2 !important;
+        background-color: #0077FF !important;
+        border-color: #0077FF !important;
     }

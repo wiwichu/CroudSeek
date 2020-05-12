@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CroudSeek.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,12 @@ namespace CroudSeek.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddHttpClient<IQuestDataService, QuestDataService>(
+                client=>
+                {
+                    client.BaseAddress = new Uri("http://localhost:51044");
+                }
+                );
             services.AddServerSideBlazor()
                 .AddCircuitOptions(options => { options.DetailedErrors = true; })
                 ;

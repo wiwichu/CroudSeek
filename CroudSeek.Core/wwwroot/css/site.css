@@ -74,7 +74,8 @@ nav {
 
 .menu {
     position: absolute;
-    margin-top: 240px;
+    /*margin-top: 240px;*/
+    margin-top: 10px;
 }
 
 #sidebar-wrapper {
@@ -88,7 +89,7 @@ nav {
 }
 
     #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
+        /*padding: 0.875rem 1.25rem;*/
         font-size: 1.2rem;
     }
 

@@ -1,0 +1,30 @@
+﻿@page "/questedit"
+@page "/questedit/{QuestId}"
+@inherits QuestEditBase
+
+    <section class="quest-edit">
+        <h1 class="page-title">Details for @Quest.Description</h1>
+        <EditForm Model="@Quest">
+            <div class="form-group row">
+                <label for="name" class="col-sm-3">Name: </label>
+                <InputText id="name" class="form-control col-sm-8" @bind-Value="@Quest.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-3">Description: </label>
+                <InputText id="description" class="form-control col-sm-8" @bind-Value="@Quest.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
+            </div>
+            <div class="form-group row">
+                <label for="zone" class="col-sm-3">Zone: </label>
+                <InputSelect id="zone" class="form-control col-sm-8" @bind-Value="@ZoneId">
+                    @foreach (var zone in Zones)
+                    {
+                        <option value="@zone.Id">@zone.Name</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="form-group row">
+                <label for="isPrivate" class="col-sm-3">IsPrivate: </label>
+                <InputCheckbox id="isPrivate" class="form-control col-sm-8" @bind-Value="@Quest.IsPrivate" placeholder="Enter IsPrivate"></InputCheckbox>
+            </div>
+        </EditForm>
+    </section>

@@ -28,7 +28,13 @@ namespace CroudSeek.Core
         {
             services.AddRazorPages();
             services.AddHttpClient<IQuestDataService, QuestDataService>(
-                client=>
+                client =>
+                {
+                    client.BaseAddress = new Uri("http://localhost:51044");
+                }
+                );
+            services.AddHttpClient<IZoneDataService, ZoneDataService>(
+                client =>
                 {
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }

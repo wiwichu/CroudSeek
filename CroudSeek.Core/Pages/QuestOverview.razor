@@ -24,21 +24,24 @@ else
         <tbody>
             @foreach (var quest in Quests)
             {
-                <tr>
-@*                    <td>@quest.Id</td>*@
-                    <td>@quest.Name</td>
-                    <td>@quest.Description</td>
-                    @*<td>@quest.IsPrivate</td>
-                    <td>@quest.OwnerId</td>
-                    <td>@quest.ZoneId</td>
-                    <td>@quest.CreateTime</td>
-                    <td>@quest.UpdateTime</td>*@
-                    <td>
-                        <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                    </td>
-                </tr>
+            <tr>
+                @*                    <td>@quest.Id</td>*@
+                <td>@quest.Name</td>
+                <td>@quest.Description</td>
+                @*<td>@quest.IsPrivate</td>
+        <td>@quest.OwnerId</td>
+        <td>@quest.ZoneId</td>
+        <td>@quest.CreateTime</td>
+        <td>@quest.UpdateTime</td>*@
+                <td>
+                    <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                    </NavLink>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

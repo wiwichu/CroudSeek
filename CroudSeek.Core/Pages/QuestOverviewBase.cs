@@ -12,11 +12,15 @@ namespace CroudSeek.Core.Pages
     {
         [Inject]
         public IQuestDataService QuestDataService { get; set; }
+        [Inject]
+        public IZoneDataService ZoneDataService { get; set; }
         public List<QuestDto> Quests { get; set; }
+        public List<ZoneDto> Zones { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             Quests = (await QuestDataService.GetAllQuests()).ToList();
+            Zones = (await ZoneDataService.GetAllZones()).ToList();
         }
     }
 }

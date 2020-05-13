@@ -11,8 +11,8 @@ body {
 }
 
 nav {
-    background-color: #0077FF;
-    border-color: #0077FF;
+    background-color: #3071BC;
+    border-color: #3071BC;
 }
 
 #logo {
@@ -29,8 +29,8 @@ nav {
 
 .sidebar-logo {
     height: 80px;
-    background-color: #0077FF;
-    border-color: #0077FF;
+    background-color: #3071BC;
+    border-color: #3071BC;
     width: 240px;
 }
 
@@ -99,8 +99,8 @@ nav {
 
 .list-group-item.active, .list-group-item.active:active, .list-group-item.active:focus, .list-group-item.active:visited {
     color: white;
-    background-color: #0077FF !important;
-    border-color: #0077FF;
+    background-color: #3071BC !important;
+    border-color: #3071BC;
     font-weight: bold;
 }
 
@@ -153,8 +153,8 @@ nav {
 
     .table-btn:hover, .table-btn:active {
         color: #fff;
-        background-color: #0077FF !important;
-        border-color: #0077FF !important;
+        background-color: #3071BC !important;
+        border-color: #3071BC !important;
     }
 
 .quick-add-btn {
@@ -164,16 +164,16 @@ nav {
     bottom: 30px;
 }
 
-.employee-detail, .employee-edit {
+.quest-detail, .quest-edit {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
-    .employee-detail .form-group {
+    .quest-detail .form-group {
         margin-bottom: 0;
     }
 
-.employee-detail-img {
+.quest-detail-img {
     width: 150px;
     height: auto;
 }
@@ -192,8 +192,8 @@ nav {
 
     .edit-btn:hover, .edit-btn:active {
         color: #fff;
-        background-color: #0077FF;
-        border-color: #0077FF;
+        background-color: #3071BC;
+        border-color: #3071BC;
     }
 
 .edit-outline-btn {
@@ -202,6 +202,6 @@ nav {
 
     .edit-outline-btn:hover, .edit-outline-btn:active {
         color: #fff;
-        background-color: #0077FF !important;
-        border-color: #0077FF !important;
+        background-color: #3071BC !important;
+        border-color: #3071BC !important;
     }

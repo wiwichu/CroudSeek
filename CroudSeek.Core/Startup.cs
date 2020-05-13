@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CroudSeek.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -42,6 +43,7 @@ namespace CroudSeek.Core
             services.AddServerSideBlazor()
                 .AddCircuitOptions(options => { options.DetailedErrors = true; })
                 ;
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -96,7 +96,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        public ActionResult<QuestDto> UpdateQuest(int questId,QuestForUpdateDto quest)
+        public ActionResult<QuestDto> UpdateQuest(int questId,[FromBody] QuestForUpdateDto quest)
         {
             if (quest.Name == quest.Description)
             {

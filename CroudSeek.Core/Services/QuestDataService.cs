@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -15,14 +16,26 @@ namespace CroudSeek.Core.Services
         {
             _httpClient = httpClient;
         }
-        public Task<QuestDto> AddQuest(QuestForCreationDto quest)
+        public async Task<QuestDto> AddQuest(QuestForCreationDto quest)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(quest);
+
+            var questJson =
+                new StringContent(json, Encoding.UTF8, "application/json");
+            
+            var response = await _httpClient.PostAsync("api/quests", questJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<QuestDto>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
         }
 
-        public Task DeleteQuest(int questId)
+        public async Task DeleteQuest(int questId)
         {
-            throw new NotImplementedException();
+                await _httpClient.DeleteAsync($"api/quests/{questId}");
         }
 
         public async Task<IEnumerable<QuestDto>> GetAllQuests()
@@ -37,9 +50,15 @@ namespace CroudSeek.Core.Services
                 (await _httpClient.GetStreamAsync($"api/quests/{questId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public Task<QuestForUpdateDto> UpdateQuest(QuestForUpdateDto quest)
+        public async Task UpdateQuest(QuestForUpdateDto quest,int questId)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(quest);
+
+            var questJson =
+                new StringContent(json, Encoding.Unicode, "application/json");
+
+
+            var result = await _httpClient.PutAsync($"api/quests/{questId}", questJson);
         }
     }
 }

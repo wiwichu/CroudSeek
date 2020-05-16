@@ -1,4 +1,5 @@
-﻿using CroudSeek.Shared;
+﻿using AutoMapper;
+using CroudSeek.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,13 @@ namespace CroudSeek.Core.Services
     public class QuestDataService : IQuestDataService
     {
         private readonly HttpClient _httpClient;
-        public QuestDataService(HttpClient httpClient)
+        private readonly IMapper _mapper;
+        private readonly IDataPointDataService _dataPointService;
+        public QuestDataService(HttpClient httpClient, IMapper mapper, IDataPointDataService dataPointService)
         {
             _httpClient = httpClient;
+            _mapper = mapper;
+            _dataPointService = dataPointService;
         }
         public async Task<QuestDto> AddQuest(QuestForCreationDto quest)
         {
@@ -44,10 +49,17 @@ namespace CroudSeek.Core.Services
                 (await _httpClient.GetStreamAsync($"api/quests"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task<QuestDto> GetQuestDetails(int questId)
+        public async Task<QuestWithDataPointsDto> GetQuestDetails(int questId)
         {
-            return await JsonSerializer.DeserializeAsync<QuestDto>
+            var quest = await JsonSerializer.DeserializeAsync<QuestDto>
                 (await _httpClient.GetStreamAsync($"api/quests/{questId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+            var dpQuest = _mapper.Map<QuestWithDataPointsDto>(quest);
+
+            var dataPoints = await _dataPointService.GetDataPointsForQuest(questId);
+            dpQuest.DataPoints = new List<DataPointDto>(dataPoints);
+
+            return dpQuest;
         }
 
         public async Task UpdateQuest(QuestForUpdateDto quest,int questId)

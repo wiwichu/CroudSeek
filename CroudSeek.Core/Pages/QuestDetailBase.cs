@@ -15,7 +15,7 @@ namespace CroudSeek.Core.Pages
 
         [Parameter]
         public string QuestId { get; set; }
-        public QuestDto Quest { get; set; } = new QuestDto();
+        public QuestWithDataPointsDto Quest { get; set; } = new QuestWithDataPointsDto();
         protected override async Task OnInitializedAsync()
         {
             Quest = await QuestDataService.GetQuestDetails(int.Parse(QuestId));

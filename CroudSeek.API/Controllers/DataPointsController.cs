@@ -228,7 +228,7 @@ namespace CroudSeek.API.Controllers
             if (dataPointForQuestFromRepo == null)
             {
                 var dataPointToAdd = _mapper.Map<Entities.DataPoint>(dataPoint);
-                dataPointToAdd.Id = dataPointId;
+                dataPointToAdd.Id = 0;
                 dataPointToAdd.QuestId = questId;
 
                 _croudSeekRepository.AddDataPoint(questId, dataPointToAdd);

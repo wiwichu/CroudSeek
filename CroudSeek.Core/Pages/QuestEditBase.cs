@@ -24,6 +24,7 @@ namespace CroudSeek.Core.Pages
         public string QuestId { get; set; }
         public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
         public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
+        public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
         public string ZoneId;
         //used to store state of screen
         protected string Message = string.Empty;
@@ -48,6 +49,7 @@ namespace CroudSeek.Core.Pages
             else
             {
                 var dpQuest = await QuestDataService.GetQuestDetails(int.Parse(QuestId));
+                DataPoints = dpQuest.DataPoints;
 
                 Quest = Mapper.Map<QuestForUpdateDto>(dpQuest);
                 Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(dpQuest.DataPoints).ToList();

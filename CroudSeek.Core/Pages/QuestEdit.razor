@@ -46,16 +46,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var dataPoint in Quest.DataPoints)
+                        @foreach (var dataPoint in DataPoints)
                         {
                             <tr>
                                 <td>@dataPoint.Name</td>
                                 <td>@dataPoint.Description</td>
                                 <td>
-                                    <a href="@($"questdetail/{QuestId}")" class="btn btn-primary table-btn">
+                                    <a href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
-                                    <NavLink href="@($"questedit/{QuestId}")" class="btn btn-primary table-btn">
+                                    <NavLink href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
                                         <i class="fas fa-edit"></i>
                                     </NavLink>
                                 </td>

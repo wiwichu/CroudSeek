@@ -23,6 +23,7 @@ namespace CroudSeek.Core.Pages
         [Parameter]
         public string QuestId { get; set; }
         public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
+        public QuestWithDataPointsDto QuestDp { get; set; } = new QuestWithDataPointsDto();
         public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
         public string ZoneId;
@@ -48,11 +49,11 @@ namespace CroudSeek.Core.Pages
             }
             else
             {
-                var dpQuest = await QuestDataService.GetQuestDetails(int.Parse(QuestId));
-                DataPoints = dpQuest.DataPoints;
+                QuestDp = await QuestDataService.GetQuestDetails(questId);
+                DataPoints = QuestDp.DataPoints;
 
-                Quest = Mapper.Map<QuestForUpdateDto>(dpQuest);
-                Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(dpQuest.DataPoints).ToList();
+                Quest = Mapper.Map<QuestForUpdateDto>(QuestDp);
+                Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(QuestDp.DataPoints).ToList();
                     
             }
 
@@ -64,9 +65,11 @@ namespace CroudSeek.Core.Pages
         public InputText DescriptionInputText { get; set; }
         protected async Task HandleValidSubmit()
         {
+            int.TryParse(QuestId, out var questId);
+
             Quest.ZoneId = int.Parse(ZoneId);
 
-            if (int.Parse(QuestId) == 0) //new
+            if (questId == 0) //new
             {
                 var newQuest = Mapper.Map<QuestForCreationDto>(Quest);
 
@@ -88,7 +91,7 @@ namespace CroudSeek.Core.Pages
             {
                 var newQuest = Mapper.Map<QuestForUpdateDto>(Quest);
 
-                await QuestDataService.UpdateQuest(newQuest,int.Parse(QuestId));
+                await QuestDataService.UpdateQuest(newQuest,questId);
                 StatusClass = "alert-success";
                 Message = "Quest updated successfully.";
                 Saved = true;
@@ -96,7 +99,9 @@ namespace CroudSeek.Core.Pages
         }
         protected async Task DeleteQuest()
         {
-            await QuestDataService.DeleteQuest(int.Parse(QuestId));
+            int.TryParse(QuestId, out var questId);
+
+            await QuestDataService.DeleteQuest(questId);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";

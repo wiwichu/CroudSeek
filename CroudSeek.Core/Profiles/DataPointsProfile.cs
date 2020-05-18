@@ -12,7 +12,8 @@ namespace CroudSeek.Core.Profiles
         {
             CreateMap<CroudSeek.Shared.DataPointDto, CroudSeek.Shared.DataPointForCreationDto>().ReverseMap();
             CreateMap<CroudSeek.Shared.DataPointDto, CroudSeek.Shared.DataPointForManipulationDto>().ReverseMap();
-            CreateMap<CroudSeek.Shared.DataPointDto, CroudSeek.Shared.DataPointForUpdateDto>().ReverseMap();            
+            CreateMap<CroudSeek.Shared.DataPointDto, CroudSeek.Shared.DataPointForUpdateDto>().ReverseMap();
+            CreateMap<CroudSeek.Shared.DataPointForCreationDto, CroudSeek.Shared.DataPointForUpdateDto>().ReverseMap();
         }
     }
 }

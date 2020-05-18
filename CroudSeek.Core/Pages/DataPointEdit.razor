@@ -1,4 +1,4 @@
-﻿@page "/datapointedit/{QuestId}"
+﻿@page "/datapointedit"
 @page "/datapointedit/{QuestId}/{DataPointId}"
 @inherits DataPointEditBase
 
@@ -10,6 +10,19 @@
         <EditForm Model="@DataPoint" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
+
+            <div class="form-group row">
+                <label for="quest" class="col-sm-3">Quest: </label>
+                <InputSelect id="quest" class="form-control col-sm-8" @bind-Value="@QuestId">
+                    @foreach (var quest in Quests)
+                        {
+                        <option value="@quest.Id">@quest.Name</option>
+                        }
+                    /**/
+                    /**/
+                    /**/
+                </InputSelect>
+            </div>
 
             <div class="form-group row">
                 <label for="name" class="col-sm-3">Name: </label>
@@ -30,7 +43,7 @@
             <div class="form-group row">
                 <label for="isNegative" class="offset-sm-3">
                     <InputCheckbox id="isNegative" @bind-Value="@DataPoint.IsNegative"></InputCheckbox>
-                    &nbsp;Is Private:
+                    &nbsp;Is Nagative:
                 </label>
             </div>
             <div class="form-group row">
@@ -60,7 +73,7 @@
             </div>
             <button type="submit" class="btn btn-primary edit-btn">Save DataPoint</button>
             <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
-            @if (int.Parse(DataPointId) > 0)
+            @if (DataPointDto.Id > 0)
             {
                 <a class="btn btn-danger" @onclick="@DeleteDataPoint">
                     Delete

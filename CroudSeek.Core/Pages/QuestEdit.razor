@@ -52,7 +52,7 @@
                                 <td>@dataPoint.Name</td>
                                 <td>@dataPoint.Description</td>
                                 <td>
-                                    <a href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                    <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
                                     <NavLink href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
@@ -65,7 +65,7 @@
                 </table>
                 <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
                 <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
-                @if (int.Parse(QuestId) > 0)
+                @if (QuestDp.Id > 0)
                 {
                     <a class="btn btn-danger" @onclick="@DeleteQuest">
                         Delete

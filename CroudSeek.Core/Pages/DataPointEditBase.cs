@@ -22,29 +22,28 @@ namespace CroudSeek.Core.Pages
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter]
-        public string QuestId { get; set; }
+        public string QuestId { get; set; } = "0";
         [Parameter]
-        public string DataPointId { get; set; }
+        public string DataPointId { get; set; } = "0";
         public DataPointForUpdateDto DataPoint { get; set; } = new DataPointForUpdateDto();
+        public DataPointDto DataPointDto { get; set; } = new DataPointDto();
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
         protected bool Saved;
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
+        public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
+
         protected override async Task OnInitializedAsync()
         {
             Saved = false;
             int.TryParse(QuestId, out var questId);
-
             int.TryParse(DataPointId, out var dataPointId);
 
-            if(questId==0)
-            {
-                return;
-            }
+            Quests = (await QuestDataService.GetAllQuests()).ToList();
 
-            if (dataPointId == 0) //new quest is being created
+            if (questId == 0 || dataPointId == 0) //new quest is being created
             {
                 //add some defaults
                 DataPoint = new DataPointForUpdateDto
@@ -55,15 +54,45 @@ namespace CroudSeek.Core.Pages
             }
             else
             {
-                var dataPoint = await DataPointDataService.GetDataPointForQuest(questId, dataPointId);
+                DataPointDto = await DataPointDataService.GetDataPointForQuest(questId, dataPointId);
 
-                DataPoint = Mapper.Map<DataPointForUpdateDto>(dataPoint);
+                QuestId = DataPointDto.QuestId.ToString();
+                DataPoint = Mapper.Map<DataPointForUpdateDto>(DataPointDto);
             }
         }
 
         protected async Task HandleValidSubmit()
         {
+            int.TryParse(QuestId, out var questId);
+            int.TryParse(DataPointId, out var dataPointId);
 
+            if (dataPointId == 0) //new
+            {
+                var newDP = Mapper.Map<DataPointForCreationDto>(DataPoint);
+
+                var addedDP = await DataPointDataService.CreateDataPointForQuest(questId, newDP);
+                if (addedDP != null)
+                {
+                    StatusClass = "alert-success";
+                    Message = "New datapoint added successfully.";
+                    Saved = true;
+                }
+                else
+                {
+                    StatusClass = "alert-danger";
+                    Message = "Something went wrong adding the new datapoint. Please try again.";
+                    Saved = false;
+                }
+            }
+            else
+            {
+                var newDP = Mapper.Map<DataPointForUpdateDto>(DataPoint);
+
+                await DataPointDataService.UpdateDataPointForQuest(questId, dataPointId,newDP);
+                StatusClass = "alert-success";
+                Message = "DataPoint updated successfully.";
+                Saved = true;
+            }
         }
         protected void NavigateToOverview()
         {
@@ -71,7 +100,10 @@ namespace CroudSeek.Core.Pages
         }
         protected async Task DeleteDataPoint()
         {
-            await DataPointDataService.DeleteDataPointForQuest(int.Parse(QuestId),int.Parse(DataPointId));
+            int.TryParse(QuestId, out var questId);
+            int.TryParse(DataPointId, out var dataPointId);
+
+            await DataPointDataService.DeleteDataPointForQuest(questId,dataPointId);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";

@@ -27,7 +27,7 @@ namespace CroudSeek.API.Entities
         /// <summary>
         /// Maximum age in days of datapoints. <0 = no limit.
         /// </summary>
-        public int age { get; set; } = -1;
+        public int Age { get; set; } = -1;
         //public ICollection<User> ExcludedUsers { get; set; }
         //    = new List<User>();
         //public ICollection<User> IncludedUsers { get; set; }

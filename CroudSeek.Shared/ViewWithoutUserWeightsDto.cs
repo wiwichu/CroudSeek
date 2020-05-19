@@ -15,7 +15,7 @@ namespace CroudSeek.Shared
         /// <summary>
         /// Maximum age in days of datapoints. <0 = no limit.
         /// </summary>
-        public int age { get; set; } = -1;
+        public int Age { get; set; } = -1;
 
     }
 }

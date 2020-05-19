@@ -38,10 +38,13 @@ namespace CroudSeek.Core.Pages
                 ZoneDto = await ZoneDataService.GetZoneById(zoneId);
 
                 Zone = Mapper.Map<ZoneForUpdateDto>(ZoneDto);
+                Title = $"Details for {Zone.Description}";
             }
         }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
+        public string Title { get; set; } = "Enter Details";
+
         protected async Task HandleValidSubmit()
         {
             int.TryParse(ZoneId, out var zoneId);

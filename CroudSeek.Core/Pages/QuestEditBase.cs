@@ -26,7 +26,8 @@ namespace CroudSeek.Core.Pages
         public QuestWithDataPointsDto QuestDp { get; set; } = new QuestWithDataPointsDto();
         public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
-        public string ZoneId;
+        public string ZoneId { get; set; }
+        public string Title { get; set; } = "Enter Details";
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -54,7 +55,8 @@ namespace CroudSeek.Core.Pages
 
                 Quest = Mapper.Map<QuestForUpdateDto>(QuestDp);
                 Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(QuestDp.DataPoints).ToList();
-                    
+                Title = $"Details for {Quest.Description}";
+
             }
 
 

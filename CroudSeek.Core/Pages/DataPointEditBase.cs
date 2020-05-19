@@ -34,6 +34,8 @@ namespace CroudSeek.Core.Pages
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
         public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
+        public string Title { get; set; } = "Enter Details";
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -59,6 +61,8 @@ namespace CroudSeek.Core.Pages
 
                 QuestId = DataPointDto.QuestId.ToString();
                 DataPoint = Mapper.Map<DataPointForUpdateDto>(DataPointDto);
+                Title = $"Details for {DataPoint.Description}";
+
             }
         }
 

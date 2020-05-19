@@ -1,0 +1,107 @@
+﻿@page "/zonedetail/{ZoneId}"
+@inherits ZoneDetailBase
+
+<h1 class="page-title">Details - @Zone.Description</h1>
+@{
+    var leadingFormat = "00000";
+}
+
+<div class="col-12 row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Zone ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.Id.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Zone.Name</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Zone.Description</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MaxLatitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MaxLatitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MinLatitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MinLatitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MaxLongitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MaxLongitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MinLatitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MinLongitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MaxAltitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MaxAltitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">MinAltitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.MinAltitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">SpotLatitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.SpotLatitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">SpotLongitude</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.SpotLongitude?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">SpotRadiusMeters</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.SpotRadiusMeters?.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Owner ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Zone.OwnerId.ToString(leadingFormat)</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Create Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Zone.CreateTime</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Update Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@Zone.UpdateTime</label>
+            </div>
+        </div>
+    </div>
+
+</div>

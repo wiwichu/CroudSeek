@@ -1,0 +1,36 @@
+﻿@page "/zoneoverview"
+@inherits ZoneOverviewBase
+
+<h1 class="page-title">All zones</h1>
+@if (Zones == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+             </tr>
+        </thead>
+        <tbody>
+            @foreach (var zone in Zones)
+            {
+                <tr>
+                    <td>@zone.Name</td>
+                    <td>@zone.Description</td>
+                    <td>
+                        <a href="@($"zonedetail/{zone.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <NavLink href="@($"zoneedit/{zone.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </NavLink>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

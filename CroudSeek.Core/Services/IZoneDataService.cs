@@ -10,5 +10,9 @@ namespace CroudSeek.Core.Services
     {
         Task<IEnumerable<ZoneDto>> GetAllZones();
         Task<ZoneDto> GetZoneById(int Id);
+        Task<ZoneDto> AddZone(ZoneForCreationDto zone);
+        Task UpdateZone(ZoneForUpdateDto zone, int zoneId);
+        Task DeleteZone(int zoneId);
+
     }
 }

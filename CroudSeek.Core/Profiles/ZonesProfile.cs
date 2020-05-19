@@ -12,6 +12,7 @@ namespace CroudSeek.Core.Profiles
         {
             CreateMap<CroudSeek.Shared.ZoneDto, CroudSeek.Shared.ZoneForUpdateDto>().ReverseMap();
             CreateMap<CroudSeek.Shared.ZoneDto, CroudSeek.Shared.ZoneForCreationDto>().ReverseMap();
+            CreateMap<CroudSeek.Shared.ZoneForUpdateDto, CroudSeek.Shared.ZoneForCreationDto>().ReverseMap();
         }
     }
 }

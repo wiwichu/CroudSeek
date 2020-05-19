@@ -24,6 +24,10 @@ namespace CroudSeek.API.Entities
         public bool IsPrivate { get; set; }
         //Users must specifically be added as a userweight to be considered.
         public bool ExcludeByDefault { get; set; }
+        /// <summary>
+        /// Maximum age in days of datapoints. <0 = no limit.
+        /// </summary>
+        public int age { get; set; } = -1;
         //public ICollection<User> ExcludedUsers { get; set; }
         //    = new List<User>();
         //public ICollection<User> IncludedUsers { get; set; }

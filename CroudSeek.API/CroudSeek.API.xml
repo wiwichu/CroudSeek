@@ -335,5 +335,6 @@
             When DataPoint was found
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "P:CroudSeek.API.Entities.View.age" -->
     </members>
 </doc>

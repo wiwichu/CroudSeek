@@ -1,7 +1,7 @@
 ﻿@page "/questdetail/{QuestId}"
 @inherits QuestDetailBase
 
-<h1 class="page-title">Details for @Quest.Description</h1>
+<h1 class="page-title">Details - @Quest.Description</h1>
 @{
     var leadingFormat = "00000";
 }
@@ -56,6 +56,23 @@
                 <label type="text" readonly class="form-control-plaintext">@Quest.UpdateTime</label>
             </div>
         </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Is Private</label>
+            <div class="col-sm-8">
+
+                @if (Quest.IsPrivate)
+                {
+                <label type="text" readonly class="form-control-plaintext">Yes</label>
+                }
+                else
+                {
+                <label type="text" readonly class="form-control-plaintext">No</label>
+
+                }
+            </div>
+        </div>
+
         <h2 class="sidebar-heading">Data Points</h2>
         <table class="table">
             <thead>
@@ -67,35 +84,18 @@
             <tbody>
                 @foreach (var dataPoint in Quest.DataPoints)
                 {
-                    <tr>
-                        <td>@dataPoint.Name</td>
-                        <td>@dataPoint.Description</td>
-                        <td>
-                            <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@dataPoint.Name</td>
+                    <td>@dataPoint.Description</td>
+                    <td>
+                        <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
-
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Is Private</label>
-            <div class="col-sm-8">
-
-                @if (Quest.IsPrivate)
-                {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
-                }
-                else
-                {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
-
-                }
-            </div>
-        </div>
-
     </div>
 
 </div>

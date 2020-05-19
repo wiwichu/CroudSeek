@@ -6,7 +6,7 @@
     @if (!Saved)
     {
 
-        <h1 class="page-title">Details for @DataPoint.Description</h1>
+        <h1 class="page-title">Details - @DataPoint.Description</h1>
         <EditForm Model="@DataPoint" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />

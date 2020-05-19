@@ -56,6 +56,29 @@
                 <label type="text" readonly class="form-control-plaintext">@Quest.UpdateTime</label>
             </div>
         </div>
+        <h2 class="sidebar-heading">Data Points</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dataPoint in Quest.DataPoints)
+                {
+                    <tr>
+                        <td>@dataPoint.Name</td>
+                        <td>@dataPoint.Description</td>
+                        <td>
+                            <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Is Private</label>

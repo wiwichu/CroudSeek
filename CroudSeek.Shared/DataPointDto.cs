@@ -44,5 +44,10 @@ namespace CroudSeek.Shared
         /// Whether DataPoint can be shared with other users
         /// </summary>
         public bool IsPrivate { get; set; }
+        /// <summary>
+        /// When DataPoint was found
+        /// </summary>
+        public DateTimeOffset TimeStamp { get; set; }
+
     }
 }

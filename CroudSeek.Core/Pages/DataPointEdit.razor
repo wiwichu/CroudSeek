@@ -1,7 +1,8 @@
 ﻿@page "/datapointedit"
 @page "/datapointedit/{QuestId}/{DataPointId}"
 @inherits DataPointEditBase
-
+@using CroudSeek.Core.Components
+ 
 <section class="datapoint-edit">
     @if (!Saved)
     {
@@ -16,7 +17,7 @@
                 <InputSelect id="quest" class="form-control col-sm-8" @bind-Value="@QuestId">
                     @foreach (var quest in Quests)
                         {
-                        <option value="@quest.Id">@quest.Name</option>
+                    <option value="@quest.Id">@quest.Name</option>
                         }
                     /**/
                     /**/
@@ -71,13 +72,18 @@
                 <InputNumber id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.Certainty" placeholder="Enter Observation Certainty"></InputNumber>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Certainty)" />
             </div>
+            <div class="form-group row">
+                <label for="certainty" class="col-sm-3">Time Found: </label>
+                <InputDateTime id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.TimeStamp" placeholder="Enter time when found"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.TimeStamp)" />
+            </div>
             <button type="submit" class="btn btn-primary edit-btn">Save DataPoint</button>
             <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
             @if (DataPointDto.Id > 0)
             {
-                <a class="btn btn-danger" @onclick="@DeleteDataPoint">
-                    Delete
-                </a>
+            <a class="btn btn-danger" @onclick="@DeleteDataPoint">
+                Delete
+            </a>
             }
         </EditForm>
     }

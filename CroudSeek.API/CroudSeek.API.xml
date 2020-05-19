@@ -330,5 +330,10 @@
             <param name="zoneId">Id of Zone to be deleted</param>
             <returns>ActionResult</returns>
         </member>
+        <member name="P:CroudSeek.API.Entities.DataPoint.TimeStamp">
+            <summary>
+            When DataPoint was found
+            </summary>
+        </member>
     </members>
 </doc>

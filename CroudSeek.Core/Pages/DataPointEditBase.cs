@@ -49,7 +49,8 @@ namespace CroudSeek.Core.Pages
                 DataPoint = new DataPointForUpdateDto
                 {
                     IsPrivate = false,
-                    IsNegative=false
+                    IsNegative=false,
+                    TimeStamp=DateTimeOffset.Now
                 };
             }
             else

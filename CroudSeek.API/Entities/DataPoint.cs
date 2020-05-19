@@ -28,5 +28,10 @@ namespace CroudSeek.API.Entities
         public bool IsNegative { get; set; }
         //Whether other users can view this datapoint.
         public bool IsPrivate { get; set; }
+        /// <summary>
+        /// When DataPoint was found
+        /// </summary>
+        public DateTimeOffset TimeStamp { get; set; }
+
     }
 }

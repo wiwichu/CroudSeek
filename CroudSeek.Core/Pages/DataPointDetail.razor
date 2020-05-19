@@ -65,11 +65,11 @@
 
                 @if (DataPoint.IsPrivate)
                 {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
+                <label type="text" readonly class="form-control-plaintext">Yes</label>
                 }
                 else
                 {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
+                <label type="text" readonly class="form-control-plaintext">No</label>
 
                 }
             </div>
@@ -80,13 +80,20 @@
 
                 @if (DataPoint.IsPrivate)
                 {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
+                <label type="text" readonly class="form-control-plaintext">Yes</label>
                 }
                 else
                 {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
+                <label type="text" readonly class="form-control-plaintext">No</label>
 
                 }
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Time Found</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@DataPoint.TimeStamp</label>
             </div>
         </div>
 

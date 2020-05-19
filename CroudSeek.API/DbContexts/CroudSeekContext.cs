@@ -301,8 +301,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest1 Possible Sighting",
                     OwnerId = 1,
                     QuestId = 1,
-                    RadiusMeters = 0
-                        ,
+                    RadiusMeters = 0,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
@@ -319,8 +319,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest1 Maybe here",
                     OwnerId = 1,
                     QuestId = 1,
-                    RadiusMeters = 100
-                        ,
+                    RadiusMeters = 100,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
@@ -337,8 +337,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest1 Digging",
                     OwnerId = 3,
                     QuestId = 1,
-                    RadiusMeters = 10
-                        ,
+                    RadiusMeters = 10,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 }, new DataPoint()
@@ -354,8 +354,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest1 Don't Bother",
                     OwnerId = 2,
                     QuestId = 1,
-                    RadiusMeters = 1000
-                        ,
+                    RadiusMeters = 1000,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
@@ -372,8 +372,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest2 Possible Sighting",
                     OwnerId = 2,
                     QuestId = 2,
-                    RadiusMeters = 0
-                        ,
+                    RadiusMeters = 0,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
@@ -390,8 +390,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest2 Maybe here",
                     OwnerId = 2,
                     QuestId = 2,
-                    RadiusMeters = 100
-                        ,
+                    RadiusMeters = 100,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
@@ -408,8 +408,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest2 Digging",
                     OwnerId = 3,
                     QuestId = 2,
-                    RadiusMeters = 10
-                        ,
+                    RadiusMeters = 10,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 }, new DataPoint()
@@ -425,8 +425,8 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest2 Don't Bother",
                     OwnerId = 3,
                     QuestId = 2,
-                    RadiusMeters = 1000
-                        ,
+                    RadiusMeters = 1000,
+                    TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 }

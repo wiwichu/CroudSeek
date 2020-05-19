@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CroudSeek.Shared
@@ -53,5 +54,9 @@ namespace CroudSeek.Shared
         /// Whether other users can view this datapoint.
         /// </summary>
         public bool IsPrivate { get; set; }
+        /// <summary>
+        /// When DataPoint was found
+        /// </summary>
+        public DateTimeOffset TimeStamp { get; set; }
     }
 }

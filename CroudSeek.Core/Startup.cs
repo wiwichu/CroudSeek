@@ -46,6 +46,12 @@ namespace CroudSeek.Core
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }
                 );
+            services.AddHttpClient<IViewDataService, ViewDataService>(
+                client =>
+                {
+                    client.BaseAddress = new Uri("http://localhost:51044");
+                }
+                );
             services.AddServerSideBlazor()
                 .AddCircuitOptions(options => { options.DetailedErrors = true; })
                 ;

@@ -31,6 +31,7 @@
                         /**/
                         /**/
                         /**/
+                        /**/
                     </InputSelect>
                 </div>
                 <div class="form-group row">
@@ -54,10 +55,37 @@
                                 <td>@dataPoint.Name</td>
                                 <td>@dataPoint.Description</td>
                                 <td>
-                                    <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                    <NavLink href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
                                         <i class="fas fa-info-circle"></i>
-                                    </a>
+                                    </NavLink>
                                     <NavLink href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                        <i class="fas fa-edit"></i>
+                                    </NavLink>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h2 class="sidebar-heading">Views</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var view in Views)
+                        {
+                            <tr>
+                                <td>@view.Name</td>
+                                <td>@view.Description</td>
+                                <td>
+                                    <NavLink href="@($"/viewdetail/{QuestId}/{view.Id}")" class="btn btn-primary table-btn">
+                                        <i class="fas fa-info-circle"></i>
+                                    </NavLink>
+                                    <NavLink href="@($"/questedit/{QuestId}/views/{view.Id}")" class="btn btn-primary table-btn">
                                         <i class="fas fa-edit"></i>
                                     </NavLink>
                                 </td>

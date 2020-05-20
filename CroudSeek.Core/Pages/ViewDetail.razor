@@ -1,0 +1,105 @@
+﻿@page "/viewdetail/{QuestId}/{ViewId}"
+@inherits ViewDetailBase
+
+<h1 class="page-title">Details - @View.Description</h1>
+@{
+    var leadingFormat = "00000";
+}
+
+<div class="col-12 row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">View ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@View.Id.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@View.Name</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@View.Description</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Owner ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@View.OwnerId.ToString(leadingFormat)</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Image</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@View.ImageUrl</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Create Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@View.CreateTime</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Update Time</label>
+            <div class="col-sm-8">
+                <label type="text" readonly class="form-control-plaintext">@View.UpdateTime</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Is Private</label>
+            <div class="col-sm-8">
+
+                @if (View.IsPrivate)
+                {
+                    <label type="text" readonly class="form-control-plaintext">Yes</label>
+                }
+                else
+                {
+                    <label type="text" readonly class="form-control-plaintext">No</label>
+
+                }
+            </div>
+        </div>
+
+        <h2 class="sidebar-heading">User Weights</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>ExcludeUser</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userWeight in View.UserWeights)
+                {
+                <tr>
+                    <td>@userWeight.Id.ToString(leadingFormat)</td>
+                    @if (userWeight.ExcludeUser)
+                    {
+                        <td>Yes</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
+                    <td>@userWeight.Weight.ToString(leadingFormat)</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

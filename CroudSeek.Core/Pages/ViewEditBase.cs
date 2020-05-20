@@ -11,12 +11,8 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class QuestEditBase : ComponentBase
+    public class ViewEditBase : ComponentBase
     {
-        [Inject]
-        public IQuestDataService QuestDataService { get; set; }
-        [Inject]
-        public IZoneDataService ZoneDataService { get; set; }
         [Inject]
         public IViewDataService ViewDataService { get; set; }
 
@@ -25,88 +21,81 @@ namespace CroudSeek.Core.Pages
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter]
         public string QuestId { get; set; }
-        public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
-        public QuestWithDataPointsDto QuestDp { get; set; } = new QuestWithDataPointsDto();
-        public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
-        public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
-        public string ZoneId { get; set; }
+        [Parameter]
+        public string ViewId { get; set; }
+        public ViewForUpdateDto View { get; set; } = new ViewForUpdateDto();
+        public ViewDto ViewDto { get; set; } = new ViewDto();
         public string Title { get; set; } = "Enter Details";
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
         protected bool Saved;
-        public List<ViewDto> Views = new List<ViewDto>();
 
         protected override async Task OnInitializedAsync()
         {
             Saved = false;
             int.TryParse(QuestId, out var questId);
+            int.TryParse(ViewId, out var viewId);
 
-            if (questId == 0) //new quest is being created
+            if (viewId == 0) //new quest is being created
             {
                 //add some defaults
-                Quest = new QuestForUpdateDto
+                View = new ViewForUpdateDto
                 {
                     IsPrivate = false,
-                    ZoneId = 1
+                    Age=-1
                 };
             }
             else
             {
-                QuestDp = await QuestDataService.GetQuestDetails(questId);
-                DataPoints = QuestDp.DataPoints;
+                ViewDto = await ViewDataService.GetViewById(questId,viewId,true);
 
-                Quest = Mapper.Map<QuestForUpdateDto>(QuestDp);
-                Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(QuestDp.DataPoints).ToList();
-                Title = $"Details for {Quest.Description}";
-                Views = new List<ViewDto>(await ViewDataService.GetAllViews(questId));
+                View = Mapper.Map<ViewForUpdateDto>(ViewDto);
+                Title = $"Details for {View.Description}";
             }
-
-
-            Zones = (await ZoneDataService.GetAllZones()).ToList();
-            ZoneId = Quest.ZoneId.ToString();
         }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
+        public InputText ImageInputText { get; set; }
         protected async Task HandleValidSubmit()
         {
             int.TryParse(QuestId, out var questId);
+            int.TryParse(ViewId, out var viewId);
 
-            Quest.ZoneId = int.Parse(ZoneId);
-
-            if (questId == 0) //new
+            if (viewId == 0) //new
             {
-                var newQuest = Mapper.Map<QuestForCreationDto>(Quest);
+                var newView = Mapper.Map<ViewForCreationDto>(View);
 
-                var addedQuest = await QuestDataService.AddQuest(newQuest);
-                if (addedQuest != null)
+                var addedView = await ViewDataService.AddView(questId,newView);
+                if (addedView != null)
                 {
                     StatusClass = "alert-success";
-                    Message = "New quest added successfully.";
+                    Message = "New view added successfully.";
                     Saved = true;
                 }
                 else
                 {
                     StatusClass = "alert-danger";
-                    Message = "Something went wrong adding the new quest. Please try again.";
+                    Message = "Something went wrong adding the new view. Please try again.";
                     Saved = false;
                 }
             }
             else
             {
-                var newQuest = Mapper.Map<QuestForUpdateDto>(Quest);
+                var newView = Mapper.Map<ViewForUpdateDto>(View);
 
-                await QuestDataService.UpdateQuest(newQuest,questId);
+                await ViewDataService.UpdateView(newView,viewId,questId);
                 StatusClass = "alert-success";
-                Message = "Quest updated successfully.";
+                Message = "View updated successfully.";
                 Saved = true;
             }
         }
-        protected async Task DeleteQuest()
+        protected async Task DeleteView()
         {
             int.TryParse(QuestId, out var questId);
+            int.TryParse(ViewId, out var viewId);
 
-            await QuestDataService.DeleteQuest(questId);
+            await ViewDataService.DeleteView(questId,viewId);
 
             StatusClass = "alert-success";
             Message = "Deleted successfully";

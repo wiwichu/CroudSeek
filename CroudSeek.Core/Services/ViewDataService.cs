@@ -26,7 +26,7 @@ namespace CroudSeek.Core.Services
         public async Task<ViewDto> GetViewById(int questId, int viewId, bool includeUserWeights)
         {
             return await JsonSerializer.DeserializeAsync<ViewDto>
-                (await _httpClient.GetStreamAsync($"/api/quests/{questId}/views/{viewId}/includeUserWeights={includeUserWeights}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await _httpClient.GetStreamAsync($"/api/quests/{questId}/views/{viewId}/?includeUserWeights={includeUserWeights}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ViewDto> AddView(int questId,ViewForCreationDto view)

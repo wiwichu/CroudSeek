@@ -20,13 +20,13 @@ namespace CroudSeek.Core.Services
         public async Task<IEnumerable<ViewDto>> GetAllViews(int questId)
         {
             return await JsonSerializer.DeserializeAsync<IEnumerable<ViewDto>>
-                (await _httpClient.GetStreamAsync($"/api/quests/{questId}/views"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await _httpClient.GetStreamAsync($"api/quests/{questId}/views"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ViewDto> GetViewById(int questId, int viewId, bool includeUserWeights)
         {
             return await JsonSerializer.DeserializeAsync<ViewDto>
-                (await _httpClient.GetStreamAsync($"/api/quests/{questId}/views/{viewId}/?includeUserWeights={includeUserWeights}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                (await _httpClient.GetStreamAsync($"api/quests/{questId}/views/{viewId}/?includeUserWeights={includeUserWeights}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ViewDto> AddView(int questId,ViewForCreationDto view)
@@ -36,7 +36,7 @@ namespace CroudSeek.Core.Services
             var viewJson =
                 new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync($"​/api/quests/{questId}​/views", viewJson);
+            var response = await _httpClient.PostAsync($"api/quests/{questId}​/views", viewJson);
 
             if (response.IsSuccessStatusCode)
             {
@@ -54,12 +54,12 @@ namespace CroudSeek.Core.Services
                 new StringContent(json, Encoding.Unicode, "application/json");
 
 
-            var result = await _httpClient.PutAsync($"/​api/quests/{questId}​/views/{viewId}", viewJson);
+            var result = await _httpClient.PutAsync($"​api/quests/{questId}​/views/{viewId}", viewJson);
         }
 
         public async Task DeleteView(int questId,int viewId)
         {
-            await _httpClient.DeleteAsync($"​/api/quests/{questId}​/views/{viewId}");
+           var result =  await _httpClient.DeleteAsync($"api/quests/{questId}​/views/{viewId}");
         }
     }
 }

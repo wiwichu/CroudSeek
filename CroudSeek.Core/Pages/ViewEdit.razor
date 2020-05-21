@@ -53,8 +53,14 @@
                         {
                         <tr>
                             <td>@userWeight.UserId</td>
-                            <td>@userWeight.ExcludeUser</td>
-                            <td>@userWeight.Weight</td>
+                            <td>
+                                <InputCheckbox @bind-Value="@userWeight.ExcludeUser"></InputCheckbox>
+                            </td>
+                            <td>
+                                <InputNumber @bind-Value="@userWeight.Weight"></InputNumber>
+                            </td>
+                            @*                            <td>@userWeight.ExcludeUser</td>*@
+                            @*                            <td>@userWeight.Weight</td>*@
                         </tr>
                         }
                     </tbody>

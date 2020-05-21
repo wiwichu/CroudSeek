@@ -76,11 +76,22 @@ namespace CroudSeek.API.Controllers
             {
                 return NotFound();
             }
+            if (view == null)
+            {
+                return NotFound();
+            }
+            if (view.UserWeights != null
+                &&
+                view.UserWeights.Select((w) => w.UserId).Distinct().Count() != view.UserWeights.Count
+                )
+            {
+                ModelState.AddModelError("UserWeights",
+                    "There can only be one UserWeight per User.");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
             var viewEntity = _mapper.Map<Entities.View>(view);
             _croudSeekRepository.AddViewByQuest(questId,viewEntity);
             _croudSeekRepository.Save();
@@ -109,7 +120,18 @@ namespace CroudSeek.API.Controllers
             {
                 return NotFound();
             }
-
+            if (view == null)
+            {
+                return NotFound();
+            }
+            if (view.UserWeights != null
+                &&
+                view.UserWeights.Select((w) => w.UserId).Distinct().Count() != view.UserWeights.Count
+                )
+            {
+                ModelState.AddModelError("UserWeights",
+                    "There can only be one UserWeight per User.");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -166,6 +188,18 @@ namespace CroudSeek.API.Controllers
             var viewToPatch = _mapper.Map<ViewForUpdateDto>(viewFromRepo);
             // add validation
             patchDocument.ApplyTo(viewToPatch, ModelState);
+            if (viewToPatch == null)
+            {
+                return NotFound();
+            }
+            if (viewToPatch.UserWeights != null
+                &&
+                viewToPatch.UserWeights.Select((w) => w.UserId).Distinct().Count() != viewToPatch.UserWeights.Count
+                )
+            {
+                ModelState.AddModelError("UserWeights",
+                    "There can only be one UserWeight per User.");
+            }
 
             if (!TryValidateModel(viewToPatch))
             {

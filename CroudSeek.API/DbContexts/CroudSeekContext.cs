@@ -451,7 +451,7 @@ namespace CroudSeek.API.DbContexts
                 ExcludeUser = false,
                 Id = 2,
                 OwnerId = 1,
-                UserId = 3,
+                UserId = 2,
                 Weight = 10
                         ,
                 CreateTime = DateTimeOffset.Now,

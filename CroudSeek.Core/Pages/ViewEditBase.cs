@@ -14,6 +14,8 @@ namespace CroudSeek.Core.Pages
     public class ViewEditBase : ComponentBase
     {
         [Inject]
+        public IQuestDataService QuestDataService { get; set; }
+        [Inject]
         public IViewDataService ViewDataService { get; set; }
 
         [Inject]
@@ -26,6 +28,7 @@ namespace CroudSeek.Core.Pages
         public ViewForUpdateDto View { get; set; } = new ViewForUpdateDto();
         public ViewDto ViewDto { get; set; } = new ViewDto();
         public string Title { get; set; } = "Enter Details";
+        public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
         //used to store state of screen
         protected string Message = string.Empty;
         protected string StatusClass = string.Empty;
@@ -36,6 +39,8 @@ namespace CroudSeek.Core.Pages
             Saved = false;
             int.TryParse(QuestId, out var questId);
             int.TryParse(ViewId, out var viewId);
+
+            Quests = (await QuestDataService.GetAllQuests()).ToList();
 
             if (viewId == 0) //new quest is being created
             {
@@ -77,7 +82,7 @@ namespace CroudSeek.Core.Pages
                 {
                     StatusClass = "alert-danger";
                     Message = "Something went wrong adding the new view. Please try again.";
-                    Saved = false;
+                    Saved = true;
                 }
             }
             else

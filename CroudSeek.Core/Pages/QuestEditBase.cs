@@ -89,7 +89,7 @@ namespace CroudSeek.Core.Pages
                 {
                     StatusClass = "alert-danger";
                     Message = "Something went wrong adding the new quest. Please try again.";
-                    Saved = false;
+                    Saved = true;
                 }
             }
             else

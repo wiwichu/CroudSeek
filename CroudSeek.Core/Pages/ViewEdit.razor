@@ -40,6 +40,7 @@
                 </div>
 
                 <h2 class="sidebar-heading">User Weights</h2>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>View.UserWeights)" />
                 <table class="table">
                     <thead>
                         <tr>
@@ -51,21 +52,23 @@
                     <tbody>
                         @foreach (var userWeight in View.UserWeights)
                         {
-                        <tr>
-                            <td>@userWeight.UserId</td>
-                            <td>
-                                <InputCheckbox @bind-Value="@userWeight.ExcludeUser"></InputCheckbox>
-                            </td>
-                            <td>
-                                <InputNumber @bind-Value="@userWeight.Weight"></InputNumber>
-                            </td>
-                            @*                            <td>@userWeight.ExcludeUser</td>*@
-                            @*                            <td>@userWeight.Weight</td>*@
-                        </tr>
+                            <tr>
+                                <td>
+                                    <InputNumber @bind-Value="@userWeight.UserId"></InputNumber>
+                                </td>
+                                <td>
+                                    <InputCheckbox @bind-Value="@userWeight.ExcludeUser"></InputCheckbox>
+                                </td>
+                                <td>
+                                    <InputNumber @bind-Value="@userWeight.Weight"></InputNumber>
+                                </td>
+                                @*                            <td>@userWeight.ExcludeUser</td>*@
+                                @*                            <td>@userWeight.Weight</td>*@
+                            </tr>
                         }
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
+                <button type="submit" class="btn btn-primary edit-btn">Save view</button>
                 <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
                 @if (ViewDto.Id > 0)
                 {

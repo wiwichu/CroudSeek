@@ -8,9 +8,7 @@ namespace CroudSeek.Shared
 {
     public class ViewForManipulationDto  
     {
-        [Required(ErrorMessage = "QuestId is required.")]
-        public int QuestId { get; set; }
-        [Required(ErrorMessage = "Name is equired.")]
+        [Required(ErrorMessage = "Name is required.")]
         [MaxLength(100)]
         public string Name { get; set; }
         [MaxLength(1000)]

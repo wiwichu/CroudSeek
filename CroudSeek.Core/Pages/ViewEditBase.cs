@@ -22,9 +22,9 @@ namespace CroudSeek.Core.Pages
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         [Parameter]
-        public string QuestId { get; set; }
+        public string QuestId { get; set; } = "0";
         [Parameter]
-        public string ViewId { get; set; }
+        public string ViewId { get; set; } = "0";
         public ViewForUpdateDto View { get; set; } = new ViewForUpdateDto();
         public ViewDto ViewDto { get; set; } = new ViewDto();
         public string Title { get; set; } = "Enter Details";
@@ -70,6 +70,7 @@ namespace CroudSeek.Core.Pages
             if (viewId == 0) //new
             {
                 var newView = Mapper.Map<ViewForCreationDto>(View);
+                newView.Age = 1;
 
                 var addedView = await ViewDataService.AddView(questId,newView);
                 if (addedView != null)

@@ -26,6 +26,11 @@ namespace CroudSeek.Core.Services
 
             var dpJson = new StringContent(json, Encoding.UTF8, "application/json");
 
+            var url = _httpClient.BaseAddress + "api/quests/3​/views";
+
+            var uri = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/datapoints");
+
+
             var response = await _httpClient.PostAsync($"api/quests/{questId}/datapoints", dpJson);
 
             if (response.IsSuccessStatusCode)
@@ -62,7 +67,7 @@ namespace CroudSeek.Core.Services
             var json = JsonSerializer.Serialize(dataPoint);
 
             var dpJson =
-                new StringContent(json, Encoding.Unicode, "application/json");
+                new StringContent(json, Encoding.UTF8, "application/json");
 
 
             var result = await _httpClient.PutAsync($"api/quests/{questId}/datapoints/{dataPointId}", dpJson);

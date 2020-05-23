@@ -67,6 +67,7 @@ namespace CroudSeek.API.Controllers
         /// <param name="view">View details</param>
         /// <returns>New View</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -34,9 +35,9 @@ namespace CroudSeek.Core.Services
             var json = JsonSerializer.Serialize(view);
 
             var viewJson =
-                new StringContent(json, Encoding.UTF8, "application/json");
+                new StringContent(json, Encoding.Default, "application/json");
 
-            var response = await _httpClient.PostAsync($"api/quests/{questId}​/views", viewJson);
+            var response = await _httpClient.PostAsync($"api/quests/{questId}/views", viewJson);
 
             if (response.IsSuccessStatusCode)
             {
@@ -51,7 +52,7 @@ namespace CroudSeek.Core.Services
             var json = JsonSerializer.Serialize(view);
 
             var viewJson =
-                new StringContent(json, Encoding.Unicode, "application/json");
+                new StringContent(json, Encoding.UTF8, "application/json");
 
 
             var result = await _httpClient.PutAsync($"​api/quests/{questId}​/views/{viewId}", viewJson);

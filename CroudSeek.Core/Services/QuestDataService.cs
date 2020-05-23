@@ -67,7 +67,7 @@ namespace CroudSeek.Core.Services
             var json = JsonSerializer.Serialize(quest);
 
             var questJson =
-                new StringContent(json, Encoding.Unicode, "application/json");
+                new StringContent(json, Encoding.UTF8, "application/json");
 
 
             var result = await _httpClient.PutAsync($"api/quests/{questId}", questJson);

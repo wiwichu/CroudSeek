@@ -11,6 +11,7 @@ namespace CroudSeek.Core.Profiles
         public QuestsProfile()
         {
             CreateMap<CroudSeek.Shared.QuestDto, CroudSeek.Shared.QuestForCreationDto>().ReverseMap();
+            CreateMap<CroudSeek.Shared.QuestForUpdateDto, CroudSeek.Shared.QuestForCreationDto>().ReverseMap();
             CreateMap<CroudSeek.Shared.QuestDto, CroudSeek.Shared.QuestForUpdateDto>().ReverseMap();
             CreateMap<CroudSeek.Shared.QuestDto, CroudSeek.Shared.QuestWithDataPointsDto>().ReverseMap();
         }

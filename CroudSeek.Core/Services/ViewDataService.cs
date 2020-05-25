@@ -35,9 +35,15 @@ namespace CroudSeek.Core.Services
             var json = JsonSerializer.Serialize(view);
 
             var viewJson =
-                new StringContent(json, Encoding.Default, "application/json");
+                new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync($"api/quests/{questId}/views", viewJson);
+
+            var uri = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/views/2");
+            var uri2 = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/datapoints");
+
+            var url = $"api/quests/{questId}/views";
+
+            var response = await _httpClient.PostAsync(url, viewJson);
 
             if (response.IsSuccessStatusCode)
             {
@@ -54,8 +60,12 @@ namespace CroudSeek.Core.Services
             var viewJson =
                 new StringContent(json, Encoding.UTF8, "application/json");
 
+            //var uri = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/views/2");
+            //var uri2 = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/datapoints");
 
-            var result = await _httpClient.PutAsync($"​api/quests/{questId}​/views/{viewId}", viewJson);
+            var url = $"​api/quests/{questId}​/views/{viewId}";
+
+            var result = await _httpClient.PutAsync(url, viewJson);
         }
 
         public async Task DeleteView(int questId,int viewId)

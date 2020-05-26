@@ -90,10 +90,19 @@ namespace CroudSeek.Core.Pages
             {
                 var newView = Mapper.Map<ViewForUpdateDto>(View);
 
-                await ViewDataService.UpdateView(newView,viewId,questId);
-                StatusClass = "alert-success";
-                Message = "View updated successfully.";
-                Saved = true;
+                var result = await ViewDataService.UpdateView(newView,viewId,questId);
+                if (result != null)
+                {
+                    StatusClass = "alert-success";
+                    Message = "View updates successfully.";
+                    Saved = true;
+                }
+                else
+                {
+                    StatusClass = "alert-danger";
+                    Message = "Something went wrong updating the view. Please try again.";
+                    Saved = true;
+                }
             }
         }
         protected async Task DeleteView()

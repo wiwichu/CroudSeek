@@ -37,6 +37,13 @@
         </div>
 
         <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Max Age in Days To Include</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@View.Age.ToString()</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="col-sm-4 col-form-label">Image</label>
             <div class="col-sm-8">
                 <label type="text" class="form-control-plaintext">@View.ImageUrl</label>
@@ -85,18 +92,18 @@
             <tbody>
                 @foreach (var userWeight in View.UserWeights)
                 {
-                <tr>
-                    <td>@userWeight.Id.ToString(leadingFormat)</td>
-                    @if (userWeight.ExcludeUser)
-                    {
-                        <td>Yes</td>
-                    }
-                    else
-                    {
-                        <td>No</td>
-                    }
-                    <td>@userWeight.Weight.ToString(leadingFormat)</td>
-                </tr>
+                    <tr>
+                        <td>@userWeight.Id.ToString(leadingFormat)</td>
+                        @if (userWeight.ExcludeUser)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+                        <td>@userWeight.Weight.ToString(leadingFormat)</td>
+                    </tr>
                 }
             </tbody>
         </table>

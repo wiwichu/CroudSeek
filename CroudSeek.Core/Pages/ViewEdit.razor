@@ -36,6 +36,11 @@
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>View.ImageUrl)" />
                 </div>
                 <div class="form-group row">
+                    <label for="latitude" class="col-sm-3">Maximum Age in Days to Include: </label>
+                    <InputNumber id="age" class="form-control col-sm-8" @bind-Value="@View.Age" placeholder="Enter Age in Days"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>View.Age)" />
+                </div>
+                <div class="form-group row">
                     <label for="isPrivate" class="offset-sm-3">
                         <InputCheckbox id="isPrivate" @bind-Value="@View.IsPrivate"></InputCheckbox>
                         &nbsp;Is Private:

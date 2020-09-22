@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class ZoneEditBase : ComponentBase
+    public partial class ZoneEdit 
     {
         [Inject]
         public IZoneDataService ZoneDataService { get; set; }

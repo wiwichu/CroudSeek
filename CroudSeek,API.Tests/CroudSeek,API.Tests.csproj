@@ -36,5 +36,8 @@
     <None Include="App.config" />
     <None Include="CroudSeek API.postman_collection.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

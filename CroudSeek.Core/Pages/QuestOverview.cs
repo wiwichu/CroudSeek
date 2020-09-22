@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class QuestOverviewBase:ComponentBase
+    public partial class QuestOverview
     {
         [Inject]
         public IQuestDataService QuestDataService { get; set; }

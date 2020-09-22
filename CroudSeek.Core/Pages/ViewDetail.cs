@@ -8,23 +8,22 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class QuestDetailBase : ComponentBase
+    public partial class ViewDetail 
     {
-        [Inject]
-        public IQuestDataService QuestDataService { get; set; }
         [Inject]
         public IViewDataService ViewDataService { get; set; }
 
         [Parameter]
         public string QuestId { get; set; }
-        public QuestWithDataPointsDto Quest { get; set; } = new QuestWithDataPointsDto();
-        public List<ViewDto> Views = new List<ViewDto>();
+        [Parameter]
+        public string ViewId { get; set; }
+        public ViewDto View { get; set; } = new ViewDto();
         protected override async Task OnInitializedAsync()
         {
             int.TryParse(QuestId, out var questId);
+            int.TryParse(ViewId, out var viewId);
 
-            Quest = await QuestDataService.GetQuestDetails(questId);
-            Views = new List<ViewDto>( await ViewDataService.GetAllViews(questId));
+            View = await ViewDataService.GetViewById(questId,viewId,true);
         }
     }
 }

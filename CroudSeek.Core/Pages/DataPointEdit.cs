@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class DataPointEditBase : ComponentBase
+    public partial class DataPointEdit
     {
         [Inject]
         public IQuestDataService QuestDataService { get; set; }
@@ -35,7 +35,6 @@ namespace CroudSeek.Core.Pages
         public InputText DescriptionInputText { get; set; }
         public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
         public string Title { get; set; } = "Enter Details";
-
 
         protected override async Task OnInitializedAsync()
         {

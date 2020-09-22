@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class DataPointDetailBase : ComponentBase
+    public partial class DataPointDetail 
     {
         [Inject]
         public IDataPointDataService DataPointDataService { get; set; }
@@ -18,6 +18,7 @@ namespace CroudSeek.Core.Pages
         [Parameter]
         public string DataPointId { get; set; }
         public DataPointDto DataPoint { get; set; } = new DataPointDto();
+
         protected override async Task OnInitializedAsync()
         {
             int.TryParse(QuestId, out var questId);

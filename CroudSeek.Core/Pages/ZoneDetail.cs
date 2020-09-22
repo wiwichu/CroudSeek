@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class ZoneDetailBase : ComponentBase
+    public partial class ZoneDetail 
     {
         [Inject]
         public IZoneDataService ZoneDataService { get; set; }

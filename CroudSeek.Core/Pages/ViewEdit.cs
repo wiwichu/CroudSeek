@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Core.Pages
 {
-    public class ViewEditBase : ComponentBase
+    public partial class ViewEdit 
     {
         [Inject]
         public IQuestDataService QuestDataService { get; set; }

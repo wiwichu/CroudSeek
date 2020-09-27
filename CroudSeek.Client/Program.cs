@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CroudSeek.Core.Services;
+using AutoMapper;
 
 namespace CroudSeek.Client
 {
@@ -16,8 +17,7 @@ namespace CroudSeek.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-//            builder.RootComponents.Add<CroudSeek.Core.App>("app");
-            builder.RootComponents.Add<App>("app");
+            builder.RootComponents.Add<CroudSeek.Core.App>("app");
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>
                  {
@@ -42,7 +42,7 @@ namespace CroudSeek.Client
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }
                 );
-                 ;
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             await builder.Build().RunAsync();
         }
     }

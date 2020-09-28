@@ -67,7 +67,8 @@ namespace CroudSeek.Core.Services
 
         public async Task DeleteView(int questId,int viewId)
         {
-           var result =  await _httpClient.DeleteAsync($"api/quests/{questId}​/views/{viewId}");
+            var url = $"api/quests/{questId}/views/{viewId}";
+            var result =  await _httpClient.DeleteAsync(url);
         }
     }
 }

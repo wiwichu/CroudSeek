@@ -124,6 +124,8 @@ namespace CroudSeek.API.Controllers
             }
             _mapper.Map(quest, questFromRepo);
 
+            //Only update quest, not datapoints
+            questFromRepo.DataPoints.Clear();
             _croudSeekRepository.UpdateQuest(questFromRepo);
 
             _croudSeekRepository.Save();

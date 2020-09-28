@@ -57,6 +57,10 @@ namespace CroudSeek.Core.Pages
                 View = Mapper.Map<ViewForUpdateDto>(ViewDto);
                 Title = $"Details for {View.Description}";
             }
+            if (Quests?.Count > 0)
+            {
+                QuestId = Quests[0].Id.ToString();
+            }
         }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }

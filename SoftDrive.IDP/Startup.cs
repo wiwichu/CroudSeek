@@ -29,7 +29,7 @@ namespace SoftDrive.IDP
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
+                //.AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(IdentityServerHost.Quickstart.UI.TestUsers.Users);
             // not recommended for production - you need to store your key material somewhere secure

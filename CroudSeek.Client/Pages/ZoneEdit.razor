@@ -1,0 +1,84 @@
+﻿@page "/zoneedit"
+@page "/zoneedit/{ZoneId}"
+
+    <section class="zone-edit">
+        @if (!Saved)
+        {
+
+            <h1 class="page-title">@Title</h1>
+            <EditForm Model="@Zone" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3">Name: </label>
+                    <InputText id="name" class="form-control col-sm-8" @bind-Value="@Zone.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.Name)" />
+                </div>
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3">Description: </label>
+                    <InputText id="description" class="form-control col-sm-8" @bind-Value="@Zone.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.Description)" />
+                </div>
+                <div class="form-group row">
+                    <label for="maxlatitude" class="col-sm-3">MaxLatitude: </label>
+                    <InputNumber id="maxlatitude" class="form-control col-sm-8" @bind-Value="@Zone.MaxLatitude" placeholder="Enter Max Latitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MaxLatitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="minlatitude" class="col-sm-3">MinLatitude: </label>
+                    <InputNumber id="minlatitude" class="form-control col-sm-8" @bind-Value="@Zone.MinLatitude" placeholder="Enter Min Latitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MinLatitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="maxlongitude" class="col-sm-3">MaxLongitude: </label>
+                    <InputNumber id="maxlongitude" class="form-control col-sm-8" @bind-Value="@Zone.MaxLongitude" placeholder="Enter Max Longitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MaxLongitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="minlongitude" class="col-sm-3">MinLongitude: </label>
+                    <InputNumber id="minlongitude" class="form-control col-sm-8" @bind-Value="@Zone.MinLongitude" placeholder="Enter Min Longitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MinLongitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="maxaltitude" class="col-sm-3">MaxAltitude: </label>
+                    <InputNumber id="maxaltitude" class="form-control col-sm-8" @bind-Value="@Zone.MaxAltitude" placeholder="Enter Max Altitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MaxAltitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="minaltitude" class="col-sm-3">MinAltitude: </label>
+                    <InputNumber id="minaltitude" class="form-control col-sm-8" @bind-Value="@Zone.MinAltitude" placeholder="Enter Min Altitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.MinAltitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="spotlatitude" class="col-sm-3">SpotLatitude: </label>
+                    <InputNumber id="spotlatitude" class="form-control col-sm-8" @bind-Value="@Zone.SpotLatitude" placeholder="Enter Spot Latitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.SpotLatitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="spotlongitude" class="col-sm-3">SpotLongitude: </label>
+                    <InputNumber id="spotlongitude" class="form-control col-sm-8" @bind-Value="@Zone.SpotLongitude" placeholder="Enter Spot Longitude"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.SpotLongitude)" />
+                </div>
+                <div class="form-group row">
+                    <label for="spotradiusmeters" class="col-sm-3">SpotRadiusMeters: </label>
+                    <InputNumber id="spotradiusmeters" class="form-control col-sm-8" @bind-Value="@Zone.SpotRadiusMeters" placeholder="Enter Spot Radius in Meters"></InputNumber>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Zone.SpotRadiusMeters)" />
+                </div>
+                <button type="submit" class="btn btn-primary edit-btn">Save zone</button>
+                <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
+                @if (ZoneDto.Id > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteZone">
+                        Delete
+                    </a>
+                }
+            </EditForm>
+        }
+        else
+        {
+            <div class="alert @StatusClass">@Message</div>
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+
+        }
+    </section>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CroudSeek.Core.Services;
+using CroudSeek.Client.Services;
 using AutoMapper;
 
 namespace CroudSeek.Client
@@ -17,7 +17,7 @@ namespace CroudSeek.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<CroudSeek.Core.App>("app");
+            builder.RootComponents.Add<CroudSeek.Client.App>("app");
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>
                  {

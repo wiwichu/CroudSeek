@@ -1,0 +1,35 @@
+﻿@page "/viewoverview/{QuestID}"
+
+<h1 class="page-title">All views</h1>
+@if (Views == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var view in Views)
+            {
+            <tr>
+                <td>@view.Name</td>
+                <td>@view.Description</td>
+                <td>
+                    <a href="@($"viewdetail/{view.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <NavLink href="@($"viewedit/{view.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                    </NavLink>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

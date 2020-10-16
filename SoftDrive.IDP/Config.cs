@@ -37,10 +37,10 @@ namespace SoftDrive.IDP
                     AllowedGrantTypes=GrantTypes.Code,
                     RequireClientSecret = false,
                     RequirePkce = true,
-                    RedirectUris = { "https://localhost:57854/authentication/login-callback" },
-                    PostLogoutRedirectUris = { "https://localhost:57854/authentication/logout-callback" },
-                    AllowedScopes = { "openid", "profile", "email", "croudaeekapi", "country" },
-                    AllowedCorsOrigins = { "https://localhost:57854" },
+                    RedirectUris = { "https://localhost:44363/authentication/login-callback" },
+                    PostLogoutRedirectUris = { "https://localhost:44363/authentication/logout-callback" },
+                    AllowedScopes = { "openid", "profile", "email", "croudseekapi", "country" },
+                    AllowedCorsOrigins = { "https://localhost:44363" },
                     RequireConsent = false
                 }
             };

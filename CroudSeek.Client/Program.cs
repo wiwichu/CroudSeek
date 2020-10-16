@@ -17,7 +17,20 @@ namespace CroudSeek.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<CroudSeek.Client.App>("app");
+            builder.RootComponents.Add<App>("app");
+
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                options.ProviderOptions.Authority = "https://localhost:5001";
+                options.ProviderOptions.ClientId = "croudseekclient";
+                options.ProviderOptions.RedirectUri = "https://localhost:44363/authentication/login-callback" ;
+                options.ProviderOptions.PostLogoutRedirectUri = "https://localhost:44363/authentication/logout-callback" ;
+                options.ProviderOptions.DefaultScopes.Add("email");
+                options.ProviderOptions.ResponseType="code";
+
+
+            });
+
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>
                  {

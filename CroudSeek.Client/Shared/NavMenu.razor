@@ -1,41 +1,70 @@
-﻿
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject IAccessTokenProvider TokenProvider
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
 <div class="bg-light" id="sidebar-wrapper">
     <div class="sidebar-logo">
-       @* <img class="img-responsive" id="logo" src="_content/BethanysPieShopHRM.Server/images/bethanylogo-new.png" />*@
+        @* <img class="img-responsive" id="logo" src="_content/BethanysPieShopHRM.Server/images/bethanylogo-new.png" />*@
     </div>
     @*<div class="profile">
-        <div class="profile-bg">
-            <img class="img-responsive" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
-        </div>
-        <div class="profile-picture">
-            <img class="img-responsive circle account-photo" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
-        </div>
-    </div>*@
-<div class="menu list-group list-group-flush">
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/" Match="NavLinkMatch.All">
-        <span class="oi oi-home" aria-hidden="true"></span> Home
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/questoverview">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Quests
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneoverview">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Zones
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/questedit">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit quest
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/viewedit">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit view
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/datapointedit">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit datapoint
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneedit">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit zone
-    </NavLink>
-    <NavLink class="list-group-item list-group-item-action bg-light"
-             href="authentication/login">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Log in
-    </NavLink>
+            <div class="profile-bg">
+                <img class="img-responsive" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
+            </div>
+            <div class="profile-picture">
+                <img class="img-responsive circle account-photo" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
+            </div>
+        </div>*@
+    <div class="menu list-group list-group-flush">
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/" Match="NavLinkMatch.All">
+            <span class="oi oi-home" aria-hidden="true"></span> Home
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/questoverview">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Quests
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneoverview">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Zones
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/questedit">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit quest
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/viewedit">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit view
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/datapointedit">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit datapoint
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneedit">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit zone
+        </NavLink>
+        <NavLink class="list-group-item list-group-item-action bg-light"
+                 href="authentication/login">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Log in
+        </NavLink>
+        <button class="list-group-item list-group-item-action bg-light"
+                @onclick="BeginSignOut">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Log out
+        </button>
+    </div>
 </div>
-</div>
+
+
+@code{
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+
+    private async Task WriteToken()
+    {
+        var tokenResult = await TokenProvider.RequestAccessToken();
+        if (tokenResult.TryGetToken(out var token))
+        {
+            System.Diagnostics.Debug.WriteLine(token.Value);
+        }
+    }
+
+}

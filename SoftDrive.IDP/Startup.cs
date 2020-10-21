@@ -4,8 +4,10 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SoftDrive.IDP.Areas.Identity.Data;
 
 namespace SoftDrive.IDP
 {
@@ -21,7 +23,9 @@ namespace SoftDrive.IDP
         public void ConfigureServices(IServiceCollection services)
         {
             // uncomment, if you want to add an MVC-based UI
-            services.AddControllersWithViews();
+            services.AddMvc();
+
+            services.AddTransient<IEmailSender, DummyEmailSender>();
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -31,7 +35,8 @@ namespace SoftDrive.IDP
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 //.AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
-                .AddTestUsers(IdentityServerHost.Quickstart.UI.TestUsers.Users);
+                .AddAspNetIdentity<ApplicationUser>();
+                //.AddTestUsers(IdentityServerHost.Quickstart.UI.TestUsers.Users);
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
         }
@@ -53,7 +58,9 @@ namespace SoftDrive.IDP
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,4 +1,5 @@
 ﻿@page "/zoneoverview"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <h1 class="page-title">All zones</h1>
 @if (Zones == null)
@@ -12,7 +13,7 @@ else
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-             </tr>
+            </tr>
         </thead>
         <tbody>
             @foreach (var zone in Zones)

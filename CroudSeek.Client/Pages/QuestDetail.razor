@@ -1,5 +1,5 @@
 ﻿@page "/questdetail/{QuestId}"
-
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 <h1 class="page-title">Details - @Quest.Description</h1>
 @{
     var leadingFormat = "00000";
@@ -106,7 +106,7 @@
             </thead>
             <tbody>
                 @foreach (var view in Views)
-                { 
+                {
                     <tr>
                         <td>@view.Name</td>
                         <td>@view.Description</td>

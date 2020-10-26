@@ -1,5 +1,5 @@
 ﻿@page "/questoverview"
-
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 <h1 class="page-title">All quests</h1>
 @if (Quests == null)
 {
@@ -10,37 +10,37 @@ else
     <table class="table">
         <thead>
             <tr>
- @*               <th>Quest ID</th>*@
+                @*               <th>Quest ID</th>*@
                 <th>Name</th>
                 <th>Description</th>
                 @*<th>Is Private</th>
-                <th>Owner Id</th>
-                <th>Zone Id</th>
-                <th>Create Time</th>
-                <th>Update Time</th>*@
+                    <th>Owner Id</th>
+                    <th>Zone Id</th>
+                    <th>Create Time</th>
+                    <th>Update Time</th>*@
             </tr>
         </thead>
         <tbody>
             @foreach (var quest in Quests)
             {
-            <tr>
-                @*                    <td>@quest.Id</td>*@
-                <td>@quest.Name</td>
-                <td>@quest.Description</td>
-                @*<td>@quest.IsPrivate</td>
-        <td>@quest.OwnerId</td>
-        <td>@quest.ZoneId</td>
-        <td>@quest.CreateTime</td>
-        <td>@quest.UpdateTime</td>*@
-                <td>
-                    <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
-                        <i class="fas fa-info-circle"></i>
-                    </a>
-                    <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
-                        <i class="fas fa-edit"></i>
-                    </NavLink>
-                </td>
-            </tr>
+                <tr>
+                    @*                    <td>@quest.Id</td>*@
+                    <td>@quest.Name</td>
+                    <td>@quest.Description</td>
+                    @*<td>@quest.IsPrivate</td>
+                        <td>@quest.OwnerId</td>
+                        <td>@quest.ZoneId</td>
+                        <td>@quest.CreateTime</td>
+                        <td>@quest.UpdateTime</td>*@
+                    <td>
+                        <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </NavLink>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

@@ -1,4 +1,5 @@
 ﻿@page "/viewdetail/{QuestId}/{ViewId}"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <h1 class="page-title">Details - @View.Description</h1>
 @{

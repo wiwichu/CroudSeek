@@ -1,4 +1,5 @@
 ﻿@page "/zonedetail/{ZoneId}"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <h1 class="page-title">Details - @Zone.Description</h1>
 @{

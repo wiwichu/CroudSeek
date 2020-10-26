@@ -14,7 +14,7 @@ namespace CroudSeek.Client.Services
         private readonly HttpClient _httpClient;
         public ZoneDataService(HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClient; 
         }
 
         public async Task<IEnumerable<ZoneDto>> GetAllZones()

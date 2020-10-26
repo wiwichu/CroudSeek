@@ -44,6 +44,7 @@
             <button class="list-group-item list-group-item-action bg-light"
                     @onclick="BeginSignOut">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Log out
+                (@context.User.Identity.Name)
             </button>
 
             <button class="list-group-item list-group-item-action bg-light"

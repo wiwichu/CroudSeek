@@ -49,7 +49,7 @@ namespace SoftDrive.IDP
                         "email", 
                         "croudseekapi" },
                     AllowedCorsOrigins = { "https://localhost:44363" },
-                    RequireConsent = true
+                    RequireConsent = false
                 }
             };
     }

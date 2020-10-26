@@ -20,13 +20,19 @@ namespace SoftDrive.IDP
                 new IdentityResource("country",new [] {"country" })
             };
 
-        public static IEnumerable<ApiResource> Apis =>
-            new ApiResource[]
-            { new ApiResource("croudseekapi",
+        public static IEnumerable<ApiScope> Apis =>
+            new ApiScope[]
+            { new ApiScope("croudseekapi",
                 "CroudSeek Api",
                 new [] {"country" })
             };
-
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
+            {
+            new ApiScope("croudseekapi",  "CroudSeek Api"    )
+            };
+        }
         public static IEnumerable<Client> Clients =>
             new Client[] 
             { 
@@ -39,9 +45,11 @@ namespace SoftDrive.IDP
                     RequirePkce = true,
                     RedirectUris = { "https://localhost:44363/authentication/login-callback" },
                     PostLogoutRedirectUris = { "https://localhost:44363/authentication/logout-callback" },
-                    AllowedScopes = { "openid", "profile", "email", "croudseekapi", "country" },
+                    AllowedScopes = { "openid", "profile", 
+                        "email", 
+                        "croudseekapi" },
                     AllowedCorsOrigins = { "https://localhost:44363" },
-                    RequireConsent = false
+                    RequireConsent = true
                 }
             };
     }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using SoftDrive.IDP.Areas.Identity.Data;
 
 namespace SoftDrive.IDP
@@ -22,6 +23,7 @@ namespace SoftDrive.IDP
 
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
             // uncomment, if you want to add an MVC-based UI
             services.AddMvc();
 
@@ -33,7 +35,7 @@ namespace SoftDrive.IDP
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
-                //.AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
                 //.AddTestUsers(IdentityServerHost.Quickstart.UI.TestUsers.Users);

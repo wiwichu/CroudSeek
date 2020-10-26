@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CroudSeek.Core\CroudSeek.Core.csproj" />
     <ProjectReference Include="..\CroudSeek.Shared\CroudSeek.Shared.csproj" />
   </ItemGroup>
 

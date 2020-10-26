@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CroudSeek.Client.Services;
 using AutoMapper;
+using CroudSeek.Client.MessageHandlers;
 
 namespace CroudSeek.Client
 {
@@ -19,9 +20,13 @@ namespace CroudSeek.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
+            builder.Services
+                .AddTransient<CroudSeekApiAuthorizationMessageHandler>();
+
             builder.Services.AddOidcAuthentication(options =>
             {
                 builder.Configuration.Bind("OidcConfiguration", options.ProviderOptions);
+                options.ProviderOptions.DefaultScopes.Add("croudseekapi");
 
             });
 
@@ -30,25 +35,29 @@ namespace CroudSeek.Client
                  {
                      client.BaseAddress = new Uri("http://localhost:51044");
                  }
-                 );
+                 )
+                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IZoneDataService, ZoneDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }
-                );
+                )
+                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IDataPointDataService, DataPointDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }
-                );
+                )
+                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IViewDataService, ViewDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("http://localhost:51044");
                 }
-                );
+                )
+                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             await builder.Build().RunAsync();
         }

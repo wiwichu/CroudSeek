@@ -1,15 +1,20 @@
 using AutoMapper;
 using CroudSeek.API.DbContexts;
 using CroudSeek.API.Services;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.IO;
@@ -30,6 +35,32 @@ namespace CourseLibrary.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
+            var requireAuthenticatedUserPolicy = new AuthorizationPolicyBuilder()
+            .RequireAuthenticatedUser()
+            .Build();
+
+            //services.AddAuthentication(
+            //    IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            //.AddIdentityServerAuthentication(options =>
+            //{
+            //    options.Authority = "https://localhost:5001/";
+            //    options.ApiName = "croudseekapi";
+            //});
+
+            services.AddAuthentication("Bearer").AddJwtBearer("Bearer",
+             options =>
+             {
+                 options.Authority = "https://localhost:5001";
+                 options.Audience = "croudseekapi";
+                 options.RequireHttpsMetadata = false;
+
+                 options.TokenValidationParameters = new
+                TokenValidationParameters()
+                 {
+                     ValidateAudience = false
+                 };
+             });
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -39,7 +70,7 @@ namespace CourseLibrary.API
 
             services.AddControllers(setupAction =>
             {
-
+                setupAction.Filters.Add(new AuthorizeFilter(requireAuthenticatedUserPolicy));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
@@ -145,6 +176,8 @@ namespace CourseLibrary.API
             });
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

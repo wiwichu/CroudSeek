@@ -33,28 +33,28 @@ namespace CroudSeek.Client
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>
                  {
-                     client.BaseAddress = new Uri("http://localhost:51044");
+                     client.BaseAddress = new Uri("https://localhost:44367");
                  }
                  )
                 .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IZoneDataService, ZoneDataService>(
                 client =>
                 {
-                    client.BaseAddress = new Uri("http://localhost:51044");
+                    client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
                 .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IDataPointDataService, DataPointDataService>(
                 client =>
                 {
-                    client.BaseAddress = new Uri("http://localhost:51044");
+                    client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
                 .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
             builder.Services.AddHttpClient<IViewDataService, ViewDataService>(
                 client =>
                 {
-                    client.BaseAddress = new Uri("http://localhost:51044");
+                    client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
                 .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();

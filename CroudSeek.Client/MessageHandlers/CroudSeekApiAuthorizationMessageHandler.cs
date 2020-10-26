@@ -14,7 +14,7 @@ namespace CroudSeek.Client.MessageHandlers
             : base(provider, navigation)
         {
             ConfigureHandler(
-                  authorizedUrls: new[] { "http://localhost:51044/" });
+                  authorizedUrls: new[] { "https://localhost:44367/" });
         }
     }
 }

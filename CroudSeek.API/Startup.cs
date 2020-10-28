@@ -37,12 +37,12 @@ namespace CourseLibrary.API
         {
             IdentityModelEventSource.ShowPII = true;
             // Add an authorization policy
-            //services.AddAuthorizationCore(authorizationOptions =>
-            //{
-            //    authorizationOptions.AddPolicy(
-            //        CroudSeek.Shared.Policies.CanManageQuests,
-            //        CroudSeek.Shared.Policies.CanManageQuestsPolicy());
-            //});
+            services.AddAuthorizationCore(authorizationOptions =>
+            {
+                authorizationOptions.AddPolicy(
+                    CroudSeek.Shared.Policies.CanManageQuests,
+                    CroudSeek.Shared.Policies.CanManageQuestsPolicy());
+            });
 
 
             var requireAuthenticatedUserPolicy = new AuthorizationPolicyBuilder()

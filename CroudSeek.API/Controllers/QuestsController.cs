@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CroudSeek.API.Controllers
 {
@@ -30,6 +31,7 @@ namespace CroudSeek.API.Controllers
         /// <returns>Collection of Quests</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<IEnumerable<QuestDto>> GetQuests()
         {
             var questsFromRepo = _croudSeekRepository.GetQuests();

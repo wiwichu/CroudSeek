@@ -24,13 +24,13 @@ namespace SoftDrive.IDP
             new ApiScope[]
             { new ApiScope("croudseekapi",
                 "CroudSeek Api",
-                new [] {"country" })
+                new [] {"questaccess" })
             };
         public static IEnumerable<ApiScope> GetApiScopes()
         {
             return new List<ApiScope>
             {
-            new ApiScope("croudseekapi",  "CroudSeek Api"    )
+            new ApiScope("croudseekapi",  "CroudSeek Api",new [] {"questaccess" })
             };
         }
         public static IEnumerable<Client> Clients =>

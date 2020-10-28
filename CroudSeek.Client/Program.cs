@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using CroudSeek.Client.Services;
 using AutoMapper;
 using CroudSeek.Client.MessageHandlers;
+using Microsoft.IdentityModel.Logging;
 
 namespace CroudSeek.Client
 {
@@ -19,6 +20,7 @@ namespace CroudSeek.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
+            IdentityModelEventSource.ShowPII = true;
 
             builder.Services
                 .AddTransient<CroudSeekApiAuthorizationMessageHandler>();
@@ -29,6 +31,13 @@ namespace CroudSeek.Client
                 options.ProviderOptions.DefaultScopes.Add("croudseekapi");
 
             });
+            builder.Services.AddAuthorizationCore(authorizationOptions =>
+            {
+                authorizationOptions.AddPolicy(
+                    CroudSeek.Shared.Policies.CanManageQuests,
+                    CroudSeek.Shared.Policies.CanManageQuestsPolicy());
+            });
+
 
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>

@@ -17,7 +17,7 @@ namespace SoftDrive.IDP
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource("country",new [] {"country" })
+                new IdentityResource("questaccess",new [] {"questaccess" })
             };
 
         public static IEnumerable<ApiScope> Apis =>
@@ -47,7 +47,8 @@ namespace SoftDrive.IDP
                     PostLogoutRedirectUris = { "https://localhost:44363/authentication/logout-callback" },
                     AllowedScopes = { "openid", "profile", 
                         "email", 
-                        "croudseekapi" },
+                        "croudseekapi",
+                    "questaccess"},
                     AllowedCorsOrigins = { "https://localhost:44363" },
                     RequireConsent = false
                 }

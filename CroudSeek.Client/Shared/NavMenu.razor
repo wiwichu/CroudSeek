@@ -29,9 +29,17 @@
             <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneoverview">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Zones
             </NavLink>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+        <Authorized>
             <NavLink class="list-group-item list-group-item-action bg-light" href="/questedit">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit quest
             </NavLink>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView>
+        <Authorized>
             <NavLink class="list-group-item list-group-item-action bg-light" href="/viewedit">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit view
             </NavLink>

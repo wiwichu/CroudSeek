@@ -61,6 +61,11 @@ namespace SoftDrive.IDP
                             .GetRequiredService<UserManager<ApplicationUser>>();
 
                         var jack = userManager.FindByNameAsync("Jack").Result;
+                        if (jack != null)
+                        {
+                            var result = userManager.DeleteAsync(jack).Result;
+                            jack = null;
+                        }
                         if (jack == null)
                         {
                             jack = new ApplicationUser
@@ -80,7 +85,8 @@ namespace SoftDrive.IDP
                                 new Claim(JwtClaimTypes.GivenName, "Jack"),
                                 new Claim(JwtClaimTypes.FamilyName, "Torrance"),
                                 new Claim(JwtClaimTypes.Email, "jack.torrance@email.com"),
-                                new Claim("country", "BE")
+                                new Claim("country", "BE"),
+                                new Claim("questaccess", "write")
                             }).Result;
 
                             if (!result.Succeeded)
@@ -90,6 +96,12 @@ namespace SoftDrive.IDP
                         }
 
                         var wendy = userManager.FindByNameAsync("Wendy").Result;
+                        if (wendy != null)
+                        {
+                            var result = userManager.DeleteAsync(wendy).Result;
+                            wendy = null;
+                        }
+
                         if (wendy == null)
                         {
                             wendy = new ApplicationUser
@@ -109,7 +121,8 @@ namespace SoftDrive.IDP
                                 new Claim(JwtClaimTypes.GivenName, "Wendy"),
                                 new Claim(JwtClaimTypes.FamilyName, "Torrance"),
                                 new Claim(JwtClaimTypes.Email, "wendy.torrance@email.com"),
-                                new Claim("country", "NL")
+                                new Claim("country", "NL"),
+                                new Claim("questaccess", "read")
                             }).Result;
 
                             if (!result.Succeeded)

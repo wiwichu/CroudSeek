@@ -86,7 +86,7 @@ namespace SoftDrive.IDP
                                 new Claim(JwtClaimTypes.FamilyName, "Torrance"),
                                 new Claim(JwtClaimTypes.Email, "jack.torrance@email.com"),
                                 new Claim("country", "BE"),
-                                new Claim("questaccess", "write")
+                                new Claim("questaccess", "PayingUser")
                             }).Result;
 
                             if (!result.Succeeded)
@@ -122,7 +122,7 @@ namespace SoftDrive.IDP
                                 new Claim(JwtClaimTypes.FamilyName, "Torrance"),
                                 new Claim(JwtClaimTypes.Email, "wendy.torrance@email.com"),
                                 new Claim("country", "NL"),
-                                new Claim("questaccess", "read")
+                                new Claim("questaccess", "FreeUser")
                             }).Result;
 
                             if (!result.Succeeded)

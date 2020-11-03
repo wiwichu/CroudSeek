@@ -13,7 +13,7 @@ namespace CroudSeek.Shared
         {
             return new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
-                .RequireClaim("questaccess", "write")
+                .RequireClaim("questaccess", "PayingUser")
                 .Build();
         }
     }

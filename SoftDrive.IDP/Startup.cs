@@ -5,10 +5,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using SoftDrive.IDP.Areas.Identity.Data;
+using SoftDrive.IDP.DbContexts;
+using SoftDrive.IDP.Services;
 
 namespace SoftDrive.IDP
 {
@@ -28,6 +31,13 @@ namespace SoftDrive.IDP
             services.AddMvc();
 
             services.AddTransient<IEmailSender, DummyEmailSender>();
+
+            services.AddDbContext<IdentityDbContext>(options =>
+            {
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SoftDriveIdentityDB;Trusted_Connection=True;");
+            });
+
+            services.AddScoped<ILocalUserService, LocalUserService>();
 
             var builder = services.AddIdentityServer(options =>
             {

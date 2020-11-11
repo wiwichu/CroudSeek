@@ -14,6 +14,8 @@ namespace CroudSeek.API.DbContexts
         {
         }
 
+        public DbSet<ApplicationUserProfile> ApplicationUserProfiles { get; set; }
+
         public DbSet<DataPoint> DataPoints { get; set; }
         public DbSet<Quest> Quests { get; set; }
         public DbSet<User> Users { get; set; }

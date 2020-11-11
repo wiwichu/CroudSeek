@@ -17,20 +17,20 @@ namespace SoftDrive.IDP
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource("questaccess",new [] {"questaccess" })
+                new IdentityResource("subscriptionlevel",new [] {"subscriptionlevel" })
             };
 
         public static IEnumerable<ApiScope> Apis =>
             new ApiScope[]
             { new ApiScope("croudseekapi",
                 "CroudSeek Api",
-                new [] {"questaccess" })
+                new [] {"subscriptionlevel" })
             };
         public static IEnumerable<ApiScope> GetApiScopes()
         {
             return new List<ApiScope>
             {
-            new ApiScope("croudseekapi",  "CroudSeek Api",new [] {"questaccess" })
+            new ApiScope("croudseekapi",  "CroudSeek Api",new [] {"subscriptionlevel" })
             };
         }
         public static IEnumerable<Client> Clients =>
@@ -48,7 +48,7 @@ namespace SoftDrive.IDP
                     AllowedScopes = { "openid", "profile", 
                         "email", 
                         "croudseekapi",
-                    "questaccess"},
+                    "subscriptionlevel"},
                     AllowedCorsOrigins = { "https://localhost:44363" },
                     RequireConsent = false
                 }

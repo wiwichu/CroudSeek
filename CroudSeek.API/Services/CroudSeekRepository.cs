@@ -289,6 +289,21 @@ namespace CroudSeek.API.Services
 
             return _context.Quests.Any(a => a.Id == questId);
         }
+
+        public ApplicationUserProfile GetApplicationUserProfile(string subject)
+        {
+            return _context.ApplicationUserProfiles.FirstOrDefault(a => a.Subject == subject);
+        }
+
+        public bool ApplicationUserProfileExists(string subject)
+        {
+            return _context.ApplicationUserProfiles.Any(a => a.Subject == subject);
+        }
+
+        public void AddApplicationUserProfile(ApplicationUserProfile applicationUserProfile)
+        {
+            _context.ApplicationUserProfiles.Add(applicationUserProfile);
+        }
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);

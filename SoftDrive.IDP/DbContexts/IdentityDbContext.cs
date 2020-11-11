@@ -76,7 +76,7 @@ namespace SoftDrive.IDP.DbContexts
              {
                  Id = Guid.NewGuid(),
                  UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
-                 Type = "questaccess",
+                 Type = "subscriptionlevel",
                  Value = "FreeUser"
              },
              new UserClaim()
@@ -111,7 +111,7 @@ namespace SoftDrive.IDP.DbContexts
              {
                  Id = Guid.NewGuid(),
                  UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
-                 Type = "questaccess",
+                 Type = "subscriptionlevel",
                  Value = "PayingUser"
              },
              new UserClaim()

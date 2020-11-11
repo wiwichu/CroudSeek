@@ -137,7 +137,7 @@ namespace SoftDrive.IDP.Migrations.IdentityDb
                         {
                             Id = new Guid("11a1475e-b55c-4b76-b9df-53b5eb3f872a"),
                             ConcurrencyStamp = "ca45af6c-8434-45b3-a4d9-2d930e1278d3",
-                            Type = "questaccess",
+                            Type = "subscriptionlevel",
                             UserId = new Guid("13229d33-99e0-41b3-b18d-4f72127e3971"),
                             Value = "FreeUser"
                         },
@@ -177,7 +177,7 @@ namespace SoftDrive.IDP.Migrations.IdentityDb
                         {
                             Id = new Guid("5b8c1a65-b9d5-4f33-90de-fd8ceefb6b28"),
                             ConcurrencyStamp = "d061a135-ecae-4e08-be73-7f09e6a14ab0",
-                            Type = "questaccess",
+                            Type = "subscriptionlevel",
                             UserId = new Guid("96053525-f4a5-47ee-855e-0ea77fa6c55a"),
                             Value = "PayingUser"
                         },

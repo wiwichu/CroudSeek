@@ -52,5 +52,9 @@ namespace CroudSeek.API.Services
         //IEnumerable<DataPoint> GetDataPoints();
         //IEnumerable<DataPoint> GetDataPointsByOwner(int ownerId);
         //        DataPoint GetDataPoint(int id);
+        ApplicationUserProfile GetApplicationUserProfile(string subject);
+        void AddApplicationUserProfile(ApplicationUserProfile applicationUserProfile);
+        bool ApplicationUserProfileExists(string subject);
+
     }
 }

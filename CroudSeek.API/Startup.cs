@@ -53,14 +53,14 @@ namespace CourseLibrary.API
             //    IdentityServerAuthenticationDefaults.AuthenticationScheme)
             //.AddIdentityServerAuthentication(options =>
             //{
-            //    options.Authority = "https://localhost:5001/";
+            //    options.Authority = "https://localhost:5003/";
             //    options.ApiName = "croudseekapi";
             //});
 
             services.AddAuthentication("Bearer").AddJwtBearer("Bearer",
              options =>
              {
-                 options.Authority = "https://localhost:5001";
+                 options.Authority = "https://localhost:5003";
                  options.Audience = "croudseekapi";
                  options.RequireHttpsMetadata = false;
 

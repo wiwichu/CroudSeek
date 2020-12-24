@@ -1,25 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-    <div class="page">
-        <div class="d-flex" id="wrapper">
+<div id="wrapper">
+        <NavMenu />
+        <div id="main" class="container-fluid">
+            @Body
+        </div>
 
-            <NavMenu />
-
-            <div id="page-content-wrapper">
-
-                <nav class="navbar navbar-expand-lg navbar-light border-bottom">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <h3 class="title">CroudSeek Quest Hunt </h3>
-                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        </ul>
-                    </div>
-                </nav>
-
-                <div class="container-fluid">
-
-                    @Body
-                </div>
+</div>
+<!-- Footer -->
+<!--<footer class="py-5 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p class="m-0 text-white">Copyright &copy; CroudSeek</p>
             </div>
-
+            <div class="col-md-4">
+                <p class="m-0 text-white">Contact Info:</p>
+                <p class="m-0 text-white">Phone: 555-555-1234 <br />Address: 1234 Test <br />Email: Care@CroudSeek.com</p>
+            </div>
+            <div class="col-md-4">
+                <p class="m-0 text-white">Coffee Fact of the Day</p>
+                <p class="m-0 text-white">More cups of coffee are drank every day than there are people on earth. <i>(May not be true)</i></p>
+            </div>
         </div>
     </div>
+</footer>-->

@@ -5,74 +5,74 @@
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 
-<div class="bg-light" id="sidebar-wrapper">
-    <div class="sidebar-logo">
-        @* <img class="img-responsive" id="logo" src="_content/BethanysPieShopHRM.Server/images/bethanylogo-new.png" />*@
-    </div>
-    @*<div class="profile">
-            <div class="profile-bg">
-                <img class="img-responsive" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
-            </div>
-            <div class="profile-picture">
-                <img class="img-responsive circle account-photo" src="_content/BethanysPieShopHRM.Server/images/profilePicture.jpg" />
-            </div>
-        </div>*@
-<div class="menu list-group list-group-flush">
-    <AuthorizeView>
-        <Authorized>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/questoverview">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Quests
-            </NavLink>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneoverview">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Zones
-            </NavLink>
-        </Authorized>
-    </AuthorizeView>
-    <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
-        <Authorized>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/questedit">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit quest
-            </NavLink>
-        </Authorized>
-    </AuthorizeView>
-    <AuthorizeView>
-        <Authorized>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/viewedit">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit view
-            </NavLink>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/datapointedit">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit datapoint
-            </NavLink>
-            <NavLink class="list-group-item list-group-item-action bg-light" href="/zoneedit">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add/Edit zone
-            </NavLink>
-            <button class="list-group-item list-group-item-action bg-light"
-                    @onclick="BeginSignOut">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Log out
-                (@context.User.Identity.Name)
-            </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div id="main" class="container">
+        <a class="navbar-brand" href="/">CroudSeek</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+@*                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All"></NavLink>*@
+                </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/questoverview">Quests</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/zoneoverview">Zones</NavLink>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/questedit">Add/Edit quest</NavLink>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/viewedit">Add/Edit view</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/datapointedit">Add/Edit datapoint</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/zoneedit">Add/Edit zone</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <button class="list-group-item list-group-item-action bg-transparent text-danger"
+                                    @onclick="BeginSignOut">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span>Log out (@context.User.Identity.Name)
+                                </button>
+                        </li>
 
-            <button class="list-group-item list-group-item-action bg-light"
-                    @onclick="WriteToken">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Write token
-            </button>
-        </Authorized>
-        <NotAuthorized>
-            <NavLink class="list-group-item list-group-item-action bg-light"
-                     href="authentication/login">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Log in
-            </NavLink>
-            <NavLink class="list-group-item list-group-item-action bg-light"
-                     href="https://localhost:5003/Identity/Account/Register">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Register
-            </NavLink>
-        </NotAuthorized>
-    </AuthorizeView>
-</div>
-</div>
+                @*<li class="nav-item">
+                    <button class="nav-link"
+                            @onclick="WriteToken">Write token</button>
+                </li>*@
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link"
+                                     href="authentication/login">Log in</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="https://localhost:5003/Identity/Account/Register">Register</NavLink>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
 @code{

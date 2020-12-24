@@ -9,7 +9,6 @@ body {
     background-repeat: repeat;*/
     font-family: 'Ubuntu', sans-serif;
 }
-
 nav {
     background-color: #3071BC;
     border-color: #3071BC;
@@ -25,7 +24,7 @@ nav {
     font-size: 80%;
     color: #dc3545;
 }
-
+/*
 #navbarSupportedContent {
     height: 80px;
 }
@@ -33,7 +32,7 @@ nav {
 .navbar {
     padding: 0;
 }
-
+*/
 .sidebar-logo {
     height: 80px;
     background-color: #3071BC;

@@ -32,14 +32,18 @@ else
                         <td>@quest.ZoneId</td>
                         <td>@quest.CreateTime</td>
                         <td>@quest.UpdateTime</td>*@
-                    <td>
-                        <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                        <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-edit"></i>
-                        </NavLink>
-                    </td>
+                <td>
+                    <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+                        <Authorized>
+                            <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
+                                <i class="fas fa-edit"></i>
+                            </NavLink>
+                        </Authorized>
+                    </AuthorizeView>
+                </td>
                 </tr>
             }
         </tbody>

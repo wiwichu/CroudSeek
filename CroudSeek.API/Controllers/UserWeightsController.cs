@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CroudSeek.API.Controllers
 {
@@ -55,6 +56,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<UserWeightDto> CreateUserWeight(UserWeightForCreationDto userWeight)
         {
             if (!ModelState.IsValid)
@@ -87,6 +89,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<UserWeightDto> UpdateUserWeight(int userWeightId, UserWeightForUpdateDto userWeight)
         {
             if (!ModelState.IsValid)
@@ -135,6 +138,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{userWeightId}")]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult PartiallyUpdateUserWeight(int userWeightId,
             JsonPatchDocument<UserWeightForUpdateDto> patchDocument)
         {
@@ -178,6 +182,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult DeleteUserWeight(int userWeightId)
         {
             var userWeightFromRepo = _croudSeekRepository.GetUserWeight(userWeightId);

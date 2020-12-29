@@ -1,7 +1,7 @@
 ﻿@page "/viewedit"
 @page "/questedit/{QuestId}/views/{ViewId}"
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
-
+@attribute [Microsoft.AspNetCore.Authorization.Authorize
+(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
 <section class="view-edit">
     @if (!Saved)
     {

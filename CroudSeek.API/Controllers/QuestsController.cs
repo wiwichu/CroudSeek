@@ -31,7 +31,6 @@ namespace CroudSeek.API.Controllers
         /// <returns>Collection of Quests</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<IEnumerable<QuestDto>> GetQuests()
         {
             var questsFromRepo = _croudSeekRepository.GetQuests();
@@ -66,6 +65,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<QuestDto> CreateQuest(QuestForCreationDto quest)
         {
             if(quest.Name==quest.Description)
@@ -98,6 +98,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<QuestDto> UpdateQuest(int questId,[FromBody] QuestForUpdateDto quest)
         {
             if (quest.Name == quest.Description)
@@ -160,6 +161,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{questId}")]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult PartiallyUpdateQuest(int questId,
             JsonPatchDocument<QuestForUpdateDto> patchDocument)
         {
@@ -197,6 +199,7 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult DeleteQuest(int questId)
         {
             var questFromRepo = _croudSeekRepository.GetQuest(questId,true);

@@ -26,7 +26,7 @@ namespace CroudSeek.Client.Pages
         public string ViewId { get; set; } = "0";
         public ViewForUpdateDto View { get; set; } = new ViewForUpdateDto();
         public ViewDto ViewDto { get; set; } = new ViewDto();
-        public string Title { get; set; } = "Enter Details";
+        public string Title { get; set; } = "Enter View Details";
         public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
         //used to store state of screen
         protected string Message = string.Empty;

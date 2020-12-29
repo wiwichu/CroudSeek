@@ -31,14 +31,20 @@
                 </AuthorizeView>
                 <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
                     <Authorized>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/questedit">Add/Edit quest</NavLink>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Quests</a>
+                            <div class="dropdown-menu">
+                                <NavLink class="dropdown-item" href="/questedit">Add/Edit quest</NavLink>
+                                <NavLink class="dropdown-item" href="/viewedit">Add/Edit view</NavLink>
+                                <NavLink class="dropdown-item" href="/datapointedit">Add/Edit datapoint</NavLink>
+                                <NavLink class="dropdown-item" href="/zoneedit">Add/Edit zone</NavLink>
+                            </div>
                         </li>
                     </Authorized>
                 </AuthorizeView>
                 <AuthorizeView>
                     <Authorized>
-                        <li class="nav-item">
+                         @*<li class="nav-item">
                             <NavLink class="nav-link" href="/viewedit">Add/Edit view</NavLink>
                         </li>
                         <li class="nav-item">
@@ -46,18 +52,18 @@
                         </li>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/zoneedit">Add/Edit zone</NavLink>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <button class="nav-link bg-transparent text-danger"
                                     @onclick="BeginSignOut">
                                 <span class="oi oi-list-rich" aria-hidden="true"></span>Log out (@context.User.Identity.Name)
-                                </button>
+                            </button>
                         </li>
 
-                @*<li class="nav-item">
-                    <button class="nav-link"
-                            @onclick="WriteToken">Write token</button>
-                </li>*@
+                        @*<li class="nav-item">
+            <button class="nav-link"
+                    @onclick="WriteToken">Write token</button>
+        </li>*@
                     </Authorized>
                     <NotAuthorized>
                         <li class="nav-item">

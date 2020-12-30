@@ -42,7 +42,7 @@ namespace CroudSeek.Client.Pages
         }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
-        public string Title { get; set; } = "Enter Details";
+        public string Title { get; set; } = "Enter Zone Details";
 
         protected async Task HandleValidSubmit()
         {

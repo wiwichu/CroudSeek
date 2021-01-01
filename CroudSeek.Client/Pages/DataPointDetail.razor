@@ -1,115 +1,122 @@
 ﻿@page "/datapointdetail/{QuestId}/{DataPointId}"
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
-<h1 class="page-title">Details - @DataPoint.Description</h1>
+<h1 class="page-title">DataPoint Details - @DataPoint.Description</h1>
 @{
     var leadingFormat = "00000";
+    var gpsFormat = "00.000000";
 }
 
 <div class="col-12 row">
-    <div class="col-xs-12 col-sm-8">
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">DataPoint ID</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.Id.ToString(leadingFormat)</label>
+    <div class="col-10 row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">DataPoint ID</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.Id.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Name</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@DataPoint.Name</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Name</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@DataPoint.Name</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Description</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@DataPoint.Description</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@DataPoint.Description</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Latitude</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.Latitude.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Latitude</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.Latitude.ToString(gpsFormat)</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Longitude</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.Longitude.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Longitude</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.Longitude.ToString(gpsFormat)</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Altitude</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.Altitude.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Altitude</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.Altitude.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Radius in Meters</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.RadiusMeters.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Radius in Meters</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.RadiusMeters.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Certainty of Observation</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@DataPoint.Certainty.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Certainty of Observation</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@DataPoint.Certainty.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Is Private</label>
-            <div class="col-sm-8">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Is Private</label>
+                <div class="col-sm-8">
 
-                @if (DataPoint.IsPrivate)
-                {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
-                }
-                else
-                {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
+                    @if (DataPoint.IsPrivate)
+                    {
+                        <label type="text" readonly class="form-control-plaintext">Yes</label>
+                    }
+                    else
+                    {
+                        <label type="text" readonly class="form-control-plaintext">No</label>
 
-                }
+                    }
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Is Negative</label>
+                <div class="col-sm-8">
+
+                    @if (DataPoint.IsPrivate)
+                    {
+                        <label type="text" readonly class="form-control-plaintext">Yes</label>
+                    }
+                    else
+                    {
+                        <label type="text" readonly class="form-control-plaintext">No</label>
+
+                    }
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Time Found</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@DataPoint.TimeStamp</label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Create Time</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@DataPoint.CreateTime</label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Update Time</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@DataPoint.UpdateTime</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="track-order-map">
+                <Map Zoom="10" Markers="MapMarkers"></Map>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Is Negative</label>
-            <div class="col-sm-8">
-
-                @if (DataPoint.IsPrivate)
-                {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
-                }
-                else
-                {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
-
-                }
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Time Found</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@DataPoint.TimeStamp</label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Create Time</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@DataPoint.CreateTime</label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Update Time</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@DataPoint.UpdateTime</label>
-            </div>
-        </div>
-
     </div>
-
 </div>

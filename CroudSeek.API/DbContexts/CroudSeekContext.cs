@@ -286,6 +286,18 @@ namespace CroudSeek.API.DbContexts
                         ,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
+                },
+                new Quest()
+                {
+                    Id = 6,
+                    Name = "NYC Sights",
+                    Description = "Sights of NYC",
+                    IsPrivate = false,
+                    OwnerId = 5,
+                    ZoneId = 5
+                        ,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
                 }
         );
         modelBuilder.Entity<DataPoint>()
@@ -416,22 +428,91 @@ namespace CroudSeek.API.DbContexts
                     UpdateTime = DateTimeOffset.Now
                 }, new DataPoint()
                 {
-                    Id = 8,
+                    Id = 9,
                     Altitude = 0,
                     Certainty = 80,
-                    Description = "Checked already",
+                    Description = "Empire State Building",
                     IsNegative = false,
                     IsPrivate = false,
-                    Latitude = 30,
-                    Longitude = -90,
-                    Name = "Quest2 Don't Bother",
+                    Latitude = 40.748817,
+                    Longitude = -73.985428,
+                    Name = "Empire State Building",
                     OwnerId = 3,
-                    QuestId = 2,
+                    QuestId = 6,
+                    RadiusMeters = 1000,
+                    TimeStamp = DateTimeOffset.Now,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
+                }, new DataPoint()
+                {
+                    Id = 10,
+                    Altitude = 0,
+                    Certainty = 80,
+                    Description = "Chrysler Building",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 40.751652,
+                    Longitude = -73.975311,
+                    Name = "Chrysler Building",
+                    OwnerId = 3,
+                    QuestId = 6,
+                    RadiusMeters = 1000,
+                    TimeStamp = DateTimeOffset.Now,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
+                }, new DataPoint()
+                {
+                    Id = 11,
+                    Altitude = 0,
+                    Certainty = 80,
+                    Description = "Flatiron Building",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 40.741112,
+                    Longitude = -73.989723,
+                    Name = "Flatiron Building",
+                    OwnerId = 3,
+                    QuestId = 6,
+                    RadiusMeters = 1000,
+                    TimeStamp = DateTimeOffset.Now,
+                    CreateTime = DateTimeOffset.Now,
+                    UpdateTime = DateTimeOffset.Now
+                }, new DataPoint()
+                {
+                    Id = 12,
+                    Altitude = 0,
+                    Certainty = 80,
+                    Description = "One World Trade Center",
+                    IsNegative = false,
+                    IsPrivate = false,
+                    Latitude = 40.712742,
+                    Longitude = -74.013382,
+                    Name = "One World Trade Center",
+                    OwnerId = 3,
+                    QuestId = 6,
                     RadiusMeters = 1000,
                     TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 }
+, new DataPoint()
+{
+    Id = 8,
+    Altitude = 0,
+    Certainty = 80,
+    Description = "Checked already",
+    IsNegative = false,
+    IsPrivate = false,
+    Latitude = 30,
+    Longitude = -90,
+    Name = "Quest2 Don't Bother",
+    OwnerId = 3,
+    QuestId = 2,
+    RadiusMeters = 1000,
+    TimeStamp = DateTimeOffset.Now,
+    CreateTime = DateTimeOffset.Now,
+    UpdateTime = DateTimeOffset.Now
+}
 
 
         );

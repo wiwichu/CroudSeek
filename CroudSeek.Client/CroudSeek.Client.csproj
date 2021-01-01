@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ComponentsLibrary\ComponentsLibrary.csproj" />
     <ProjectReference Include="..\CroudSeek.Shared\CroudSeek.Shared.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using CroudSeek.Client.Services;
+﻿using ComponentsLibrary.Map;
+using CroudSeek.Client.Services;
 using CroudSeek.Shared;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -14,6 +15,7 @@ namespace CroudSeek.Client.Pages
         public IQuestDataService QuestDataService { get; set; }
         [Inject]
         public IViewDataService ViewDataService { get; set; }
+        public List<Marker> MapMarkers { get; set; } = new List<Marker>();
 
         [Parameter]
         public string QuestId { get; set; }
@@ -25,6 +27,13 @@ namespace CroudSeek.Client.Pages
 
             Quest = await QuestDataService.GetQuestDetails(questId);
             Views = new List<ViewDto>( await ViewDataService.GetAllViews(questId));
+            MapMarkers = new List<Marker>();
+            foreach (var dataPoint in Quest.DataPoints)
+            MapMarkers.Add(
+                new Marker{Description = $"{dataPoint.Description}",  
+                    ShowPopup = false, 
+                    X = dataPoint.Longitude, 
+                    Y = dataPoint.Latitude});
         }
     }
 }

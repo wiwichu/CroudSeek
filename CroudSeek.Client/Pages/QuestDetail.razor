@@ -6,119 +6,125 @@
 }
 
 <div class="col-12 row">
-    <div class="col-xs-12 col-sm-8">
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Quest ID</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@Quest.Id.ToString(leadingFormat)</label>
+    <div class="col-10 row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Quest ID</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Quest.Id.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Name</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@Quest.Name</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Name</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@Quest.Name</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Description</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@Quest.Description</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Description</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@Quest.Description</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Owner ID</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@Quest.OwnerId.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Owner ID</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Quest.OwnerId.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Zone ID</label>
-            <div class="col-sm-8">
-                <label type="text" class="form-control-plaintext">@Quest.ZoneId.ToString(leadingFormat)</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Zone ID</label>
+                <div class="col-sm-8">
+                    <label type="text" class="form-control-plaintext">@Quest.ZoneId.ToString(leadingFormat)</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Create Time</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@Quest.CreateTime</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Create Time</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@Quest.CreateTime</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Update Time</label>
-            <div class="col-sm-8">
-                <label type="text" readonly class="form-control-plaintext">@Quest.UpdateTime</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Update Time</label>
+                <div class="col-sm-8">
+                    <label type="text" readonly class="form-control-plaintext">@Quest.UpdateTime</label>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Is Private</label>
-            <div class="col-sm-8">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Is Private</label>
+                <div class="col-sm-8">
 
-                @if (Quest.IsPrivate)
-                {
-                    <label type="text" readonly class="form-control-plaintext">Yes</label>
-                }
-                else
-                {
-                    <label type="text" readonly class="form-control-plaintext">No</label>
+                    @if (Quest.IsPrivate)
+                    {
+                        <label type="text" readonly class="form-control-plaintext">Yes</label>
+                    }
+                    else
+                    {
+                        <label type="text" readonly class="form-control-plaintext">No</label>
 
-                }
+                    }
+                </div>
             </div>
-        </div>
 
-        <h2 class="sidebar-heading">Data Points</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var dataPoint in Quest.DataPoints)
-                {
+            <h2 class="sidebar-heading">Data Points</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@dataPoint.Name</td>
-                        <td>@dataPoint.Description</td>
-                        <td>
-                            <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
-                        </td>
+                        <th>Name</th>
+                        <th>Description</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var dataPoint in Quest.DataPoints)
+                    {
+                        <tr>
+                            <td>@dataPoint.Name</td>
+                            <td>@dataPoint.Description</td>
+                            <td>
+                                <a href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-        <h2 class="sidebar-heading">Views</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var view in Views)
-                {
+            <h2 class="sidebar-heading">Views</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@view.Name</td>
-                        <td>@view.Description</td>
-                        <td>
-                            <a href="@($"/viewdetail/{QuestId}/{view.Id}")" class="btn btn-primary table-btn">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
-                        </td>
+                        <th>Name</th>
+                        <th>Description</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var view in Views)
+                    {
+                        <tr>
+                            <td>@view.Name</td>
+                            <td>@view.Description</td>
+                            <td>
+                                <a href="@($"/viewdetail/{QuestId}/{view.Id}")" class="btn btn-primary table-btn">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="track-order-map">
+                <Map Zoom="10" Markers="MapMarkers"></Map>
+            </div>
+        </div>
     </div>
-
 </div>

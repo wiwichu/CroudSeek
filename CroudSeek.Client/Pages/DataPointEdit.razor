@@ -9,85 +9,96 @@
     {
 
         <h1 class="page-title">@Title</h1>
-        <EditForm Model="@DataPoint" OnValidSubmit="@HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+        <div class="col-12 row">
+            <div class="col-10 row">
+                <div class="col-xs-12 col-sm-8">
+                    <EditForm Model="@DataPoint" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
 
-            <div class="form-group row">
-                <label for="quest" class="col-sm-3">Quest: </label>
-                <InputSelect id="quest" class="form-control col-sm-8" @bind-Value="@QuestId">
-                    @foreach (var quest in Quests)
+                        <div class="form-group row">
+                            <label for="quest" class="col-sm-3">Quest: </label>
+                            <InputSelect id="quest" class="form-control col-sm-8" @bind-Value="@QuestId">
+                                @foreach (var quest in Quests)
+                                    {
+                                    <option value="@quest.Id">@quest.Name</option>
+                                    }
+                                /**/
+                                /**/
+                                /**/
+                                /**/
+                            </InputSelect>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-3">Name: </label>
+                            <InputText id="name" class="form-control col-sm-8" @bind-Value="@DataPoint.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Name)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3">Description: </label>
+                            <InputText id="description" class="form-control col-sm-8" @bind-Value="@DataPoint.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Description)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="isPrivate" class="offset-sm-3">
+                                <InputCheckbox id="isPrivate" @bind-Value="@DataPoint.IsPrivate"></InputCheckbox>
+                                &nbsp;Is Private:
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="isNegative" class="offset-sm-3">
+                                <InputCheckbox id="isNegative" @bind-Value="@DataPoint.IsNegative"></InputCheckbox>
+                                &nbsp;Is Negative:
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="latitude" class="col-sm-3">Latitude: </label>
+                            <InputNumber id="latitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Latitude" placeholder="Enter Latitude"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Latitude)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="longitude" class="col-sm-3">Longitude: </label>
+                            <InputNumber id="longitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Longitude" placeholder="Enter Longitude"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Longitude)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="altitude" class="col-sm-3">Altitude: </label>
+                            <InputNumber id="altitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Altitude" placeholder="Enter Altitude"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Altitude)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="radiusmeters" class="col-sm-3">RadiusMeters: </label>
+                            <InputNumber id="radiusmeters" class="form-control col-sm-8" @bind-Value="@DataPoint.RadiusMeters" placeholder="Enter Radius in Meters"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.RadiusMeters)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="certainty" class="col-sm-3">Certainty: </label>
+                            <InputNumber id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.Certainty" placeholder="Enter Observation Certainty"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Certainty)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="certainty" class="col-sm-3">Time Found: </label>
+                            <InputDateTime id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.TimeStamp" placeholder="Enter time when found"></InputDateTime>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.TimeStamp)" />
+                        </div>
+                        <button type="submit" class="btn btn-primary edit-btn">Save DataPoint</button>
+                        <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
+                        @if (DataPointDto.Id > 0)
                         {
-                        <option value="@quest.Id">@quest.Name</option>
+                            <a class="btn btn-danger" @onclick="@DeleteDataPoint">
+                                Delete
+                            </a>
                         }
-                    /**/
-                    /**/
-                    /**/
-                    /**/
-                </InputSelect>
+                    </EditForm>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="track-order-map">
+                        <Map Zoom="10" Markers="MapMarkers" CanAddNewMarkers="false"></Map>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group row">
-                <label for="name" class="col-sm-3">Name: </label>
-                <InputText id="name" class="form-control col-sm-8" @bind-Value="@DataPoint.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Name)" />
-            </div>
-            <div class="form-group row">
-                <label for="description" class="col-sm-3">Description: </label>
-                <InputText id="description" class="form-control col-sm-8" @bind-Value="@DataPoint.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Description)" />
-            </div>
-            <div class="form-group row">
-                <label for="isPrivate" class="offset-sm-3">
-                    <InputCheckbox id="isPrivate" @bind-Value="@DataPoint.IsPrivate"></InputCheckbox>
-                    &nbsp;Is Private:
-                </label>
-            </div>
-            <div class="form-group row">
-                <label for="isNegative" class="offset-sm-3">
-                    <InputCheckbox id="isNegative" @bind-Value="@DataPoint.IsNegative"></InputCheckbox>
-                    &nbsp;Is Negative:
-                </label>
-            </div>
-            <div class="form-group row">
-                <label for="latitude" class="col-sm-3">Latitude: </label>
-                <InputNumber id="latitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Latitude" placeholder="Enter Latitude"></InputNumber>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Latitude)" />
-            </div>
-            <div class="form-group row">
-                <label for="longitude" class="col-sm-3">Longitude: </label>
-                <InputNumber id="longitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Longitude" placeholder="Enter Longitude"></InputNumber>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Longitude)" />
-            </div>
-            <div class="form-group row">
-                <label for="altitude" class="col-sm-3">Altitude: </label>
-                <InputNumber id="altitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Altitude" placeholder="Enter Altitude"></InputNumber>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Altitude)" />
-            </div>
-            <div class="form-group row">
-                <label for="radiusmeters" class="col-sm-3">RadiusMeters: </label>
-                <InputNumber id="radiusmeters" class="form-control col-sm-8" @bind-Value="@DataPoint.RadiusMeters" placeholder="Enter Radius in Meters"></InputNumber>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.RadiusMeters)" />
-            </div>
-            <div class="form-group row">
-                <label for="certainty" class="col-sm-3">Certainty: </label>
-                <InputNumber id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.Certainty" placeholder="Enter Observation Certainty"></InputNumber>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Certainty)" />
-            </div>
-            <div class="form-group row">
-                <label for="certainty" class="col-sm-3">Time Found: </label>
-                <InputDateTime id="certainty" class="form-control col-sm-8" @bind-Value="@DataPoint.TimeStamp" placeholder="Enter time when found"></InputDateTime>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.TimeStamp)" />
-            </div>
-            <button type="submit" class="btn btn-primary edit-btn">Save DataPoint</button>
-            <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
-            @if (DataPointDto.Id > 0)
-            {
-                <a class="btn btn-danger" @onclick="@DeleteDataPoint">
-                    Delete
-                </a>
-            }
-        </EditForm>
+        </div>
     }
     else
     {

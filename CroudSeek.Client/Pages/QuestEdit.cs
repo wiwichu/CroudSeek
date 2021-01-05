@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ComponentsLibrary.Map;
 using CroudSeek.Client.Services;
 using CroudSeek.Shared;
 using Microsoft.AspNetCore.Components;
@@ -22,6 +23,8 @@ namespace CroudSeek.Client.Pages
         [Inject]
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
+        public List<Marker> MapMarkers { get; set; } = new List<Marker>();
+
         [Parameter]
         public string QuestId { get; set; }
         public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
@@ -40,6 +43,7 @@ namespace CroudSeek.Client.Pages
         {
             Saved = false;
             int.TryParse(QuestId, out var questId);
+            MapMarkers = new List<Marker>();
 
             if (questId == 0) //new quest is being created
             {
@@ -59,6 +63,15 @@ namespace CroudSeek.Client.Pages
                 Quest.DataPoints = Mapper.Map<IEnumerable<DataPointForCreationDto>>(QuestDp.DataPoints).ToList();
                 Title = $"Details for {Quest.Description}";
                 Views = new List<ViewDto>(await ViewDataService.GetAllViews(questId));
+                foreach (var dataPoint in Quest.DataPoints)
+                    MapMarkers.Add(
+                        new Marker
+                        {
+                            Description = $"{dataPoint.Description}",
+                            ShowPopup = false,
+                            X = dataPoint.Longitude,
+                            Y = dataPoint.Latitude
+                        });
             }
 
 

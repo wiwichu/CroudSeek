@@ -4,7 +4,7 @@
 
     // Global export
     window.deliveryMap = {
-        showOrUpdate: function (elementId, markers) {
+        showOrUpdate: function (elementId, markers,canAddNewMarkers) {
             var elem = document.getElementById(elementId);
             if (!elem) {
                 throw new Error('No element with ID ' + elementId);
@@ -18,7 +18,28 @@
             }
 
             var map = elem.map;
-            if (map.addedMarkers.length !== markers.length) {
+
+            function onEachFeature(feature, layer) {
+                //bind click
+                layer.on('click', function (e) {
+                    // e = event
+                    console.log(e);
+                    alert("Click!");
+                    // You can make your ajax call declaration here
+                    //$.ajax(... 
+                });
+
+            }
+            
+            if (map.addedMarkers.length == 0 && markers.length == 0)
+            {
+                map.fitWorld();
+                if (canAddNewMarkers) {
+                    map.on('contextmenu',
+                        rightClick);
+                }
+            }
+             else if (map.addedMarkers.length !== markers.length) {
                 // Markers have changed, so reset
                 map.addedMarkers.forEach(marker => marker.removeFrom(map));
                 map.addedMarkers = markers.map(m => {
@@ -47,6 +68,10 @@
         }
     };
 
+    function rightClick()
+    {
+        alert("Click!");
+    }
     function animateMarkerMove(marker, coords, durationMs) {
         if (marker.existingAnimation) {
             cancelAnimationFrame(marker.existingAnimation.callbackHandle);

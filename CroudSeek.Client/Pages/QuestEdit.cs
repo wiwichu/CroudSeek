@@ -51,7 +51,7 @@ namespace CroudSeek.Client.Pages
                 Quest = new QuestForUpdateDto
                 {
                     IsPrivate = false,
-                    ZoneId = 1
+                    ZoneId = -1
                 };
             }
             else
@@ -76,7 +76,7 @@ namespace CroudSeek.Client.Pages
 
 
             Zones = (await ZoneDataService.GetAllZones()).ToList();
-            ZoneId = Quest.ZoneId.ToString();
+            ZoneId = Quest?.ZoneId.ToString();
         }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }

@@ -63,6 +63,15 @@ namespace CroudSeek.API.DbContexts
                 .HasData(
                     new User()
                     {
+                        Id = -1,
+                        OwnerId = -1,
+                        Email = "Boss@CroudSeek.com",
+                        Name = "Boss"
+                        ,
+                        CreateTime = DateTimeOffset.Now,
+                        UpdateTime = DateTimeOffset.Now
+                    }, new User()
+                    {
                         Id = 1,
                         OwnerId = 1,
                         Email = "Joe.Schmo@CroudSeek.com",
@@ -126,17 +135,17 @@ namespace CroudSeek.API.DbContexts
                 .HasData(
                 new Zone()
                 {
-                    Id = 1,
-                    OwnerId = 1,
-                    Description = "This is Zone1",
+                    Id = -1,
+                    OwnerId = -1,
+                    Description = "The whole worlds",
                     IsPrivate = false,
                     MaxAltitude = 999999.9999,
-                    MaxLatitude = 20,
-                    MaxLongitude = -60,
+                    MaxLatitude = 90,
+                    MaxLongitude = 180,
                     MinAltitude = -200,
-                    MinLatitude = 20,
-                    MinLongitude = 160,
-                    Name = "Zone1",
+                    MinLatitude = -90,
+                    MinLongitude = -180,
+                    Name = "World",
                     SpotLatitude = 40,
                     SpotLongitude = -100,
                     SpotRadiusMeters = 10000.7
@@ -144,6 +153,26 @@ namespace CroudSeek.API.DbContexts
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
                 },
+               new Zone()
+               {
+                   Id = 1,
+                   OwnerId = 1,
+                   Description = "This is Zone1",
+                   IsPrivate = false,
+                   MaxAltitude = 999999.9999,
+                   MaxLatitude = 20,
+                   MaxLongitude = -60,
+                   MinAltitude = -200,
+                   MinLatitude = 20,
+                   MinLongitude = 160,
+                   Name = "Zone1",
+                   SpotLatitude = 40,
+                   SpotLongitude = -100,
+                   SpotRadiusMeters = 10000.7
+                        ,
+                   CreateTime = DateTimeOffset.Now,
+                   UpdateTime = DateTimeOffset.Now
+               },
                new Zone()
                {
                    Id = 2,

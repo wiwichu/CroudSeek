@@ -1,0 +1,45 @@
+﻿
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">DataPoint Quick Add for Quest: @QuestName</h5>
+                    <button type="button" class="close" @onclick="@Close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <EditForm Model="@DataPoint" OnValidSubmit="@HandleValidSubmit">
+
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-3">Name: </label>
+                            <InputText id="name" class="form-control col-sm-8" @bind-Value="@DataPoint.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Name)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3">Description: </label>
+                            <InputText id="description" class="form-control col-sm-8" @bind-Value="@DataPoint.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Description)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Latitude: @DataPoint.Latitude</label>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Longitude: @DataPoint.Longitude</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save employee</button>
+                        <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                    </EditForm>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

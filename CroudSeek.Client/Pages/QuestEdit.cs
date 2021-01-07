@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using ComponentsLibrary.Map;
+using CroudSeek.Client.Components;
 using CroudSeek.Client.Services;
 using CroudSeek.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,9 @@ namespace CroudSeek.Client.Pages
         public IViewDataService ViewDataService { get; set; }
 
         [Inject]
+        public IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         public List<Marker> MapMarkers { get; set; } = new List<Marker>();
@@ -31,6 +36,8 @@ namespace CroudSeek.Client.Pages
         public QuestWithDataPointsDto QuestDp { get; set; } = new QuestWithDataPointsDto();
         public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
+        protected AddDataPointDialog AddDataPointDialog { get; set; }
+
         public string ZoneId { get; set; }
         public string Title { get; set; } = "Enter Quest Details";
         //used to store state of screen
@@ -74,10 +81,10 @@ namespace CroudSeek.Client.Pages
                         });
             }
 
-
             Zones = (await ZoneDataService.GetAllZones()).ToList();
             ZoneId = Quest?.ZoneId.ToString();
-        }
+
+    }
         public InputText NameInputText { get; set; }
         public InputText DescriptionInputText { get; set; }
         protected async Task HandleValidSubmit()
@@ -130,7 +137,19 @@ namespace CroudSeek.Client.Pages
         {
             NavigationManager.NavigateTo("/questoverview");
         }
+        public async void AddDataPointDialog_OnDialogClose()
+        {
+            int.TryParse(QuestId, out var qId);
+            MapMarkers = new List<Marker>();
 
+            if (qId != 0)
+            {
+                var quest = await QuestDataService.GetQuestDetails(qId);
+                DataPoints = quest.DataPoints;
+
+                StateHasChanged();
+            }
+        }
     }
 
 }

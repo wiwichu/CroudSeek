@@ -22,14 +22,23 @@
             public List<Marker> Markers { get; set; }
             [Parameter]
             public bool CanAddNewMarkers { get; set; }
+            [JSInvokable]
+            public void AddMarker(double latitude, double longitude)
+            {
+                StateHasChanged();
+
+            }
+
 
             protected override async Task OnAfterRenderAsync(bool firstRender)
             {
+                var dotNetObjectRef = DotNetObjectReference.Create(this);
 
                 await JSRuntime.InvokeVoidAsync(
-                "deliveryMap.showOrUpdate",
-                elementId,
-                Markers,
-                CanAddNewMarkers);
+                    "deliveryMap.showOrUpdate",
+                    elementId,
+                    Markers,
+                    CanAddNewMarkers,
+                    dotNetObjectRef);
             }
         }

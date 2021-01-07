@@ -2,9 +2,12 @@
     var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var tileAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
 
+    var lat, lng;
+    var dotNetObjectRef;
+
     // Global export
     window.deliveryMap = {
-        showOrUpdate: function (elementId, markers,canAddNewMarkers) {
+        showOrUpdate: function (elementId, markers,canAddNewMarkers,dotNetObjectReference) {
             var elem = document.getElementById(elementId);
             if (!elem) {
                 throw new Error('No element with ID ' + elementId);
@@ -16,9 +19,8 @@
                 elem.map.addedMarkers = [];
                 L.tileLayer(tileUrl, { attribution: tileAttribution }).addTo(elem.map);
             }
-
+            dotNetObjectRef = dotNetObjectReference;
             var map = elem.map;
-
             function onEachFeature(feature, layer) {
                 //bind click
                 layer.on('click', function (e) {
@@ -35,6 +37,11 @@
             {
                 map.fitWorld();
                 if (canAddNewMarkers) {
+
+                    map.addEventListener('mousemove', function (ev) {
+                        lat = ev.latlng.lat;
+                        lng = ev.latlng.lng;
+                    });
                     map.on('contextmenu',
                         rightClick);
                 }
@@ -68,9 +75,12 @@
         }
     };
 
-    function rightClick()
+    function rightClick(
+        //dotNetObjectReference
+    )
     {
-        alert("Click!");
+        dotNetObjectRef.invokeMethodAsync("AddMarker", lat, lng);
+        //alert("Click! Latitude: " + lat + ", Longitude: " + lng);
     }
     function animateMarkerMove(marker, coords, durationMs) {
         if (marker.existingAnimation) {

@@ -12,8 +12,13 @@ namespace CroudSeek.Client.Components
 {
     public partial class AddDataPointDialog
     {
-        public DataPointForUpdateDto DataPoint { get; set; } = 
-            new DataPointForUpdateDto { Name="dp",Description="dp",TimeStamp=DateTime.Now};
+        private DataPointForUpdateDto _dataPoint =  new DataPointForUpdateDto { Name="dp",Description="dp",TimeStamp=DateTime.Now
+    };
+        public DataPointForUpdateDto DataPoint { get { return _dataPoint; } set {
+                _dataPoint = value;
+                StateHasChanged();
+            } }
+
 
         [Inject]
         IMapper Mapper { get; set; }
@@ -32,7 +37,7 @@ namespace CroudSeek.Client.Components
 
         public void Show()
         {
-            ResetDialog();
+            //ResetDialog();
             ShowDialog = true;
             StateHasChanged();
         }

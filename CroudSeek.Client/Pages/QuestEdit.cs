@@ -37,7 +37,19 @@ namespace CroudSeek.Client.Pages
         public List<ZoneDto> Zones { get; set; } = new List<ZoneDto>();
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
         protected AddDataPointDialog AddDataPointDialog { get; set; }
-
+        private Map _locationMap = null;
+        public Map LocationMap { get { return _locationMap; } 
+            set 
+            { _locationMap = value;
+                _locationMap.RightCLickCallback = (lat, lng) => 
+                {
+                    AddDataPointDialog.DataPoint =
+                        new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude=lat, Longitude=lng, TimeStamp = DateTime.Now };
+                    AddDataPointDialog.Show();
+                    StateHasChanged();
+                };
+            } 
+        }
         public string ZoneId { get; set; }
         public string Title { get; set; } = "Enter Quest Details";
         //used to store state of screen

@@ -25,10 +25,11 @@
             [JSInvokable]
             public void AddMarker(double latitude, double longitude)
             {
+                RightCLickCallback(latitude, longitude);
                 StateHasChanged();
 
             }
-
+            public Action<double, double> RightCLickCallback { get; set; }
 
             protected override async Task OnAfterRenderAsync(bool firstRender)
             {

@@ -14,10 +14,7 @@ namespace CroudSeek.Client.Components
     {
         private DataPointForUpdateDto _dataPoint =  new DataPointForUpdateDto { Name="dp",Description="dp",TimeStamp=DateTime.Now
     };
-        public DataPointForUpdateDto DataPoint { get { return _dataPoint; } set {
-                _dataPoint = value;
-                StateHasChanged();
-            } }
+        public DataPointForUpdateDto DataPoint { get; set; }
 
 
         [Inject]
@@ -61,7 +58,6 @@ namespace CroudSeek.Client.Components
             ShowDialog = false;
 
             await CloseEventCallback.InvokeAsync(true);
-            StateHasChanged();
         }
 
     }

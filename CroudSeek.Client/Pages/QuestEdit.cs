@@ -30,6 +30,7 @@ namespace CroudSeek.Client.Pages
         [Inject] public NavigationManager NavigationManager { get; set; }
         public List<Marker> MapMarkers { get; set; } = new List<Marker>();
         public bool MapEditable { get { return !string.IsNullOrWhiteSpace(QuestId); } }
+        public string MapHeader { get {return !string.IsNullOrWhiteSpace(QuestId) ? "Right Click To Add Datapoint"  : ""; } }
         [Parameter]
         public string QuestId { get; set; }
         public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
@@ -55,7 +56,6 @@ namespace CroudSeek.Client.Pages
                             AddDataPointDialog.DataPoint =
                                 new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude = lat, Longitude = lng, TimeStamp = DateTime.Now };
                             AddDataPointDialog.Show();
-                            StateHasChanged();
                         };
                     }
                 }
@@ -182,7 +182,6 @@ namespace CroudSeek.Client.Pages
                             Y = dataPoint.Latitude
                         });
                 }
-                _locationMap.Markers = new List<Marker>(MapMarkers);
             }
             StateHasChanged();
         }

@@ -19,20 +19,13 @@
             public double Zoom { get; set; }
 
             [Parameter]
-            public List<Marker> Markers {
-                get { return _markers; }
-                set{
-                    _markers = value;
-                    StateHasChanged();
-                }
-            }
+            public List<Marker> Markers { get; set; }
             [Parameter]
             public bool CanAddNewMarkers { get; set; }
             [JSInvokable]
             public void AddMarker(double latitude, double longitude)
             {
                 RightCLickCallback(latitude, longitude);
-                StateHasChanged();
 
             }
             public Action<double, double> RightCLickCallback { get; set; }

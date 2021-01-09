@@ -2,7 +2,7 @@
     var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var tileAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
 
-    var lat, lng;
+    var lat =0.0, lng=0.0;
     var dotNetObjectRef;
 
     // Global export
@@ -46,7 +46,7 @@
                         rightClick);
                 }
             }
-             else if (map.addedMarkers.length !== markers.length) {
+            else if ((map.addedMarkers.length !== markers.length) && markers.length != 0) {
                 // Markers have changed, so reset
                 map.addedMarkers.forEach(marker => marker.removeFrom(map));
                 map.addedMarkers = markers.map(m => {

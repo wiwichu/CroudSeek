@@ -12,14 +12,20 @@
     </div>
 
         @code {
-
+            private List<Marker> _markers;
             string elementId = $"map-{Guid.NewGuid().ToString("D")}";
 
             [Parameter]
             public double Zoom { get; set; }
 
             [Parameter]
-            public List<Marker> Markers { get; set; }
+            public List<Marker> Markers {
+                get { return _markers; }
+                set{
+                    _markers = value;
+                    StateHasChanged();
+                }
+            }
             [Parameter]
             public bool CanAddNewMarkers { get; set; }
             [JSInvokable]
@@ -41,5 +47,6 @@
                     Markers,
                     CanAddNewMarkers,
                     dotNetObjectRef);
+
             }
         }

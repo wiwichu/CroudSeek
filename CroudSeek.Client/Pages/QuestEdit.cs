@@ -29,7 +29,7 @@ namespace CroudSeek.Client.Pages
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         public List<Marker> MapMarkers { get; set; } = new List<Marker>();
-
+        public bool MapEditable { get { return !string.IsNullOrWhiteSpace(QuestId); } }
         [Parameter]
         public string QuestId { get; set; }
         public QuestForUpdateDto Quest { get; set; } = new QuestForUpdateDto();
@@ -38,17 +38,28 @@ namespace CroudSeek.Client.Pages
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
         protected AddDataPointDialog AddDataPointDialog { get; set; }
         private Map _locationMap = null;
-        public Map LocationMap { get { return _locationMap; } 
-            set 
-            { _locationMap = value;
-                _locationMap.RightCLickCallback = (lat, lng) => 
+        public Map LocationMap
+        {
+            get { return _locationMap; }
+            set
+            {
+                _locationMap = value;
+                if (!string.IsNullOrWhiteSpace(QuestId) && AddDataPointDialog!=null)
                 {
-                    AddDataPointDialog.DataPoint =
-                        new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude=lat, Longitude=lng, TimeStamp = DateTime.Now };
-                    AddDataPointDialog.Show();
-                    StateHasChanged();
-                };
-            } 
+                    int.TryParse(QuestId, out var questId);
+                    if (questId != 0) //new quest is being created
+                    {
+                        AddDataPointDialog.QuestId = questId;
+                        _locationMap.RightCLickCallback = (lat, lng) =>
+                        {
+                            AddDataPointDialog.DataPoint =
+                                new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude = lat, Longitude = lng, TimeStamp = DateTime.Now };
+                            AddDataPointDialog.Show();
+                            StateHasChanged();
+                        };
+                    }
+                }
+            }
         }
         public string ZoneId { get; set; }
         public string Title { get; set; } = "Enter Quest Details";
@@ -83,6 +94,7 @@ namespace CroudSeek.Client.Pages
                 Title = $"Details for {Quest.Description}";
                 Views = new List<ViewDto>(await ViewDataService.GetAllViews(questId));
                 foreach (var dataPoint in Quest.DataPoints)
+                {
                     MapMarkers.Add(
                         new Marker
                         {
@@ -91,6 +103,7 @@ namespace CroudSeek.Client.Pages
                             X = dataPoint.Longitude,
                             Y = dataPoint.Latitude
                         });
+                }
             }
 
             Zones = (await ZoneDataService.GetAllZones()).ToList();
@@ -158,9 +171,20 @@ namespace CroudSeek.Client.Pages
             {
                 var quest = await QuestDataService.GetQuestDetails(qId);
                 DataPoints = quest.DataPoints;
-
-                StateHasChanged();
+                foreach (var dataPoint in DataPoints)
+                {
+                    MapMarkers.Add(
+                        new Marker
+                        {
+                            Description = $"{dataPoint.Description}",
+                            ShowPopup = false,
+                            X = dataPoint.Longitude,
+                            Y = dataPoint.Latitude
+                        });
+                }
+                _locationMap.Markers = new List<Marker>(MapMarkers);
             }
+            StateHasChanged();
         }
     }
 

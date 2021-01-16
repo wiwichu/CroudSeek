@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ComponentsLibrary.Map;
+using CroudSeek.Client.Components;
 using CroudSeek.Client.Services;
 using CroudSeek.Shared;
 using Microsoft.AspNetCore.Components;
@@ -23,6 +24,8 @@ namespace CroudSeek.Client.Pages
         IMapper Mapper { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
         public List<Marker> MapMarkers { get; set; } = new List<Marker>();
+
+        protected AddDataPointDialog AddDataPointDialog { get; set; }
 
         [Parameter]
         public string QuestId { get; set; } = "0";

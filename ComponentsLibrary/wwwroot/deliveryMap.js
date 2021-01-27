@@ -4,6 +4,86 @@
 
     var lat =0.0, lng=0.0;
     var dotNetObjectRef;
+    var blueIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-blue.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var goldIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-gold.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var redIcon = new L.Icon({
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var greenIcon = new L.Icon({
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var orangeIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-orange.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var yellowIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-yellow.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var violetIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-violet.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var greyIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-grey.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var blackIcon = new L.Icon({
+        iconUrl: 'images/marker-icon-2x-black.png',
+        shadowUrl: 'images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
 
     // Global export
     window.deliveryMap = {
@@ -52,21 +132,24 @@
                 map.addedMarkers = markers.map(m => {
                     //return L.marker([m.y, m.x], { icon: getMarkerIcon(L, "red") }).addTo(map)
                     var color = 'green';
+                    var icon = greenIcon;
                     if (m.isNegative) {
                         color = 'red';
+                        var icon = redIcon;
                     }
                         var opacity = m.certainty;
                     if (opacity != 0) {
                         opacity = opacity / 200;
                     }
-                    return L.circle([m.y, m.x], {
+                    L.circle([m.y, m.x], {
                         //color: 'red',
+
                         color: color,
                         fillColor: color,
                         fillOpacity: opacity,
                         radius: m.radiusMeters
                     }).bindPopup(m.description).addTo(map);
-                    //return L.marker([m.y, m.x]).bindPopup(m.description).addTo(map);
+                    return L.marker([m.y, m.x], { icon : icon }).bindPopup(m.description).addTo(map);
                 });
 
                 // Auto-fit the view
@@ -94,9 +177,9 @@
 
     function getMarkerIcon(L, color) {
         return L.Icon({
-            //iconRetinaUrl: require('@/assets/img/map_markers/marker-icon-2x-' + color + '.png'),
-            //iconUrl: require('@/assets/img/map_markers/marker-icon-' + color + '.png'),
-            //shadowUrl: require('@/assets/img/map_markers/marker-shadow.png'),
+            //iconRetinaUrl: require('@/assets/images/map_markers/marker-icon-2x-' + color + '.png'),
+            //iconUrl: require('@/assets/images/map_markers/marker-icon-' + color + '.png'),
+            //shadowUrl: require('@/assets/images/map_markers/marker-shadow.png'),
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],

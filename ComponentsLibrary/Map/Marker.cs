@@ -9,5 +9,8 @@
         public double Y { get; set; }
 
         public bool ShowPopup { get; set; }
+        public bool IsNegative { get; set; }
+        public double RadiusMeters { get; set; }
+        public double Certainty { get; set; }
     }
 }

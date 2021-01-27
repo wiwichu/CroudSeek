@@ -50,7 +50,23 @@
                 // Markers have changed, so reset
                 map.addedMarkers.forEach(marker => marker.removeFrom(map));
                 map.addedMarkers = markers.map(m => {
-                    return L.marker([m.y, m.x]).bindPopup(m.description).addTo(map);
+                    //return L.marker([m.y, m.x], { icon: getMarkerIcon(L, "red") }).addTo(map)
+                    var color = 'green';
+                    if (m.isNegative) {
+                        color = 'red';
+                    }
+                        var opacity = m.certainty;
+                    if (opacity != 0) {
+                        opacity = opacity / 200;
+                    }
+                    return L.circle([m.y, m.x], {
+                        //color: 'red',
+                        color: color,
+                        fillColor: color,
+                        fillOpacity: opacity,
+                        radius: m.radiusMeters
+                    }).bindPopup(m.description).addTo(map);
+                    //return L.marker([m.y, m.x]).bindPopup(m.description).addTo(map);
                 });
 
                 // Auto-fit the view
@@ -75,6 +91,18 @@
         }
     };
 
+
+    function getMarkerIcon(L, color) {
+        return L.Icon({
+            //iconRetinaUrl: require('@/assets/img/map_markers/marker-icon-2x-' + color + '.png'),
+            //iconUrl: require('@/assets/img/map_markers/marker-icon-' + color + '.png'),
+            //shadowUrl: require('@/assets/img/map_markers/marker-shadow.png'),
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        })
+    }
     function rightClick(
         //dotNetObjectReference
     )

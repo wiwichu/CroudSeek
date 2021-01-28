@@ -138,9 +138,13 @@
                         var icon = redIcon;
                     }
                         var opacity = m.certainty;
-                    if (opacity != 0) {
-                        opacity = opacity / 200;
+                    if (opacity <= 0) {
+                        opacity = 1;
                     }
+                    else if (opacity >= 100) {
+                        opacity = 100;
+                    }
+                    opacity = opacity / 200;
                     L.circle([m.y, m.x], {
                         //color: 'red',
 

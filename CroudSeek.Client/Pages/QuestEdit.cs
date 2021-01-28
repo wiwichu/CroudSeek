@@ -182,7 +182,10 @@ namespace CroudSeek.Client.Pages
                             Description = $"{dataPoint.Description}",
                             ShowPopup = false,
                             X = dataPoint.Longitude,
-                            Y = dataPoint.Latitude
+                            Y = dataPoint.Latitude,
+                            IsNegative=dataPoint.IsNegative,
+                            RadiusMeters=dataPoint.RadiusMeters,
+                            Certainty=dataPoint.Certainty
                         });
                 }
             }

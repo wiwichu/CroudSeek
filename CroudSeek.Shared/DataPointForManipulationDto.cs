@@ -26,6 +26,7 @@ namespace CroudSeek.Shared
         /// </summary>
         [MaxLength(1000)]
         public virtual string Description { get; set; }
+        [Range(-180, 180)]
         /// <summary>
         /// Latitude of DataPoint
         /// </summary>
@@ -33,6 +34,7 @@ namespace CroudSeek.Shared
         /// <summary>
         /// Longitude of DataPoint
         /// </summary>
+        [Range(-90, 90)]
         public double Longitude { get; set; }
         /// <summary>
         /// Altitude of DataPoint
@@ -41,10 +43,12 @@ namespace CroudSeek.Shared
         /// <summary>
         /// How big the circle around this point is.
         /// </summary>
+        [Range(1, Double.PositiveInfinity)]
         public double RadiusMeters { get; set; }
         /// <summary>
         /// Arbitrary number indicating the level of certainty on this datapoint
         /// </summary>
+        [Range(1, 100)]
         public double Certainty { get; set; }
         /// <summary>
         /// Whether this DataPoint indicates the Quest is not found here.

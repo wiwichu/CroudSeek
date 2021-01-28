@@ -28,10 +28,14 @@
                             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Description)" />
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3">Latitude: @DataPoint.Latitude</label>
+                            <label for="latitude" class="col-sm-3">Latitude: </label>
+                            <InputNumber id="latitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Latitude" placeholder="Latitude"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Latitude)" />
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3">Longitude: @DataPoint.Longitude</label>
+                            <label for="longitude" class="col-sm-3">Longitude: </label>
+                            <InputNumber id="longitude" class="form-control col-sm-8" @bind-Value="@DataPoint.Longitude" placeholder="Longitude"></InputNumber>
+                            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.Longitude)" />
                         </div>
                         <div class="form-group row">
                             <label for="isNegative" class="offset-sm-3">

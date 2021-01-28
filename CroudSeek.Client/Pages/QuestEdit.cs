@@ -54,7 +54,7 @@ namespace CroudSeek.Client.Pages
                         _locationMap.RightCLickCallback = (lat, lng) =>
                         {
                             AddDataPointDialog.DataPoint =
-                                new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude = lat, Longitude = lng, TimeStamp = DateTime.Now };
+                                new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude = lat, Longitude = lng, TimeStamp = DateTime.Now,Certainty=100,IsNegative=false,RadiusMeters=10 };
                             AddDataPointDialog.Show();
                         };
                     }
@@ -190,6 +190,12 @@ namespace CroudSeek.Client.Pages
                 }
             }
             StateHasChanged();
+        }
+        protected void QuickAddDataPoint()
+        {
+            AddDataPointDialog.DataPoint =
+                 new DataPointForUpdateDto { Name = "dpNew", Description = "dpNew", Latitude = 0, Longitude = 0, TimeStamp = DateTime.Now, Certainty = 100, IsNegative = false, RadiusMeters = 10 };
+            AddDataPointDialog.Show();
         }
     }
 

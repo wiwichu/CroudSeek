@@ -83,7 +83,7 @@
                             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>DataPoint.TimeStamp)" />
                         </div>
                         <button type="submit" class="btn btn-primary edit-btn">Save DataPoint</button>
-                        <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
+                        <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToQuest">Cancel</a>
                         @if (DataPointDto.Id > 0)
                         {
                             <a class="btn btn-danger" @onclick="@DeleteDataPoint">
@@ -103,7 +103,7 @@
     else
     {
         <div class="alert @StatusClass">@Message</div>
-        <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+        <a class="btn btn-outline-primary" @onclick="@NavigateToQuest">Back to Quest</a>
 
     }
 </section>

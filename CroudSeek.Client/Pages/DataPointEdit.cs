@@ -72,7 +72,8 @@ namespace CroudSeek.Client.Pages
                 DataPoint = Mapper.Map<DataPointForUpdateDto>(DataPointDto);
                 MapMarkers = new List<Marker>
                 {
-                  new Marker{Description = $"{DataPoint.Description}",  ShowPopup = false, X = DataPoint.Longitude, Y = DataPoint.Latitude}
+                  new Marker{Description = $"{DataPoint.Description}",  ShowPopup = false, X = DataPoint.Longitude, Y = DataPoint.Latitude,
+                                              RadiusMeters=DataPoint.RadiusMeters,IsNegative=DataPoint.IsNegative,Certainty=DataPoint.Certainty}
                 };
                 Title = $"Details for {DataPoint.Description}";
 
@@ -115,6 +116,10 @@ namespace CroudSeek.Client.Pages
         protected void NavigateToOverview()
         {
             NavigationManager.NavigateTo("/questoverview");
+        }
+        protected void NavigateToQuest()
+        {
+            NavigationManager.NavigateTo($"/questedit/{QuestId}");
         }
         protected async Task DeleteDataPoint()
         {

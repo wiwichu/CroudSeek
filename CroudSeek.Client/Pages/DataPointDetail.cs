@@ -29,7 +29,8 @@ namespace CroudSeek.Client.Pages
             DataPoint = await DataPointDataService.GetDataPointForQuest(questId, dataPointId);
             MapMarkers = new List<Marker>
             {
-                new Marker{Description = $"{DataPoint.Description}",  ShowPopup = false, X = DataPoint.Longitude, Y = DataPoint.Latitude}
+                  new Marker{Description = $"{DataPoint.Description}",  ShowPopup = false, X = DataPoint.Longitude, Y = DataPoint.Latitude,
+                                              RadiusMeters=DataPoint.RadiusMeters,IsNegative=DataPoint.IsNegative, Certainty=DataPoint.Certainty }
             };
         }
     }

@@ -26,7 +26,7 @@ namespace CroudSeek.Shared
         /// </summary>
         [MaxLength(1000)]
         public virtual string Description { get; set; }
-        [Range(-180, 180)]
+        [Range(-90, 90)]
         /// <summary>
         /// Latitude of DataPoint
         /// </summary>
@@ -34,7 +34,7 @@ namespace CroudSeek.Shared
         /// <summary>
         /// Longitude of DataPoint
         /// </summary>
-        [Range(-90, 90)]
+        [Range(-180, 180)]
         public double Longitude { get; set; }
         /// <summary>
         /// Altitude of DataPoint

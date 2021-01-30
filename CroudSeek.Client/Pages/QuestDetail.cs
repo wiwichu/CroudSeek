@@ -29,11 +29,17 @@ namespace CroudSeek.Client.Pages
             Views = new List<ViewDto>( await ViewDataService.GetAllViews(questId));
             MapMarkers = new List<Marker>();
             foreach (var dataPoint in Quest.DataPoints)
-            MapMarkers.Add(
-                new Marker{Description = $"{dataPoint.Description}",  
-                    ShowPopup = false, 
-                    X = dataPoint.Longitude, 
-                    Y = dataPoint.Latitude});
+                MapMarkers.Add(
+                     new Marker
+                     {
+                         Description = $"{dataPoint.Description}",
+                         ShowPopup = false,
+                         X = dataPoint.Longitude,
+                         Y = dataPoint.Latitude,
+                         RadiusMeters = dataPoint.RadiusMeters,
+                         IsNegative = dataPoint.IsNegative,
+                         Certainty = dataPoint.Certainty
+                     });
         }
     }
 }

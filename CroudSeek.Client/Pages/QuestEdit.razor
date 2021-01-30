@@ -46,6 +46,14 @@
                                 &nbsp;Is Private:
                             </label>
                         </div>
+                        <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
+                        <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
+                        @if (QuestDp.Id > 0)
+                        {
+                            <a class="btn btn-danger" @onclick="@DeleteQuest">
+                                Delete
+                            </a>
+                        }
                         <h2 class="sidebar-heading">Data Points</h2>
                         <table class="table">
                             <thead>
@@ -99,14 +107,6 @@
                                 }
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
-                        <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
-                        @if (QuestDp.Id > 0)
-                        {
-                            <a class="btn btn-danger" @onclick="@DeleteQuest">
-                                Delete
-                            </a>
-                        }
                     </EditForm>
                 </div>
                 <div class="col-xs-12 col-sm-4">

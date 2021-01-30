@@ -68,11 +68,11 @@ namespace CroudSeek.API.Controllers
         [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         public ActionResult<QuestDto> CreateQuest(QuestForCreationDto quest)
         {
-            if(quest.Name==quest.Description)
-            {
-                ModelState.AddModelError("Description",
-                    "Description must be different from Name.");
-            }
+            //if(quest.Name==quest.Description)
+            //{
+            //    ModelState.AddModelError("Description",
+            //        "Description must be different from Name.");
+            //}
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

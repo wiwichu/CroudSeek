@@ -97,7 +97,7 @@
             if (!elem.map) {
                 elem.map = L.map(elementId);
                 elem.map.addedMarkers = [];
-                L.tileLayer(tileUrl, { attribution: tileAttribution }).addTo(elem.map);
+                L.tileLayer(tileUrl, { attribution: tileAttribution, noWrap: true, bounds: [[-90, -180], [90, 180]]  }).addTo(elem.map);
             }
             dotNetObjectRef = dotNetObjectReference;
             var map = elem.map;

@@ -1,6 +1,7 @@
 using AutoMapper;
 using CroudSeek.API.DbContexts;
 using CroudSeek.API.Services;
+using CroudSeek.Identity;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,7 @@ namespace CourseLibrary.API
         public void ConfigureServices(IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true;
+            //services.AddIdentityServices(Configuration);
             // Add an authorization policy
             services.AddAuthorizationCore(authorizationOptions =>
             {
@@ -57,7 +59,7 @@ namespace CourseLibrary.API
             //    options.ApiName = "croudseekapi";
             //});
 
-            services.AddAuthentication("Bearer").AddJwtBearer("Bearer",
+            services.AddAuthentication("BearerCS").AddJwtBearer("BearerCS",
              options =>
              {
                  options.Authority = "https://localhost:5003";

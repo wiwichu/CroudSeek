@@ -49,6 +49,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CroudSeek.Application\CroudSeek.Application.csproj" />
+    <ProjectReference Include="..\CroudSeek.Identity\CroudSeek.Identity.csproj" />
     <ProjectReference Include="..\CroudSeek.Shared\CroudSeek.Shared.csproj" />
   </ItemGroup>
 

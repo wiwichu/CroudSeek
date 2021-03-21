@@ -1,4 +1,5 @@
-﻿using CroudSeek.Shared;
+﻿using Blazored.LocalStorage;
+using CroudSeek.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +10,31 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Client.Services
 {
-    public class ViewDataService : IViewDataService
+    public class ViewDataService : BaseDataService, IViewDataService
     {
         private readonly HttpClient _httpClient;
-        public ViewDataService(HttpClient httpClient)
+        public ViewDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage) : base(client, localStorage)
         {
-            _httpClient = httpClient;
+            _httpClient = client.HttpClient;
         }
 
         public async Task<IEnumerable<ViewDto>> GetAllViews(int questId)
         {
+            await AddBearerToken();
             return await JsonSerializer.DeserializeAsync<IEnumerable<ViewDto>>
                 (await _httpClient.GetStreamAsync($"api/quests/{questId}/views"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ViewDto> GetViewById(int questId, int viewId, bool includeUserWeights)
         {
+            await AddBearerToken();
             return await JsonSerializer.DeserializeAsync<ViewDto>
                 (await _httpClient.GetStreamAsync($"api/quests/{questId}/views/{viewId}/?includeUserWeights={includeUserWeights}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ViewDto> AddView(int questId,ViewForCreationDto view)
         {
+            //await AddBearerToken();
             var json = JsonSerializer.Serialize(view);
 
             var viewJson =
@@ -50,6 +54,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<HttpResponseMessage> UpdateView(ViewForUpdateDto view, int viewId,int questId)
         {
+            //await AddBearerToken();
             var json = JsonSerializer.Serialize(view);
 
             var viewJson =
@@ -67,6 +72,7 @@ namespace CroudSeek.Client.Services
 
         public async Task DeleteView(int questId,int viewId)
         {
+            //await AddBearerToken();
             var url = $"api/quests/{questId}/views/{viewId}";
             var result =  await _httpClient.DeleteAsync(url);
         }

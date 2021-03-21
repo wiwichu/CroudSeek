@@ -1,5 +1,5 @@
 ﻿@page "/questoverview"
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@*@attribute [Microsoft.AspNetCore.Authorization.Authorize]*@
 <h1 class="page-title">All quests</h1>
 @if (Quests == null)
 {
@@ -36,7 +36,7 @@ else
                     <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
                         <i class="fas fa-info-circle"></i>
                     </a>
-                    <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+                    <AuthorizeView >
                         <Authorized>
                             <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
                                 <i class="fas fa-edit"></i>

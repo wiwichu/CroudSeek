@@ -75,7 +75,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult<DataPointDto> CreateDataPointForQuest(
             int questId, DataPointForCreationDto dataPoint)
         {
@@ -123,7 +124,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{dataPointId}")]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
 
         public ActionResult PartiallyUpdateDataPointForQuest(int questId,
             int dataPointId,
@@ -186,7 +188,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public IActionResult DeleteDataPointForQuest(int questId, int dataPointId)
         {
             if (!_croudSeekRepository.QuestExists(questId))
@@ -219,7 +222,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public IActionResult UpdateDataPointForQuest(int questId,
             int dataPointId,
             DataPointForUpdateDto dataPoint)

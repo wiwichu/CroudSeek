@@ -37,7 +37,7 @@ namespace CourseLibrary.API
         public void ConfigureServices(IServiceCollection services)
         {
             IdentityModelEventSource.ShowPII = true;
-            //services.AddIdentityServices(Configuration);
+            services.AddIdentityServices(Configuration);
             // Add an authorization policy
             services.AddAuthorizationCore(authorizationOptions =>
             {
@@ -81,13 +81,13 @@ namespace CourseLibrary.API
 
             services.AddControllers(setupAction =>
             {
-                setupAction.Filters.Add(new AuthorizeFilter(requireAuthenticatedUserPolicy));
+                //setupAction.Filters.Add(new AuthorizeFilter(requireAuthenticatedUserPolicy));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
                 setupAction.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
                 setupAction.Filters.Add(new ProducesAttribute("application/json", "application/xml"));
                 setupAction.Filters.Add(new ConsumesAttribute("application/json"));
-                setupAction.ReturnHttpNotAcceptable = true;
+                //setupAction.ReturnHttpNotAcceptable = true;
 
                 var jsonOutputFormatter = setupAction.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>().FirstOrDefault();
 
@@ -175,7 +175,11 @@ namespace CourseLibrary.API
                 });
 
             }
-            app.UseCors("MyPolicy");
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(setupAction =>
@@ -186,9 +190,7 @@ namespace CourseLibrary.API
                 setupAction.RoutePrefix = "";
             });
 
-            app.UseRouting();
-
-            app.UseAuthentication();
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

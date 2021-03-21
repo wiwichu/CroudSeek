@@ -1,4 +1,5 @@
-﻿using CroudSeek.Shared;
+﻿using Blazored.LocalStorage;
+using CroudSeek.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +10,30 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Client.Services
 {
-    public class ZoneDataService : IZoneDataService
+    public class ZoneDataService : BaseDataService, IZoneDataService
     {
         private readonly HttpClient _httpClient;
-        public ZoneDataService(HttpClient httpClient)
+        public ZoneDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage) : base(client, localStorage)
         {
-            _httpClient = httpClient; 
+            _httpClient = client.HttpClient; 
         }
 
         public async Task<IEnumerable<ZoneDto>> GetAllZones()
         {
+            await AddBearerToken();
             return await JsonSerializer.DeserializeAsync<IEnumerable<ZoneDto>>
                 (await _httpClient.GetStreamAsync($"api/zones"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<ZoneDto> GetZoneById(int Id)
         {
+            await AddBearerToken();
             return await JsonSerializer.DeserializeAsync<ZoneDto>
                 (await _httpClient.GetStreamAsync($"api/zones/{Id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
         public async Task<ZoneDto> AddZone(ZoneForCreationDto zone)
         {
+            //await AddBearerToken();
             var json = JsonSerializer.Serialize(zone);
 
             var zoneJson =
@@ -47,10 +51,12 @@ namespace CroudSeek.Client.Services
 
         public async Task DeleteZone(int zoneId)
         {
+            //await AddBearerToken();
             await _httpClient.DeleteAsync($"api/zones/{zoneId}");
         }
         public async Task UpdateZone(ZoneForUpdateDto zone, int zoneId)
         {
+            //await AddBearerToken();
             var json = JsonSerializer.Serialize(zone);
 
             var zoneJson =

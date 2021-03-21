@@ -56,7 +56,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult<ZoneDto> CreateZone(ZoneForCreationDto zone)
         {
             if (zone.Name == zone.Description)
@@ -89,7 +90,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult<ZoneDto> UpdateZone(int zoneId, ZoneForUpdateDto zone)
         {
             if (zone.Name == zone.Description)
@@ -142,7 +144,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{zoneId}")]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult PartiallyUpdateQuest(int zoneId,
             JsonPatchDocument<ZoneForUpdateDto> patchDocument)
         {
@@ -180,7 +183,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult DeleteZone(int zoneId)
         {
             var zoneFromRepo = _croudSeekRepository.GetZone(zoneId);

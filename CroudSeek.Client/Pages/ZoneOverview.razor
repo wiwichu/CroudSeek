@@ -1,5 +1,5 @@
 ﻿@page "/zoneoverview"
-@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@*@attribute [Microsoft.AspNetCore.Authorization.Authorize]*@
 
 <h1 class="page-title">All zones</h1>
 @if (Zones == null)
@@ -25,7 +25,7 @@ else
                         <a href="@($"zonedetail/{zone.Id}")" class="btn btn-primary table-btn">
                             <i class="fas fa-info-circle"></i>
                         </a>
-                        <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+                        <AuthorizeView >
                             <Authorized>
                                 <NavLink href="@($"zoneedit/{zone.Id}")" class="btn btn-primary table-btn">
                                     <i class="fas fa-edit"></i>

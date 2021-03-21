@@ -6,9 +6,9 @@ namespace CroudSeek.Identity.Seed
 {
     public static class UserCreator
     {
-        public static async Task SeedAsync(UserManager<ApplicationUserCS> userManager)
+        public static async Task SeedAsync(UserManager<ApplicationUser> userManager)
         {
-            var applicationUser = new ApplicationUserCS
+            var applicationUser = new ApplicationUser
             {
                 FirstName = "John",
                 LastName = "Smith",

@@ -24,7 +24,7 @@ namespace CroudSeek.Identity
             services.AddDbContext<CroudSeekIdentityDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("CroudSeekIdentityConnectionString"),
                 b => b.MigrationsAssembly(typeof(CroudSeekIdentityDbContext).Assembly.FullName)));
 
-            services.AddIdentity<ApplicationUserCS, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<CroudSeekIdentityDbContext>().AddDefaultTokenProviders();
 
             services.AddTransient<IAuthenticationService, AuthenticationService>();

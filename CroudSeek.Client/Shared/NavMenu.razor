@@ -1,35 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using CroudSeek.Client.Contracts
 
-@inject IAccessTokenProvider TokenProvider
+@*@inject IAccessTokenProvider TokenProvider*@
 @inject NavigationManager Navigation
-@inject SignOutSessionStateManager SignOutManager
+@*@inject SignOutSessionStateManager SignOutManager*@
+@inject IAuthenticationService AuthenticationService
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
         <a class="navbar-brand" href="/">CroudSeek</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            @*            <span class="navbar-toggler-icon"></span>*@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <!--<li class="nav-item">-->
-@*                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All"></NavLink>*@
+                @*                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All"></NavLink>*@
                 <!--</li>-->
-                <AuthorizeView>
-                    <Authorized>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/questoverview">Quests</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/zoneoverview">Zones</NavLink>
-                        </li>
-                    </Authorized>
-                </AuthorizeView>
-                <AuthorizeView Policy="@CroudSeek.Shared.Policies.CanManageQuests">
+                @*<AuthorizeView>
+                    <Authorized>*@
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/questoverview">Quests</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/zoneoverview">Zones</NavLink>
+                </li>
+                @*</Authorized>
+                    </AuthorizeView>*@
+                <AuthorizeView >
                     <Authorized>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Quests</a>
@@ -44,15 +46,15 @@
                 </AuthorizeView>
                 <AuthorizeView>
                     <Authorized>
-                         @*<li class="nav-item">
-                            <NavLink class="nav-link" href="/viewedit">Add/Edit view</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/datapointedit">Add/Edit datapoint</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="/zoneedit">Add/Edit zone</NavLink>
-                        </li>*@
+                        @*<li class="nav-item">
+                                <NavLink class="nav-link" href="/viewedit">Add/Edit view</NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/datapointedit">Add/Edit datapoint</NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/zoneedit">Add/Edit zone</NavLink>
+                            </li>*@
                         <li class="nav-item">
                             <button class="nav-link bg-transparent text-danger"
                                     @onclick="BeginSignOut">
@@ -61,17 +63,17 @@
                         </li>
 
                         @*<li class="nav-item">
-            <button class="nav-link"
-                    @onclick="WriteToken">Write token</button>
-        </li>*@
+                                <button class="nav-link"
+                                        @onclick="WriteToken">Write token</button>
+                            </li>*@
                     </Authorized>
                     <NotAuthorized>
                         <li class="nav-item">
                             <NavLink class="nav-link"
-                                     href="authentication/login">Log in</NavLink>
+                                     href="/login">Log in</NavLink>
                         </li>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="https://localhost:5003/Identity/Account/Register">Register</NavLink>
+                            <NavLink class="nav-link" href="register">Register</NavLink>
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>
@@ -84,17 +86,18 @@
 @code{
     private async Task BeginSignOut(MouseEventArgs args)
     {
-        await SignOutManager.SetSignOutState();
-        Navigation.NavigateTo("authentication/logout");
+        //await SignOutManager.SetSignOutState();
+        //Navigation.NavigateTo("authentication/logout");
+        AuthenticationService.Logout();
     }
 
-    private async Task WriteToken()
-    {
-        var tokenResult = await TokenProvider.RequestAccessToken();
-        if (tokenResult.TryGetToken(out var token))
-        {
-            System.Diagnostics.Debug.WriteLine(token.Value);
-        }
-    }
+    //private async Task WriteToken()
+    //{
+    //    var tokenResult = await TokenProvider.RequestAccessToken();
+    //    if (tokenResult.TryGetToken(out var token))
+    //    {
+    //        System.Diagnostics.Debug.WriteLine(token.Value);
+    //    }
+    //}
 
 }

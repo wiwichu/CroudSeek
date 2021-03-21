@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
 using CroudSeek.Shared;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,21 @@ using System.Threading.Tasks;
 
 namespace CroudSeek.Client.Services
 {
-    public class QuestDataService : IQuestDataService
+    public class QuestDataService : BaseDataService, IQuestDataService
     {
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
         private readonly IDataPointDataService _dataPointService;
-        public QuestDataService(HttpClient httpClient, IMapper mapper, IDataPointDataService dataPointService)
+        public QuestDataService(HttpClient hhttpClient, IMapper mapper, IDataPointDataService dataPointService, IClient client, ILocalStorageService localStorage) : base(client, localStorage)
         {
-            _httpClient = httpClient;
+            _httpClient = client.HttpClient;
             _mapper = mapper;
             _dataPointService = dataPointService;
         }
         public async Task<QuestDto> AddQuest(QuestForCreationDto quest)
         {
+            //await AddBearerToken();
+
             var json = JsonSerializer.Serialize(quest);
 
             var questJson =
@@ -40,17 +43,20 @@ namespace CroudSeek.Client.Services
 
         public async Task DeleteQuest(int questId)
         {
-                await _httpClient.DeleteAsync($"api/quests/{questId}");
+            //await AddBearerToken();
+            await _httpClient.DeleteAsync($"api/quests/{questId}");
         }
 
         public async Task<IEnumerable<QuestDto>> GetAllQuests()
         {
+            await AddBearerToken();
             return await JsonSerializer.DeserializeAsync<IEnumerable<QuestDto>>
                 (await _httpClient.GetStreamAsync($"api/quests"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<QuestWithDataPointsDto> GetQuestDetails(int questId)
         {
+            await AddBearerToken();
             var quest = await JsonSerializer.DeserializeAsync<QuestDto>
                 (await _httpClient.GetStreamAsync($"api/quests/{questId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
@@ -64,6 +70,7 @@ namespace CroudSeek.Client.Services
 
         public async Task UpdateQuest(QuestForUpdateDto quest,int questId)
         {
+            //await AddBearerToken();
             var json = JsonSerializer.Serialize(quest);
 
             var questJson =

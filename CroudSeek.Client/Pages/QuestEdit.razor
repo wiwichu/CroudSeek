@@ -1,7 +1,6 @@
 ﻿@page "/questedit"
 @page "/questedit/{QuestId}"
-@attribute [Microsoft.AspNetCore.Authorization.Authorize
-   (Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <section class="quest-edit">
     <AddDataPointDialog @ref="AddDataPointDialog" CloseEventCallback="@AddDataPointDialog_OnDialogClose"></AddDataPointDialog>

@@ -11,6 +11,11 @@ using CroudSeek.Client.Services;
 using AutoMapper;
 using CroudSeek.Client.MessageHandlers;
 using Microsoft.IdentityModel.Logging;
+using CroudSeek.Client.Contracts;
+using CroudSeek.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
+using CroudSeek.Client.Auth;
+using Blazored.LocalStorage;
 
 namespace CroudSeek.Client
 {
@@ -22,15 +27,16 @@ namespace CroudSeek.Client
             builder.RootComponents.Add<App>("#app");
             IdentityModelEventSource.ShowPII = true;
 
-            builder.Services
-                .AddTransient<CroudSeekApiAuthorizationMessageHandler>();
+            //builder.Services
+            //    .AddTransient<CroudSeekApiAuthorizationMessageHandler>();
 
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                builder.Configuration.Bind("OidcConfiguration", options.ProviderOptions);
-                options.ProviderOptions.DefaultScopes.Add("croudseekapi");
+            //builder.Services.AddOidcAuthentication(options =>
+            //{
+            //    builder.Configuration.Bind("OidcConfiguration", options.ProviderOptions);
+            //    options.ProviderOptions.DefaultScopes.Add("croudseekapi");
 
-            });
+            //});
+            builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddAuthorizationCore(authorizationOptions =>
             {
                 authorizationOptions.AddPolicy(
@@ -38,6 +44,8 @@ namespace CroudSeek.Client
                     CroudSeek.Shared.Policies.CanManageQuestsPolicy());
             });
 
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            _ = builder.Services.AddHttpClient<IClient, CroudSeek.Client.Services.Client>(client => client.BaseAddress = new Uri("https://localhost:44367"));
 
             builder.Services.AddHttpClient<IQuestDataService, QuestDataService>(
                  client =>
@@ -45,29 +53,35 @@ namespace CroudSeek.Client
                      client.BaseAddress = new Uri("https://localhost:44367");
                  }
                  )
-                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
+                //.AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>()
+                ;
             builder.Services.AddHttpClient<IZoneDataService, ZoneDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
-                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
+                //.AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>()
+                ;
             builder.Services.AddHttpClient<IDataPointDataService, DataPointDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
-                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
+                //.AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>()
+                ;
             builder.Services.AddHttpClient<IViewDataService, ViewDataService>(
                 client =>
                 {
                     client.BaseAddress = new Uri("https://localhost:44367");
                 }
                 )
-                .AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>();
+                //.AddHttpMessageHandler<CroudSeekApiAuthorizationMessageHandler>()
+                ;
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
             await builder.Build().RunAsync();
         }
     }

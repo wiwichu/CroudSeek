@@ -72,7 +72,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult<ViewDto> CreateViewForQuest(int questId,ViewForCreationDto view)
         {
             if (!_croudSeekRepository.QuestExists(questId))
@@ -117,7 +118,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult<ViewDto> UpdateViewForQuest(int questId,int viewId, ViewForUpdateDto view)
         {
             if (!_croudSeekRepository.QuestExists(questId))
@@ -178,7 +180,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{viewId}")]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult PartiallyUpdateView(int viewId,
             JsonPatchDocument<ViewForUpdateDto> patchDocument)
         {
@@ -229,7 +232,8 @@ namespace CroudSeek.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        [Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+        [Authorize]
         public ActionResult DeleteViewForQuest(int questId,int viewId)
         {
             var viewFromRepo = _croudSeekRepository.GetViewByQuest(questId,viewId,true);

@@ -1,7 +1,6 @@
 ﻿@page "/zoneedit"
 @page "/zoneedit/{ZoneId}"
-@attribute [Microsoft.AspNetCore.Authorization.Authorize
-(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 <section class="zone-edit">
     @if (!Saved)
     {

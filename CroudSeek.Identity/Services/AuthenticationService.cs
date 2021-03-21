@@ -16,13 +16,13 @@ namespace CroudSeek.Identity.Services
 {
     public class AuthenticationService: IAuthenticationService
     {
-        private readonly UserManager<ApplicationUserCS> _userManager;
-        private readonly SignInManager<ApplicationUserCS> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly JwtSettings _jwtSettings;
 
-        public AuthenticationService(UserManager<ApplicationUserCS> userManager,
+        public AuthenticationService(UserManager<ApplicationUser> userManager,
             IOptions<JwtSettings> jwtSettings,
-            SignInManager<ApplicationUserCS> signInManager)
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings.Value;
@@ -67,7 +67,7 @@ namespace CroudSeek.Identity.Services
                 throw new Exception($"Username '{request.UserName}' already exists.");
             }
 
-            var user = new ApplicationUserCS
+            var user = new ApplicationUser
             {
                 Email = request.Email,
                 FirstName = request.FirstName,
@@ -84,6 +84,18 @@ namespace CroudSeek.Identity.Services
 
                 if (result.Succeeded)
                 {
+                    result = _userManager.AddClaimsAsync(user, new Claim[]{
+                                new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+                                new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
+                                new Claim("subscriptionlevel", "PayingUser")
+                            }).Result;
+
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
                     return new RegistrationResponse() { UserId = user.Id };
                 }
                 else
@@ -97,7 +109,7 @@ namespace CroudSeek.Identity.Services
             }
         }
 
-        private async Task<JwtSecurityToken> GenerateToken(ApplicationUserCS user)
+        private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);

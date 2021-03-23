@@ -344,7 +344,7 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest1 Possible Sighting",
                     OwnerId = 1,
                     QuestId = 1,
-                    RadiusMeters = 0,
+                    RadiusMeters = 1,
                     TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now
@@ -415,7 +415,7 @@ namespace CroudSeek.API.DbContexts
                     Name = "Quest2 Possible Sighting",
                     OwnerId = 2,
                     QuestId = 2,
-                    RadiusMeters = 0,
+                    RadiusMeters = 1,
                     TimeStamp = DateTimeOffset.Now,
                     CreateTime = DateTimeOffset.Now,
                     UpdateTime = DateTimeOffset.Now

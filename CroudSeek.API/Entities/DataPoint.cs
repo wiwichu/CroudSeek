@@ -21,7 +21,7 @@ namespace CroudSeek.API.Entities
         public double Longitude { get; set; }
         public double Altitude { get; set; }
         //How big the circle around this point is.
-        public double RadiusMeters { get; set; }
+        public double RadiusMeters { get; set; } = 1;
         //Arbitrary number indicating the level of certainty on this datapoint
         public double Certainty { get; set; }
         //Whether this DataPoint indicates the Quest is not found here.

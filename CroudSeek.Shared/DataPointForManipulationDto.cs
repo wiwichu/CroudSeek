@@ -44,7 +44,7 @@ namespace CroudSeek.Shared
         /// How big the circle around this point is.
         /// </summary>
         [Range(1, Double.PositiveInfinity)]
-        public double RadiusMeters { get; set; }
+        public double RadiusMeters { get; set; } = 1;
         /// <summary>
         /// Arbitrary number indicating the level of certainty on this datapoint
         /// </summary>

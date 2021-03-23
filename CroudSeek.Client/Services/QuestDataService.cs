@@ -24,7 +24,7 @@ namespace CroudSeek.Client.Services
         }
         public async Task<QuestDto> AddQuest(QuestForCreationDto quest)
         {
-            //await AddBearerToken();
+            await AddBearerToken();
 
             var json = JsonSerializer.Serialize(quest);
 
@@ -43,7 +43,7 @@ namespace CroudSeek.Client.Services
 
         public async Task DeleteQuest(int questId)
         {
-            //await AddBearerToken();
+            await AddBearerToken();
             await _httpClient.DeleteAsync($"api/quests/{questId}");
         }
 
@@ -70,7 +70,7 @@ namespace CroudSeek.Client.Services
 
         public async Task UpdateQuest(QuestForUpdateDto quest,int questId)
         {
-            //await AddBearerToken();
+            await AddBearerToken();
             var json = JsonSerializer.Serialize(quest);
 
             var questJson =

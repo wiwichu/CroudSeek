@@ -31,7 +31,7 @@ namespace CroudSeek.Shared
         /// <summary>
         /// Radius of DataPoint in Meters
         /// </summary>
-        public double RadiusMeters { get; set; }
+        public double RadiusMeters { get; set; } = 1;
         /// <summary>
         /// Certainty of Observation
         /// </summary>

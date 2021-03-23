@@ -15,6 +15,7 @@ namespace CroudSeek.Shared
         public string Name { get; set; }
         [MaxLength(1000)]
         public string Description { get; set; }
+        public string TagsCSV { get; set; }
         //Whether Quest can be viewed by other Users
         public bool IsPrivate { get; set; }
         public ICollection<DataPointForCreationDto> DataPoints { get; set; }

@@ -19,6 +19,8 @@ namespace CroudSeek.API.Entities
         public string Name { get; set; }
         [MaxLength(1000)]
         public string Description { get; set; }
+        //A comma separated list of arbitrary strings used in searching.
+        public string TagsCSV { get; set; }
         //Whether Quest can be viewed by other Users
         public bool IsPrivate { get; set; }
         public ICollection<DataPoint> DataPoints { get; set; }

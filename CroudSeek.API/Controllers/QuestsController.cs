@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CroudSeek.API.Controllers
 {
@@ -80,6 +81,7 @@ namespace CroudSeek.API.Controllers
             }
 
             var questEntity = _mapper.Map<Entities.Quest>(quest);
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             _croudSeekRepository.AddQuest(questEntity);
             _croudSeekRepository.Save();
 

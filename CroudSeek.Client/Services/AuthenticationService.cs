@@ -27,7 +27,7 @@ namespace CroudSeek.Client.Services
                 if (authenticationResponse.Token != string.Empty)
                 {
                     await _localStorage.SetItemAsync("token", authenticationResponse.Token);
-                    ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(email);
+                    ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(authenticationResponse.UserName);
                     _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", authenticationResponse.Token);
                     return true;
                 }

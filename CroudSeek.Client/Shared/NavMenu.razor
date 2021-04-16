@@ -58,7 +58,7 @@
                         <li class="nav-item">
                             <button class="nav-link bg-transparent text-danger"
                                     @onclick="BeginSignOut">
-                                <span class="oi oi-list-rich" aria-hidden="true"></span>Log out (@context.User.Identity.Name)
+                                <span class="oi oi-list-rich" aria-hidden="true"></span>Log out (@(context.User.Claims.Where((c)=> c.Type=="sub").Select((c)=> $"{c.Value}").FirstOrDefault() ?? "NO NAME"))
                             </button>
                         </li>
 

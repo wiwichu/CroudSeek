@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace CourseLibrary.API
+namespace CroudSeek.API
 {
     public class Program
     {

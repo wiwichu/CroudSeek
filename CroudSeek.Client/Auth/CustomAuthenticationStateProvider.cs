@@ -27,7 +27,8 @@ namespace CroudSeek.Client.Auth
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseTokenClaims(savedToken), "jwt")));
+            var authState= new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseTokenClaims(savedToken), "jwt")));
+            return authState;
         }
 
         public void SetUserAuthenticated(string email)

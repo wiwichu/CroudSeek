@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CroudSeek.API.Controllers
 {
@@ -54,6 +55,9 @@ namespace CroudSeek.API.Controllers
         }
 
         [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public IActionResult CreateApplicationUserProfile(
             [FromBody] ApplicationUserProfileForCreation applicationUserProfileForCreation)
         {

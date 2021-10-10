@@ -9,5 +9,8 @@ namespace CroudSeek.Identity
         public CroudSeekIdentityDbContext(DbContextOptions<CroudSeekIdentityDbContext> options) : base(options)
         {
         }
+        //public CroudSeekIdentityDbContext() : base()
+        //{
+        //}
     }
 }

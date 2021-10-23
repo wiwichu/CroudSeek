@@ -56,6 +56,9 @@ namespace CroudSeek.API.Controllers
         [ProducesDefaultResponseType]
         public IActionResult GetQuest(int questId)
         {
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
+
             var questFromRepo = _croudSeekRepository.GetQuest(questId);
 
             if (questFromRepo == null)
@@ -63,7 +66,12 @@ namespace CroudSeek.API.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<QuestDto>(questFromRepo));
+            var questDto = _mapper.Map<QuestDto>(questFromRepo);
+
+            var questUserEntity = _croudSeekRepository.GetUser(questDto.OwnerId);
+            questDto.CanEdit = questUserEntity?.Name == user;
+
+            return Ok(questDto);
         }
         /// <summary>
         /// Create a Quest
@@ -113,6 +121,7 @@ namespace CroudSeek.API.Controllers
         [HttpPut("{questId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
         //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
@@ -128,7 +137,6 @@ namespace CroudSeek.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var questFromRepo = _croudSeekRepository.GetQuest(questId);
 
             if (questFromRepo == null)
@@ -143,6 +151,16 @@ namespace CroudSeek.API.Controllers
                 //    new { questId = questToReturn.Id },
                 //    questToReturn);
             }
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
+
+            var questUserEntity = _croudSeekRepository.GetUser(questFromRepo.OwnerId);
+            
+            if(questUserEntity?.Name != user)
+            {
+                return Unauthorized();
+            }
+
             _mapper.Map(quest, questFromRepo);
 
             //Only update quest, not datapoints
@@ -177,6 +195,7 @@ namespace CroudSeek.API.Controllers
         /// </remarks>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Consumes("application/json-patch+json")]
         [HttpPatch("{questId}")]
         //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
@@ -190,6 +209,15 @@ namespace CroudSeek.API.Controllers
             if (questFromRepo == null)
             {
                 return NotFound();
+            }
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
+
+            var questUserEntity = _croudSeekRepository.GetUser(questFromRepo.OwnerId);
+
+            if (questUserEntity?.Name != user)
+            {
+                return Unauthorized();
             }
 
             var questToPatch = _mapper.Map<QuestForUpdateDto>(questFromRepo);
@@ -217,6 +245,7 @@ namespace CroudSeek.API.Controllers
         [HttpDelete("{questId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
         //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
         [Authorize]
@@ -227,6 +256,15 @@ namespace CroudSeek.API.Controllers
             if (questFromRepo == null)
             {
                 return NotFound();
+            }
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
+
+            var questUserEntity = _croudSeekRepository.GetUser(questFromRepo.OwnerId);
+
+            if (questUserEntity?.Name != user)
+            {
+                return Unauthorized();
             }
             foreach (var datapoint in questFromRepo.DataPoints)
             {

@@ -23,8 +23,10 @@ namespace CroudSeek.API
                     var csContext = scope.ServiceProvider.GetService<CroudSeekContext>();
                     // for demo purposes, delete the database & migrate on startup so 
                     // we can start with a clean slate
-                    csContext.Database.EnsureDeleted();
-                    csContext.Database.EnsureCreated();
+
+                    //csContext.Database.EnsureDeleted();
+                    //csContext.Database.EnsureCreated();
+
                     //csContext.Database.Migrate();
                 }
                 catch (Exception ex)

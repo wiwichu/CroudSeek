@@ -38,9 +38,12 @@ else
                     </a>
                     <AuthorizeView >
                         <Authorized>
-                            <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
-                                <i class="fas fa-edit"></i>
-                            </NavLink>
+                            @if (quest.CanEdit)
+                            {
+                                <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
+                                    <i class="fas fa-edit"></i>
+                                </NavLink>
+                            }
                         </Authorized>
                     </AuthorizeView>
                 </td>

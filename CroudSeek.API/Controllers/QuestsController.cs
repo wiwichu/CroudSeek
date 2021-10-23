@@ -34,8 +34,16 @@ namespace CroudSeek.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<QuestDto>> GetQuests()
         {
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
             var questsFromRepo = _croudSeekRepository.GetQuests();
-            return Ok(_mapper.Map <IEnumerable<QuestDto>>(questsFromRepo));
+            var questDtos = _mapper.Map<IEnumerable<QuestDto>>(questsFromRepo).Select((q)=>
+            {
+                var questUserEntity = _croudSeekRepository.GetUser(q.OwnerId);
+                q.CanEdit = questUserEntity?.Name == user;
+                return q;
+            });
+            return  Ok(questDtos);
         }
         /// <summary>
         /// Get a Quest by Id
@@ -82,10 +90,16 @@ namespace CroudSeek.API.Controllers
 
             var questEntity = _mapper.Map<Entities.Quest>(quest);
             var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
+            if (userEntity != null)
+            {
+                questEntity.OwnerId = userEntity.Id;
+            }
             _croudSeekRepository.AddQuest(questEntity);
             _croudSeekRepository.Save();
 
             var questToReturn = _mapper.Map<QuestDto>(questEntity);
+            questToReturn.CanEdit = true;
             return CreatedAtRoute("GetQuest",
                 new { questId = questToReturn.Id },
                 questToReturn);

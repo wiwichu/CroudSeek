@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CroudSeek.API.Controllers
 {
@@ -71,6 +72,7 @@ namespace CroudSeek.API.Controllers
         /// <param name="dataPoint">DataPoint details</param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Consumes("application/json")]
@@ -87,6 +89,13 @@ namespace CroudSeek.API.Controllers
 
             var dataPointEntity = _mapper.Map<Entities.DataPoint>(dataPoint);
             dataPointEntity.QuestId = questId;
+            var userName = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = _croudSeekRepository.GetUsers().Where((u) => u.Name == userName).FirstOrDefault();
+            if (user == null)
+            {
+                return ValidationProblem($"Invalid user: {userName}");
+            }
+            dataPointEntity.OwnerId = user.Id;
             _croudSeekRepository.AddDataPoint(questId, dataPointEntity);
             _croudSeekRepository.Save();
 

@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using CroudSeek.Client.Auth;
 using CroudSeek.Client.Contracts;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Net.Http.Headers;
@@ -12,7 +13,7 @@ namespace CroudSeek.Client.Services
     {
         private readonly AuthenticationStateProvider _authenticationStateProvider;
 
-        public AuthenticationService(IClient client, ILocalStorageService localStorage, AuthenticationStateProvider authenticationStateProvider) : base(client, localStorage)
+        public AuthenticationService(IClient client, ILocalStorageService localStorage, AuthenticationStateProvider authenticationStateProvider, NavigationManager navigation) : base(client, localStorage,navigation)
         {
             _authenticationStateProvider = authenticationStateProvider;
         }
@@ -27,6 +28,7 @@ namespace CroudSeek.Client.Services
                 if (authenticationResponse.Token != string.Empty)
                 {
                     await _localStorage.SetItemAsync("token", authenticationResponse.Token);
+                    await _localStorage.SetItemAsync("expiry", authenticationResponse.Expiry);
                     ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(authenticationResponse.UserName);
                     _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", authenticationResponse.Token);
                     return true;

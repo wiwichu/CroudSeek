@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using CroudSeek.Shared;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +14,29 @@ namespace CroudSeek.Client.Services
     public class ZoneDataService : BaseDataService, IZoneDataService
     {
         private readonly HttpClient _httpClient;
-        public ZoneDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage) : base(client, localStorage)
+        public ZoneDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage,navigation)
         {
             _httpClient = client.HttpClient; 
         }
 
         public async Task<IEnumerable<ZoneDto>> GetAllZones()
         {
-            await AddBearerToken();
-            return await JsonSerializer.DeserializeAsync<IEnumerable<ZoneDto>>
-                (await _httpClient.GetStreamAsync($"api/zones"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            if (await AddBearerToken())
+            {
+                return await JsonSerializer.DeserializeAsync<IEnumerable<ZoneDto>>
+                    (await _httpClient.GetStreamAsync($"api/zones"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            return null;
         }
 
         public async Task<ZoneDto> GetZoneById(int Id)
         {
-            await AddBearerToken();
-            return await JsonSerializer.DeserializeAsync<ZoneDto>
-                (await _httpClient.GetStreamAsync($"api/zones/{Id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            if (await AddBearerToken())
+            {
+                return await JsonSerializer.DeserializeAsync<ZoneDto>
+                    (await _httpClient.GetStreamAsync($"api/zones/{Id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
+            return null;
         }
         public async Task<ZoneDto> AddZone(ZoneForCreationDto zone)
         {

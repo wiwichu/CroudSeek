@@ -52,7 +52,8 @@ namespace CroudSeek.Identity.Services
                 Id = user.Id,
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Email = user.Email,
-                UserName = user.UserName
+                UserName = user.UserName,
+                Expiry = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes)
             };
             
             return response;

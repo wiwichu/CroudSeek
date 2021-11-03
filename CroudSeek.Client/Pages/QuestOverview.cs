@@ -19,8 +19,8 @@ namespace CroudSeek.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Quests = (await QuestDataService.GetAllQuests()).ToList();
-            Zones = (await ZoneDataService.GetAllZones()).ToList();
+            Quests = (await QuestDataService.GetAllQuests())?.ToList();
+            Zones = (await ZoneDataService.GetAllZones())?.ToList();
         }
     }
 }

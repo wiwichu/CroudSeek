@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
 using CroudSeek.Shared;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace CroudSeek.Client.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
-        public DataPointDataService(HttpClient httpClient, IMapper mapper, IClient client, ILocalStorageService localStorage) : base(client, localStorage)
+        public DataPointDataService(HttpClient httpClient, IMapper mapper, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage, navigation)
         {
             //_httpClient = httpClient;
             _httpClient = client.HttpClient;
@@ -24,23 +25,24 @@ namespace CroudSeek.Client.Services
 
         public async Task<DataPointDto> CreateDataPointForQuest(int questId, DataPointForCreationDto dataPoint)
         {
-            await AddBearerToken();
-            var json = JsonSerializer.Serialize(dataPoint);
-
-            var dpJson = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var url = _httpClient.BaseAddress + "api/quests/3​/views";
-
-            var uri = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/datapoints");
-
-
-            var response = await _httpClient.PostAsync($"api/quests/{questId}/datapoints", dpJson);
-
-            if (response.IsSuccessStatusCode)
+            if (await AddBearerToken())
             {
-                return await JsonSerializer.DeserializeAsync<DataPointDto>(await response.Content.ReadAsStreamAsync());
-            }
+                var json = JsonSerializer.Serialize(dataPoint);
 
+                var dpJson = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var url = _httpClient.BaseAddress + "api/quests/3​/views";
+
+                var uri = new Uri(_httpClient.BaseAddress + $"api/quests/{questId}/datapoints");
+
+
+                var response = await _httpClient.PostAsync($"api/quests/{questId}/datapoints", dpJson);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await JsonSerializer.DeserializeAsync<DataPointDto>(await response.Content.ReadAsStreamAsync());
+                }
+            }
             return null;
         }
 
@@ -52,20 +54,26 @@ namespace CroudSeek.Client.Services
 
         public async Task<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)
         {
-            await AddBearerToken();
-            var dataPoint = await JsonSerializer.DeserializeAsync<DataPointDto>
-                (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints/{dataPointId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            if (await AddBearerToken())
+            {
+                var dataPoint = await JsonSerializer.DeserializeAsync<DataPointDto>
+                    (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints/{dataPointId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            return dataPoint;
+                return dataPoint;
+            }
+            return null;
         }
 
         public async Task<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
         {
-            await AddBearerToken();
-            var dataPoints = await JsonSerializer.DeserializeAsync<IEnumerable<DataPointDto>>
-                (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            if (await AddBearerToken())
+            {
+                var dataPoints = await JsonSerializer.DeserializeAsync<IEnumerable<DataPointDto>>
+                    (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
 
-            return dataPoints;
+                return dataPoints;
+            }
+            return null;
         }
 
         public async Task UpdateDataPointForQuest(int questId, int dataPointId, DataPointForUpdateDto dataPoint)

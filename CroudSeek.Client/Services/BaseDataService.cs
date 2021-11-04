@@ -35,7 +35,7 @@ namespace CroudSeek.Client.Services
             }
         }
 
-        protected async Task<bool> AddBearerToken()
+        protected async Task<bool> AddBearerToken(bool ignoreExpired=false)
         {
             if (await _localStorage.ContainKeyAsync("expiry"))
             {
@@ -43,6 +43,10 @@ namespace CroudSeek.Client.Services
                 var expiry = DateTime.Parse(expiration);
                 if (DateTime.Now > expiry)
                 {
+                    if (ignoreExpired)
+                    {
+                        return true;
+                    }
                     _navigation.NavigateTo("login");
                     return false;
                 }

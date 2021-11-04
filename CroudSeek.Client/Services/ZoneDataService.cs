@@ -21,7 +21,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<IEnumerable<ZoneDto>> GetAllZones()
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 return await JsonSerializer.DeserializeAsync<IEnumerable<ZoneDto>>
                     (await _httpClient.GetStreamAsync($"api/zones"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

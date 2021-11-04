@@ -52,7 +52,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<IEnumerable<QuestDto>> GetAllQuests()
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 return await JsonSerializer.DeserializeAsync<IEnumerable<QuestDto>>
                     (await _httpClient.GetStreamAsync($"api/quests"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using CroudSeek.Client.Contracts;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Net.Http.Headers;
@@ -11,12 +12,14 @@ namespace CroudSeek.Client.Services
         protected readonly ILocalStorageService _localStorage;
         NavigationManager _navigation;
         protected IClient _client;
+        private IAuthenticationService _authenticationService;
 
-        public BaseDataService(IClient client, ILocalStorageService localStorage, NavigationManager navigation)
+        public BaseDataService(IClient client, ILocalStorageService localStorage, NavigationManager navigation,IAuthenticationService authenticationService)
         {
             _client = client;
             _localStorage = localStorage;
             _navigation = navigation;
+            _authenticationService = authenticationService;
         }
 
         protected ApiResponse<Guid> ConvertApiExceptions<Guid>(ApiException ex)
@@ -43,6 +46,7 @@ namespace CroudSeek.Client.Services
                 var expiry = DateTime.Parse(expiration);
                 if (DateTime.Now > expiry)
                 {
+                    await _authenticationService?.Logout();
                     if (ignoreExpired)
                     {
                         return true;

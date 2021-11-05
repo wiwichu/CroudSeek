@@ -16,7 +16,9 @@ namespace CroudSeek.Client.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
-        public DataPointDataService(HttpClient httpClient, IMapper mapper, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage, navigation)
+        public DataPointDataService(HttpClient httpClient, IMapper mapper, IClient client, ILocalStorageService localStorage, NavigationManager navigation
+            , CroudSeek.Client.Contracts.IAuthenticationService authenticationService) 
+            : base(client, localStorage, navigation, authenticationService)
         {
             //_httpClient = httpClient;
             _httpClient = client.HttpClient;

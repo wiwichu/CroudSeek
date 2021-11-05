@@ -13,7 +13,11 @@ namespace CroudSeek.Client.Services
     {
         private readonly AuthenticationStateProvider _authenticationStateProvider;
 
-        public AuthenticationService(IClient client, ILocalStorageService localStorage, AuthenticationStateProvider authenticationStateProvider, NavigationManager navigation) : base(client, localStorage,navigation)
+        public AuthenticationService(IClient client, 
+            ILocalStorageService localStorage, 
+            
+            AuthenticationStateProvider authenticationStateProvider, NavigationManager navigation
+            ) : base(client, localStorage, navigation, null)
         {
             _authenticationStateProvider = authenticationStateProvider;
         }

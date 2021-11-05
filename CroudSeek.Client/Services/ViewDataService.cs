@@ -14,7 +14,8 @@ namespace CroudSeek.Client.Services
     public class ViewDataService : BaseDataService, IViewDataService
     {
         private readonly HttpClient _httpClient;
-        public ViewDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage, navigation)
+        public ViewDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage, NavigationManager navigation
+            , CroudSeek.Client.Contracts.IAuthenticationService authenticationService) : base(client, localStorage, navigation, authenticationService)
         {
             _httpClient = client.HttpClient;
         }

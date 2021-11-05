@@ -36,7 +36,7 @@ namespace CroudSeek.API.Controllers
         {
             var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
-            var questsFromRepo = _croudSeekRepository.GetQuests();
+            var questsFromRepo = _croudSeekRepository.GetQuests().Where(q=>q.OwnerId==userEntity?.Id || !q.IsPrivate);
             var questDtos = _mapper.Map<IEnumerable<QuestDto>>(questsFromRepo).Select((q)=>
             {
                 var questUserEntity = _croudSeekRepository.GetUser(q.OwnerId);

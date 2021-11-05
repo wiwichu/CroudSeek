@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
+using CroudSeek.Client.Contracts;
 using CroudSeek.Shared;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -17,7 +18,13 @@ namespace CroudSeek.Client.Services
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
         private readonly IDataPointDataService _dataPointService;
-        public QuestDataService(HttpClient hhttpClient, IMapper mapper, IDataPointDataService dataPointService, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage, navigation)
+        public QuestDataService(HttpClient hhttpClient, 
+            IMapper mapper, 
+            IDataPointDataService dataPointService, 
+            IClient client, 
+            ILocalStorageService localStorage, 
+            NavigationManager navigation,
+            IAuthenticationService authenticationService) : base(client, localStorage, navigation,authenticationService)
         {
             _httpClient = client.HttpClient;
             _mapper = mapper;

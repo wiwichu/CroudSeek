@@ -14,7 +14,8 @@ namespace CroudSeek.Client.Services
     public class ZoneDataService : BaseDataService, IZoneDataService
     {
         private readonly HttpClient _httpClient;
-        public ZoneDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage, NavigationManager navigation) : base(client, localStorage,navigation)
+        public ZoneDataService(HttpClient httpClient, IClient client, ILocalStorageService localStorage, NavigationManager navigation
+            , CroudSeek.Client.Contracts.IAuthenticationService authenticationService) : base(client, localStorage, navigation, authenticationService)
         {
             _httpClient = client.HttpClient; 
         }

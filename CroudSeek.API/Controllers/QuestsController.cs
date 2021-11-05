@@ -53,6 +53,7 @@ namespace CroudSeek.API.Controllers
         [HttpGet("{questId}", Name = "GetQuest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
         public IActionResult GetQuest(int questId)
         {
@@ -64,6 +65,10 @@ namespace CroudSeek.API.Controllers
             if (questFromRepo == null)
             {
                 return NotFound();
+            }
+            if (!(questFromRepo.OwnerId == userEntity?.Id || !questFromRepo.IsPrivate))
+            {
+                return Unauthorized();
             }
 
             var questDto = _mapper.Map<QuestDto>(questFromRepo);

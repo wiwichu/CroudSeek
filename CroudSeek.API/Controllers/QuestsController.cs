@@ -39,8 +39,9 @@ namespace CroudSeek.API.Controllers
             var questsFromRepo = _croudSeekRepository.GetQuests().Where(q=>q.OwnerId==userEntity?.Id || !q.IsPrivate);
             var questDtos = _mapper.Map<IEnumerable<QuestDto>>(questsFromRepo).Select((q)=>
             {
+                q.CanEdit = true;
                 var questUserEntity = _croudSeekRepository.GetUser(q.OwnerId);
-                q.CanEdit = questUserEntity?.Name == user;
+                q.IsOwner = questUserEntity?.Name == user;
                 return q;
             });
             return  Ok(questDtos);
@@ -74,7 +75,8 @@ namespace CroudSeek.API.Controllers
             var questDto = _mapper.Map<QuestDto>(questFromRepo);
 
             var questUserEntity = _croudSeekRepository.GetUser(questDto.OwnerId);
-            questDto.CanEdit = questUserEntity?.Name == user;
+            questDto.CanEdit = true;
+            questDto.IsOwner = questUserEntity?.Name == user;
 
             return Ok(questDto);
         }
@@ -113,6 +115,7 @@ namespace CroudSeek.API.Controllers
 
             var questToReturn = _mapper.Map<QuestDto>(questEntity);
             questToReturn.CanEdit = true;
+            questToReturn.IsOwner = true;
             return CreatedAtRoute("GetQuest",
                 new { questId = questToReturn.Id },
                 questToReturn);

@@ -41,9 +41,17 @@ namespace CroudSeek.API.Controllers
             {
                 return NotFound();
             }
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
 
-            var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPointsByQuest(questId);
-            return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo));
+            var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPointsByQuest(questId).Where(dp => dp.OwnerId == userEntity?.Id || !dp.IsPrivate);
+            return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo).Select((dp) =>
+            {
+                var dpEntity = _croudSeekRepository.GetUser(dp.OwnerId);
+                dp.CanEdit = dpEntity?.Name == user;
+                dp.IsOwner = dpEntity?.Name == user;
+                return dp;
+            }));
         }
 
         //[HttpGet()]
@@ -71,7 +79,6 @@ namespace CroudSeek.API.Controllers
         /// <param name="questId">Id of quest for which datapoint will be created</param>
         /// <param name="dataPoint">DataPoint details</param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -295,8 +302,16 @@ namespace CroudSeek.API.Controllers
             {
                 return NotFound();
             }
+            var user = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
 
-            return Ok(_mapper.Map<DataPointDto>(dataPointForQuestFromRepo));
+            var dp = _mapper.Map<DataPointDto>(dataPointForQuestFromRepo);
+
+            var dpEntity = _croudSeekRepository.GetUser(dp.OwnerId);
+            dp.CanEdit = dpEntity?.Name == user;
+            dp.IsOwner = dpEntity?.Name == user;
+
+            return Ok(dp);
         }
 
     }

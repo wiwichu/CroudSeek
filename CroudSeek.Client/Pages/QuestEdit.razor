@@ -16,19 +16,19 @@
                         <DataAnnotationsValidator />
                         <ValidationSummary />
 
-                        <div class="form-group row">
+                        <div class="form-group row" >
                             <label for="name" class="col-sm-3">Name: </label>
-                            <InputText id="name" class="form-control col-sm-8" @bind-Value="@Quest.Name" placeholder="Enter Name" @ref="NameInputText"></InputText>
+                            <InputText id="name" disabled="@IsReadOnly" class="form-control col-sm-8" @bind-Value="@Quest.Name" placeholder="Enter Name" @ref="NameInputText" ></InputText>
                             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Quest.Name)" />
                         </div>
                         <div class="form-group row">
                             <label for="description" class="col-sm-3">Description: </label>
-                            <InputText id="description" class="form-control col-sm-8" @bind-Value="@Quest.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
+                            <InputText id="description" disabled="@IsReadOnly" class="form-control col-sm-8" @bind-Value="@Quest.Description" placeholder="Enter Description" @ref="DescriptionInputText"></InputText>
                             <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Quest.Description)" />
                         </div>
                         <div class="form-group row">
                             <label for="zone" class="col-sm-3">Zone: </label>
-                            <InputSelect id="zone" class="form-control col-sm-8" @bind-Value="@ZoneId">
+                            <InputSelect id="zone" disabled="@IsReadOnly" class="form-control col-sm-8" @bind-Value="@ZoneId">
                                 @foreach (var zone in Zones)
                                     {
                                     <option value="@zone.Id">@zone.Name</option>
@@ -41,13 +41,16 @@
                         </div>
                         <div class="form-group row">
                             <label for="isPrivate" class="offset-sm-3">
-                                <InputCheckbox id="isPrivate" @bind-Value="@Quest.IsPrivate"></InputCheckbox>
+                                <InputCheckbox id="isPrivate"  disabled="@IsReadOnly" @bind-Value="@Quest.IsPrivate"></InputCheckbox>
                                 &nbsp;Is Private:
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
+                        @if (!IsReadOnly)
+                        {
+                            <button type="submit" class="btn btn-primary edit-btn">Save quest</button>
+                        }
                         <a class="btn btn-outline-primary edit-outline-btn" @onclick="@NavigateToOverview">Cancel</a>
-                        @if (QuestDp.Id > 0)
+                        @if (QuestDp.Id > 0 && !IsReadOnly)
                         {
                             <a class="btn btn-danger" @onclick="@DeleteQuest">
                                 Delete
@@ -71,9 +74,12 @@
                                             <NavLink href="@($"/datapointdetail/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
                                                 <i class="fas fa-info-circle"></i>
                                             </NavLink>
-                                            <NavLink href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
-                                                <i class="fas fa-edit"></i>
-                                            </NavLink>
+                                            @if (dataPoint.CanEdit)
+                                            {
+                                                <NavLink href="@($"/datapointedit/{QuestId}/{dataPoint.Id}")" class="btn btn-primary table-btn">
+                                                    <i class="fas fa-edit"></i>
+                                                </NavLink>
+                                            }
                                         </td>
                                     </tr>
                                 }

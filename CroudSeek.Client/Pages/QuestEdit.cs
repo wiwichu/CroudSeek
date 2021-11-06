@@ -39,6 +39,7 @@ namespace CroudSeek.Client.Pages
         public List<DataPointDto> DataPoints { get; set; } = new List<DataPointDto>();
         protected AddDataPointDialog AddDataPointDialog { get; set; }
         private Map _locationMap = null;
+        public bool IsReadOnly { get { return !QuestDp.IsOwner; } }
         public Map LocationMap
         {
             get { return _locationMap; }

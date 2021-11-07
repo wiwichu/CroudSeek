@@ -56,18 +56,20 @@
                                 Delete
                             </a>
                         }
-                        <div class="col-xs-12 col-sm-8">
-                            <div class="col-12 row">
-                                <div class="col-10 row">
-                                    <h2 class="sidebar-heading">Data Points</h2>
-                                </div>
-                                <div class="col-sm-2 row">
-                                    <NavLink href="@($"/datapointedit/{QuestId}/0")" class="btn btn-primary table-btn  ">
-                                        <span class="fas fa-plus"></span>
-                                    </NavLink>
-                                </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <br />
+                        <div class="col-12 row">
+                            <div class="col-10 row">
+                                <h2 class="sidebar-heading">Data Points</h2>
+                            </div>
+                            <div class="col-sm-2 row">
+                                <NavLink href="@($"/datapointedit/{QuestId}/0")" class="btn btn-primary table-btn  ">
+                                    <span class="fas fa-plus text-center"></span>
+                                </NavLink>
+                                <br />
                             </div>
                         </div>
+                    </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -96,15 +98,18 @@
                                 }
                             </tbody>
                         </table>
+                        <br />
                         <div class="col-xs-12 col-sm-8">
+                            <br />
                             <div class="col-12 row">
                                 <div class="col-10 row">
                                     <h2 class="sidebar-heading">Views</h2>
                                 </div>
                                 <div class="col-sm-2 row">
                                     <NavLink href="@($"/questedit/{QuestId}/views/0")" class="btn btn-primary table-btn  ">
-                                        <span class="fas fa-plus"></span>
+                                        <span class="fas fa-plus text-center"></span>
                                     </NavLink>
+                                    <br />
                                 </div>
                             </div>
                         </div>

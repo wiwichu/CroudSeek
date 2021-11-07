@@ -56,7 +56,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<DataPointDto> GetDataPointForQuest(int questId, int dataPointId)
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 var dataPoint = await JsonSerializer.DeserializeAsync<DataPointDto>
                     (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints/{dataPointId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -68,7 +68,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<IEnumerable<DataPointDto>> GetDataPointsForQuest(int questId)
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 var dataPoints = await JsonSerializer.DeserializeAsync<IEnumerable<DataPointDto>>
                     (await _httpClient.GetStreamAsync($"api/quests/{questId}/datapoints"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

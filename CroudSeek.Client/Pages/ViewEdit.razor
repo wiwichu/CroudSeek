@@ -11,7 +11,7 @@
             <ValidationSummary />
             <div class="form-group row">
                 <label for="quest" class="col-sm-3">Quest: </label>
-                <InputSelect id="quest" class="form-control col-sm-8" @bind-Value="@QuestId">
+                <InputSelect id="quest" disabled="@IsEdit" class="form-control col-sm-8" @bind-Value="@QuestId">
                     @foreach (var quest in Quests)
                         {
                         <option value="@quest.Id">@quest.Name</option>

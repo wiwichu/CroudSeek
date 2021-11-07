@@ -28,7 +28,7 @@ namespace CroudSeek.Client.Pages
             Quest = await QuestDataService.GetQuestDetails(questId);
             Views = new List<ViewDto>( await ViewDataService.GetAllViews(questId));
             MapMarkers = new List<Marker>();
-            foreach (var dataPoint in Quest.DataPoints)
+            foreach (var dataPoint in Quest?.DataPoints)
                 MapMarkers.Add(
                      new Marker
                      {

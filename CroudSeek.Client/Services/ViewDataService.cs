@@ -22,12 +22,12 @@ namespace CroudSeek.Client.Services
 
         public async Task<IEnumerable<ViewDto>> GetAllViews(int questId)
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 return await JsonSerializer.DeserializeAsync<IEnumerable<ViewDto>>
                     (await _httpClient.GetStreamAsync($"api/quests/{questId}/views"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
-            return null;
+            return new List<ViewDto>();
         }
 
         public async Task<ViewDto> GetViewById(int questId, int viewId, bool includeUserWeights)

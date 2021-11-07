@@ -70,7 +70,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<QuestWithDataPointsDto> GetQuestDetails(int questId)
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 var quest = await JsonSerializer.DeserializeAsync<QuestDto>
                     (await _httpClient.GetStreamAsync($"api/quests/{questId}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

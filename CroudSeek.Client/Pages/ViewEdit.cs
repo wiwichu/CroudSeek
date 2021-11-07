@@ -33,6 +33,7 @@ namespace CroudSeek.Client.Pages
         protected string StatusClass = string.Empty;
         protected bool Saved;
 
+        public bool IsEdit { get; set; }
         protected override async Task OnInitializedAsync()
         {
             Saved = false;
@@ -40,6 +41,11 @@ namespace CroudSeek.Client.Pages
             int.TryParse(ViewId, out var viewId);
 
             Quests = (await QuestDataService.GetAllQuests()).ToList();
+            if (questId != 0)
+            {
+                IsEdit = true;
+                QuestId = questId.ToString();
+            }
 
             if (viewId == 0) //new quest is being created
             {
@@ -57,7 +63,7 @@ namespace CroudSeek.Client.Pages
                 View = Mapper.Map<ViewForUpdateDto>(ViewDto);
                 Title = $"Details for {View.Description}";
             }
-            if (Quests?.Count > 0)
+            if (questId == 0 && Quests?.Count > 0)
             {
                 QuestId = Quests[0].Id.ToString();
             }

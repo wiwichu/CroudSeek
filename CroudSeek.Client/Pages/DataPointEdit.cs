@@ -41,6 +41,7 @@ namespace CroudSeek.Client.Pages
         public InputText DescriptionInputText { get; set; }
         public List<QuestDto> Quests { get; set; } = new List<QuestDto>();
         public string Title { get; set; } = "Enter DataPoint Details";
+        public bool IsEdit { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -49,7 +50,11 @@ namespace CroudSeek.Client.Pages
             int.TryParse(DataPointId, out var dataPointId);
 
             Quests = (await QuestDataService.GetAllQuests()).ToList();
-
+            if(questId != 0)
+            {
+                IsEdit = true;
+                QuestId = questId.ToString();
+            }
             if (questId == 0 || dataPointId == 0) //new datapoint is being created
             {
                 //add some defaults
@@ -59,7 +64,7 @@ namespace CroudSeek.Client.Pages
                     IsNegative=false,
                     TimeStamp=DateTimeOffset.Now
                 };
-                if (Quests?.Count > 0)
+                if (questId == 0 && Quests?.Count > 0)
                 {
                     QuestId = Quests[0].Id.ToString();
                 }

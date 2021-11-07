@@ -32,7 +32,7 @@ namespace CroudSeek.Client.Services
 
         public async Task<ZoneDto> GetZoneById(int Id)
         {
-            if (await AddBearerToken())
+            if (await AddBearerToken(true))
             {
                 return await JsonSerializer.DeserializeAsync<ZoneDto>
                     (await _httpClient.GetStreamAsync($"api/zones/{Id}"), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

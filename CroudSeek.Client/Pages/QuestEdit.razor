@@ -56,7 +56,18 @@
                                 Delete
                             </a>
                         }
-                        <h2 class="sidebar-heading">Data Points</h2>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="col-12 row">
+                                <div class="col-10 row">
+                                    <h2 class="sidebar-heading">Data Points</h2>
+                                </div>
+                                <div class="col-sm-2 row">
+                                    <NavLink href="@($"/datapointedit/{QuestId}/0")" class="btn btn-primary table-btn  ">
+                                        <span class="fas fa-plus"></span>
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -87,12 +98,12 @@
                         </table>
                         <div class="col-xs-12 col-sm-8">
                             <div class="col-12 row">
-                                <div class="col-6 row">
+                                <div class="col-10 row">
                                     <h2 class="sidebar-heading">Views</h2>
                                 </div>
-                                <div class="col-sm-6 row">
-                                    <NavLink href="@($"/questedit/{QuestId}/views/0")" class="btn btn-primary table-btn">
-                                        <i class="fas fa-circle-plus"></i>
+                                <div class="col-sm-2 row">
+                                    <NavLink href="@($"/questedit/{QuestId}/views/0")" class="btn btn-primary table-btn  ">
+                                        <span class="fas fa-plus"></span>
                                     </NavLink>
                                 </div>
                             </div>

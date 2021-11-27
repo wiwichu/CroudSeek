@@ -36,16 +36,16 @@ else
                     <a href="@($"questdetail/{quest.Id}")" class="btn btn-primary table-btn">
                         <i class="fas fa-info-circle"></i>
                     </a>
-                    <AuthorizeView >
-                        <Authorized>
-                            @if (quest.CanEdit)
-                            {
+                    @*<AuthorizeView >
+                        <Authorized>*@
+@*                            @if (quest.CanEdit)*@
+@*                            {*@
                                 <NavLink href="@($"questedit/{quest.Id}")" class="btn btn-primary table-btn">
                                     <i class="fas fa-edit"></i>
                                 </NavLink>
-                            }
-                        </Authorized>
-                    </AuthorizeView>
+@*                            }*@
+                        @*</Authorized>
+                    </AuthorizeView>*@
                 </td>
                 </tr>
             }

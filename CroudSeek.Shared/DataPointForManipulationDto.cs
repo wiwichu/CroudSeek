@@ -59,6 +59,12 @@ namespace CroudSeek.Shared
         /// </summary>
         public bool IsPrivate { get; set; }
         /// <summary>
+        /// Email to be used when verifying
+        /// </summary>
+
+        [EmailAddress]
+        public string Email { get; set; }
+        /// <summary>
         /// When DataPoint was found
         /// </summary>
         public DateTimeOffset TimeStamp { get; set; }

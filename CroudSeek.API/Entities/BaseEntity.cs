@@ -13,6 +13,9 @@ namespace CroudSeek.API.Entities
         public DateTimeOffset CreateTime { get; set; }
         public DateTimeOffset UpdateTime { get; set; }
         public int OwnerId { get; set; } = 1;
+        [EmailAddress]
+        public string Email { get; set; }
+        public bool Active { get; set; }
         [ForeignKey("OwnerId")]
         [Required]
         public User Owner { get; set; }

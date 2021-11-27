@@ -9,6 +9,7 @@ namespace CroudSeek.Shared
         public DateTimeOffset UpdateTime { get; set; }
         public int OwnerId { get; set; }
         public bool CanEdit { get; set; }
+        public bool Active { get; set; }
         public bool IsOwner { get; set; }
     }
 }

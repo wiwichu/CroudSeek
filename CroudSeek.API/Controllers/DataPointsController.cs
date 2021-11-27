@@ -45,13 +45,14 @@ namespace CroudSeek.API.Controllers
             var userEntity = _croudSeekRepository.GetUsers().Where((u) => u.Name == user).FirstOrDefault();
 
             var dataPointsForQuestFromRepo = _croudSeekRepository.GetDataPointsByQuest(questId).Where(dp => dp.OwnerId == userEntity?.Id || !dp.IsPrivate);
-            return Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo).Select((dp) =>
+            var result = Ok(_mapper.Map<IEnumerable<DataPointDto>>(dataPointsForQuestFromRepo).Select((dp) =>
             {
                 var dpEntity = _croudSeekRepository.GetUser(dp.OwnerId);
                 dp.CanEdit = dpEntity?.Name == user;
                 dp.IsOwner = dpEntity?.Name == user;
                 return dp;
             }));
+            return result;
         }
 
         //[HttpGet()]
@@ -85,7 +86,7 @@ namespace CroudSeek.API.Controllers
         [Consumes("application/json")]
         [ProducesDefaultResponseType]
         //[Authorize(Policy = CroudSeek.Shared.Policies.CanManageQuests)]
-        [Authorize]
+        //[Authorize]
         public ActionResult<DataPointDto> CreateDataPointForQuest(
             int questId, DataPointForCreationDto dataPoint)
         {
@@ -98,6 +99,7 @@ namespace CroudSeek.API.Controllers
             dataPointEntity.QuestId = questId;
             var userName = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var user = _croudSeekRepository.GetUsers().Where((u) => u.Name == userName).FirstOrDefault();
+            //TODO - Allow Quest to be created without user name through email verification
             if (user == null)
             {
                 return ValidationProblem($"Invalid user: {userName}");
